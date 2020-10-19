@@ -1,5 +1,6 @@
 @import './normalize.css';
 @import './fonts.css';
+@import './vars.css';
 
 html {
   box-sizing: border-box;
@@ -14,7 +15,12 @@ html {
 }
 
 body {
-  font-family: Roboto, Arial, sans-serif;
+  font-family: var(--main-font-stack);
+}
+
+h1 {
+  font-family: var(--font-gilroy-bold);
+  margin: 0;
 }
 
 ​img {
@@ -36,10 +42,17 @@ input {
   padding: 10px;
 }
 
+button {
+  display: inline-block;
+}
+
 button:hover {
   cursor: pointer;
 }
 
+input:focus,
+input:active,
+button:active,
 button:focus {
   outline: none;
 }

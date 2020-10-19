@@ -1,7 +1,16 @@
 import React from 'react';
+import Layout from './common/Layout';
+import Appbar from './common/Appbar';
+import Content from './Content';
 
 const App = () => {
-  return <h1>Buy a flat</h1>;
+  return (
+    <Layout>
+      <Appbar />
+      <Content />
+      {/* {error && <Notification />} */}
+    </Layout>
+  );
 };
 
 export default App;
