@@ -32,12 +32,12 @@ export default [
     private: true,
   },
   {
-    name: 'Dinamics',
-    path: '/dinamics',
+    name: 'Dynamics',
+    path: '/dynamics',
     showInMenu: true,
     exact: true,
     component: lazy(() =>
-      import('./pages/Dinamics' /* webpackChunkName: "dinamics-page" */),
+      import('./pages/Dynamics' /* webpackChunkName: "dynamics-page" */),
     ),
     private: true,
   },
