@@ -1,11 +1,12 @@
 :root {
-  --orange-color: #ff6c00;
-  --blue-color: #e1f3f5;
-  --black-font-color: #18191f;
-  --grey-font-color: rgba(24, 25, 31, 0.54);
-  --background-grey-color: #f7f7f7;
-  --background-black-color: #35363b;
   --main-font-stack: Roboto, Arial, sans-serif;
   --font-gilroy-extrabold: Gilroy-ExtraBold;
   --font-gilroy-bold: Gilroy-Bold;
+  --black-font-color: #18191f;
+  --grey-font-color: rgba(24, 25, 31, 0.54);
+  --orange-color: #ff6c00;
+  --blue-color: #e1f3f5;
+  --background-grey-color: #f7f7f7;
+  --background-black-color: #373b53;
+  --modal-color: rgba(55, 59, 83, 0.2);
 }

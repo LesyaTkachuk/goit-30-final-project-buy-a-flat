@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Appbar.module.scss';
+import styles from './Appbar.module.css';
 
 function Appbar() {
   return (

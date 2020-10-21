@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './Layout.module.scss';
+import styles from './Layout.module.css';
 
 function Layout({ children }) {
   return <div className={styles.container}> {children}</div>;
