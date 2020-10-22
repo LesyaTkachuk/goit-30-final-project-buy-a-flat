@@ -1,0 +1,7 @@
+.navigationWrapper {
+  width: 100%;
+  background: url('../../assets/images/nav-page-image.svg') no-repeat right
+    bottom;
+  background-size: contain;
+  padding: 27px 0;
+}

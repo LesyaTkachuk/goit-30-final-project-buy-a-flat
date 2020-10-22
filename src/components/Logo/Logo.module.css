@@ -1,0 +1,15 @@
+.logoWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 108px;
+}
+
+.logoTitle {
+  font-family: var(--font-gilroy-extrabold);
+  font-style: normal;
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 20px;
+  color: var(--black-font-color);
+}

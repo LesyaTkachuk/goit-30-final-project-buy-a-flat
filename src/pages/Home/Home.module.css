@@ -4,7 +4,7 @@
     bottom;
   padding-top: 34px;
   margin-bottom: 34px;
-  min-height: 863px;
+  /* min-height: 863px; */
 }
 
 .title {
@@ -29,7 +29,7 @@
       center bottom;
     padding-top: 122px;
     margin-bottom: 122px;
-    min-height: 952px;
+    min-height: calc(100vh - 72px);
   }
 
   .title {
