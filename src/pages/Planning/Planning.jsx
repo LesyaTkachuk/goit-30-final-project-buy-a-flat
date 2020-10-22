@@ -4,7 +4,6 @@ import styles from './Planning.module.css';
 export default class Planning extends Component {
   render() {
     const [PlanForm, Prognosis] = this.props.children;
-    console.log(this.props.children);
     return (
       <div className={styles.wrapper}>
       <div className={styles.planForm}>
