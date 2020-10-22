@@ -1,0 +1,21 @@
+.buttons__wrapper {
+  width: 220px;
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+.google_btn {
+  background: rgba(255, 108, 0, 0.1);
+}
+
+.facebook_btn {
+  background-color: #e3eaff;
+}
+
+@media (min-width: 1240px) {
+  .buttons__wrapper {
+    margin: 0 auto 0 106px;
+  }
+}
