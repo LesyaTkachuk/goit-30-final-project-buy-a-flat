@@ -4,8 +4,9 @@
   justify-content: space-between;
 }
 .loginBtn {
-  background-color: var(-blue-color);
+  background-color: var(--blue-button-color);
 }
 .registerBtn {
   background-color: var(--orange-color);
+  color: #fff;
 }
