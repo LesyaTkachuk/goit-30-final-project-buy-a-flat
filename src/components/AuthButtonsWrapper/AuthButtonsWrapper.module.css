@@ -1,0 +1,11 @@
+.authButtonsWrapper {
+  width: 214px;
+  display: flex;
+  justify-content: space-between;
+}
+.loginBtn {
+  background-color: var(-blue-color);
+}
+.registerBtn {
+  background-color: var(--orange-color);
+}
