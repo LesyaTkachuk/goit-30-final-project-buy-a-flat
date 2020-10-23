@@ -1,5 +1,4 @@
 import React from 'react';
-import Dynamics from '../../pages/Dynamics';
 import styles from './Content.module.css';
 
 function Content() {
