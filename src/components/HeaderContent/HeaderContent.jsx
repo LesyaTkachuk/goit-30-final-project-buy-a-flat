@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import AuthButtonsWrapper from '../AuthButtonsWrapper';
 import Logo from '../Logo';
 import NavigationBar from '../NavigationBar';
+import Media from 'react-media';
 import UserInfo from '../UserInfo';
 import styles from './HeaderContent.module.css';
 
@@ -8,9 +10,13 @@ class HeaderContent extends Component {
   render() {
     return (
       <div className={styles.headerContentWrapper}>
-        {window.innerWidth >= 1240 && <NavigationBar />}
+        <Media query="(min-width: 1240px)" render={() => <NavigationBar />} />
         <Logo />
-        <UserInfo />
+        <Media
+          query="(min-width: 768px)"
+          render={() => <AuthButtonsWrapper />}
+        />
+        {/* <UserInfo /> */}
       </div>
     );
   }

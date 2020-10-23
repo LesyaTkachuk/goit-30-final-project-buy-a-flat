@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import routes from '../../routes';
 import Spinner from '../common/Spinner';
 import styles from './Content.module.css';
@@ -12,6 +12,7 @@ function Content() {
           {routes.map(route => (
             <Route key={route.name} {...route} />
           ))}
+          <Redirect to="/" />
         </Switch>
       </Suspense>
     </div>
