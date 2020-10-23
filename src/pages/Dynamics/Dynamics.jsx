@@ -1,5 +1,5 @@
 import React from 'react';
-import Chart from '../../components/common/Chart';
+import Chart from '../../components/Chart';
 import styles from './Dynamics.module.css';
 
 export default function Dynamics() {
