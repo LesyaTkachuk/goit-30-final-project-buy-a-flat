@@ -1,0 +1,82 @@
+.formItem {
+  display: block;
+  margin-bottom: 35px;
+}
+
+.formItem:nth-child(4) {
+  background-image: url(../../assets/icons/calculator.svg);
+  background-repeat: no-repeat;
+  background-position: bottom 19px right 12px;
+}
+
+.formItem:focus-within label {
+  color: #2196f3;
+}
+
+.formLabel {
+  cursor: pointer;
+  display: block;
+  position: absolute;
+  font-family: var(--main-font-stack);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  color: var(--grey-font-color);
+  padding-top: 6px;
+  padding-left: 12px;
+}
+
+.formInput {
+  display: block;
+  border: none;
+  outline: none;
+  width: 280px;
+  height: 56px;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-radius: 8px 8px 0px 0px;
+  font-family: var(--main-font-stack);
+  font-size: 16px;
+  line-height: 19px;
+  color: rgba(24, 25, 31, 0.87);
+  border-bottom: 1px solid rgba(24, 25, 31, 0.36);
+  padding: 2px 0px 0 12px;
+}
+
+.formInput:focus {
+  border-bottom: 1px solid #2196f3;
+}
+
+@media (min-width: 768px) {
+  .form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .formItem:nth-child(3) {
+    order: 1;
+  }
+
+  .formItem:nth-child(2) {
+    order: 2;
+  }
+
+  .formItem:nth-child(4) {
+    order: 3;
+  }
+
+  .formInput {
+    width: 330px;
+  }
+}
+
+@media (min-width: 1240px) {
+  .formContainer {
+    width: 770px;
+    margin: 0 auto;
+  }
+  .formInput {
+    width: 370px;
+  }
+}

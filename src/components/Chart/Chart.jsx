@@ -1,4 +1,5 @@
 import React, { Component, createRef } from 'react';
+import Media from 'react-media';
 import Chart from 'chart.js';
 import styles from './Chart.module.css';
 
@@ -73,7 +74,7 @@ const SCALES = {
   },
 };
 
-export default class MyChart extends Component {
+class MyChart extends Component {
   chartRef = createRef(null);
 
   state = {
@@ -82,12 +83,23 @@ export default class MyChart extends Component {
 
   componentDidMount() {
     if (!this.chartRef.current) return;
-    if (this.state.instance) this.state.instance.destroy();
-    const isMobile = window.innerWidth < 768;
+    this.createChart();
+  }
 
+  componentDidUpdate(prevProps) {
+    const { media } = this.props;
+    if (prevProps.media !== media) {
+      this.createChart();
+    }
+  }
+
+  createChart = () => {
     const ctx = this.chartRef.current.getContext('2d');
+    if (this.state.instance) this.state.instance.destroy();
+    const { media } = this.props;
+
     const instance = new Chart(ctx, {
-      type: TYPE[isMobile ? 'mobile' : 'desctop'],
+      type: TYPE[media],
       data: {
         datasets: [
           {
@@ -114,7 +126,7 @@ export default class MyChart extends Component {
         ],
       },
       options: {
-        maintainAspectRatio: true,
+        aspectRatio: media === 'mobile' ? 0.45 : 1.55,
         legend: {
           display: false,
         },
@@ -128,15 +140,14 @@ export default class MyChart extends Component {
             },
           },
         },
-        scales: SCALES[isMobile ? 'mobile' : 'desctop'],
+        scales: SCALES[media],
       },
     });
 
     this.setState({ instance });
-  }
+  };
 
   render() {
-    const height = window.innerWidth < 768 ? 750 : 300;
     return (
       <>
         <h2 className={styles.title}>Динамика расходов и накоплений</h2>
@@ -147,8 +158,20 @@ export default class MyChart extends Component {
             </li>
           ))}
         </ul>
-        <canvas ref={this.chartRef} width={400} height={height} />
+        <canvas ref={this.chartRef} />
       </>
     );
   }
+}
+
+export default function MediaChart() {
+  return (
+    <Media
+      queries={{
+        mobile: '(max-width: 768px)',
+      }}
+    >
+      {matches => <MyChart media={matches.mobile ? 'mobile' : 'desctop'} />}
+    </Media>
+  );
 }
