@@ -3,7 +3,6 @@ import AuthButtonsWrapper from '../AuthButtonsWrapper';
 import Logo from '../Logo';
 import NavigationBar from '../NavigationBar';
 import Media from 'react-media';
-import UserInfo from '../UserInfo';
 import styles from './HeaderContent.module.css';
 
 class HeaderContent extends Component {
@@ -16,7 +15,6 @@ class HeaderContent extends Component {
           query="(min-width: 768px)"
           render={() => <AuthButtonsWrapper />}
         />
-        {/* <UserInfo /> */}
       </div>
     );
   }

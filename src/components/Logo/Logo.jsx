@@ -7,7 +7,7 @@ function Logo() {
   return (
     <Link to="/" className={styles.logoWrapper}>
       <img src={logoIcon} alt="logo icon" className={styles.logoImage} />
-      <p className={styles.logoTitle}>Finance</p>
+      <span className={styles.logoTitle}>Finance</span>
     </Link>
   );
 }

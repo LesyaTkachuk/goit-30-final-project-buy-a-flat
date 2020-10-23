@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from '../Button';
+import Button from './Button';
 import googleIcon from '../../assets/icons/google-auth.svg';
 import facebookIcon from '../../assets/icons/facebook.svg';
 import styles from './ButtonsWrapper.module.css';
