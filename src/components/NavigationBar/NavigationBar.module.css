@@ -29,7 +29,7 @@
   }
 
   .navigationLink {
-    font-size: 14px;
+    font-size: 16px;
   }
   .navigationItem:not(:last-child) {
     margin-right: 32px;
