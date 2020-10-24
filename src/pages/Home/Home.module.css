@@ -1,1 +1,59 @@
+.wrapper {
+  width: 100%;
+  background: url('../../assets/images/first-page-mobile.svg') no-repeat center
+    bottom;
+  padding-top: 34px;
+  margin-bottom: 34px;
+  min-height: 863px;
+}
 
+.title {
+  max-width: 460px;
+  font-family: var(--font-gilroy-extrabold);
+  color: var(--black-font-color);
+  font-style: normal;
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 26px;
+  text-align: center;
+  margin: 0 auto 34px;
+}
+
+.title__orange {
+  color: var(--orange-color);
+}
+
+@media (min-width: 768px) {
+  .wrapper {
+    background: url('../../assets/images/first-page-tablet.svg') no-repeat
+      center bottom;
+    padding-top: 122px;
+    margin-bottom: 122px;
+    min-height: 952px;
+  }
+
+  .title {
+    font-size: 31px;
+    line-height: 50px;
+    margin: 0 auto 40px;
+  }
+}
+
+@media (min-width: 1240px) {
+  .wrapper {
+    background: url('../../assets/images/first-page-desctop.svg') no-repeat
+      right bottom;
+    padding: 70px 40px 0;
+    /* min-height: calc(100vh - 72px); */
+    min-height: 648px;
+    margin-bottom: 70px;
+  }
+  .title {
+    font-size: 36px;
+    text-align: left;
+    margin: 0 auto 46px 106px;
+  }
+  .title__break {
+    display: block;
+  }
+}
