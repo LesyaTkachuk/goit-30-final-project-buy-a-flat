@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { authOperations } from '../../../redux/auth';
 import styles from '../LoginRegistForm.module.css';
-// import {connect} from 'react-redux';
 
 class RegistrationForm extends Component {
   state = {
@@ -29,7 +30,8 @@ class RegistrationForm extends Component {
         passwordErorr: '',
       });
 
-      this.props.onRegister({ ...this.state });
+      // this.props.onRegister({ ...this.state });
+      this.props.onToggleModal();
     }
   };
 
@@ -130,4 +132,9 @@ class RegistrationForm extends Component {
     );
   }
 }
-export default RegistrationForm;
+
+const mapDispatchToProps = {
+  onRegister: authOperations,
+};
+
+export default connect(null, mapDispatchToProps)(RegistrationForm);

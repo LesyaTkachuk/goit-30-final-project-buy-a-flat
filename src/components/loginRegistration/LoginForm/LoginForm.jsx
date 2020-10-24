@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styles from '../LoginRegistForm.module.css';
-// import {connect} from 'react-redux';
+import { globalActions } from '../../../redux/global';
+import { connect } from 'react-redux';
 
 class LoginForm extends Component {
   state = {
@@ -91,7 +92,10 @@ class LoginForm extends Component {
           </button>
           <p className={styles.loginRegist_mobile__Text}>
             Еще нет аккаунта?{' '}
-            <button className={styles.loginRegist_mobile__Bth}>
+            <button
+              className={styles.loginRegist_mobile__Bth}
+              onSubmit={this.props.onSubmit}
+            >
               Зарегистрироваться
             </button>
           </p>
@@ -100,4 +104,9 @@ class LoginForm extends Component {
     );
   }
 }
-export default LoginForm;
+
+const mapDispatchToProps = {
+  onSubmit: globalActions.toggleModal,
+};
+
+export default connect(null, mapDispatchToProps)(LoginForm);
