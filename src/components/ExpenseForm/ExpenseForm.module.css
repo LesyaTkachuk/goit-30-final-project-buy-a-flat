@@ -1,4 +1,7 @@
-.formItem {
+.form {
+  margin-bottom: 53px;
+}
+.formItem:not(:last-child) {
   display: block;
   margin-bottom: 35px;
 }
@@ -13,6 +16,10 @@
   color: #2196f3;
 }
 
+.formItem:hover label {
+  color: #2196f3;
+}
+
 .formLabel {
   cursor: pointer;
   display: block;
@@ -22,7 +29,7 @@
   font-size: 12px;
   line-height: 14px;
   color: var(--grey-font-color);
-  padding-top: 6px;
+  padding-top: 4px;
   padding-left: 12px;
 }
 
@@ -39,9 +46,12 @@
   line-height: 19px;
   color: rgba(24, 25, 31, 0.87);
   border-bottom: 1px solid rgba(24, 25, 31, 0.36);
-  padding: 2px 0px 0 12px;
+  padding: 12px 0px 0 12px;
 }
 
+.formInput:hover {
+  border-bottom: 1px solid #2196f3;
+}
 .formInput:focus {
   border-bottom: 1px solid #2196f3;
 }
@@ -52,6 +62,10 @@
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+  }
+
+  .formItem:nth-child(2) {
+    margin-bottom: 0px;
   }
 
   .formItem:nth-child(3) {
