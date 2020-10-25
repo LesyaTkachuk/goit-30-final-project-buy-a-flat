@@ -4,16 +4,18 @@ import authActions from './authActions';
 const initialState = {
   auth: {
     user: {
+      id: '', //?
       name: '',
       email: '',
+      familyId: '',
     },
     token: null,
-    loading: false,
+    isLoading: false,
     error: '',
   },
 };
 
-const setUser = (_, { payload }) => payload.user;
+const setUser = (state, { payload }) => ({ ...state, ...payload.user });
 const setCurrentUser = (_, { payload }) => payload;
 const setToken = (_, { payload }) => payload.token;
 const setError = (_, { payload }) => payload;
@@ -27,13 +29,12 @@ const user = createReducer(initialState.auth.user, {
 });
 
 const token = createReducer(initialState.auth.token, {
-  [authActions.registerSuccess]: setToken,
   [authActions.loginSuccess]: setToken,
   [authActions.logoutSuccess]: () => null,
   [authActions.clearToken]: () => null,
 });
 
-const loading = createReducer(initialState.auth.loading, {
+const loading = createReducer(initialState.auth.isLoading, {
   [authActions.registerRequest]: () => true,
   [authActions.loginRequest]: () => true,
   [authActions.logoutRequest]: () => true,

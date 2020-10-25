@@ -3,21 +3,22 @@ import familyActions from './familyActions';
 
 axios.defaults.baseURL = 'https://goit-phonebook-api.herokuapp.com/';
 
-const getFamily = () => dispatch => {
-  dispatch(familyActions.getfamilyRequest());
-
-  axios
-    .get('/family')
-    .then(({ data }) => dispatch(familyActions.getFamilySuccess(data)))
-    .catch(({ message }) => dispatch(familyActions.getFamilyError(message)));
-};
+// const token = {
+//   set(token) {
+//     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+//   },
+//   unset() {
+//     axios.defaults.headers.common.Authorization = '';
+//   },
+// };
+// axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 
 const addFamily = credentials => dispatch => {
   dispatch(familyActions.addFamilyRequest());
 
   axios
-    .post('/family', credentials)
-    .then(({ data }) => dispatch(familyActions.addFamilyuccess(data)))
+    .post('/api/families', credentials)
+    .then(({ data }) => dispatch(familyActions.addFamilySuccess(data)))
     .catch(({ message }) => dispatch(familyActions.addFamilyError(message)));
 };
 
@@ -25,33 +26,42 @@ const updateFamily = credentials => dispatch => {
   dispatch(familyActions.updateFamilyRequest());
 
   axios
-    .put(`/family`, credentials)
-    .then(data => dispatch(familyActions.updateFamilyuccess(data)))
+    .put(`/api/families`, credentials)
+    .then(({ data }) => dispatch(familyActions.updateFamilySuccess(data)))
     .catch(({ message }) => dispatch(familyActions.updateFamilyError(message)));
 };
 
 const getCurrentFamily = () => (dispatch, getState) => {
-  const {
-    auth: { token: persistedToken },
-  } = getState();
+  // const {
+  //   auth: { token: persistedToken },
+  // } = getState();
 
-  if (!persistedToken) {
-    return;
-  }
+  // if (!persistedToken) {
+  //   return;
+  // }
 
   dispatch(familyActions.getCurrentFamilyRequest());
 
   axios
-    .get(`/family/current`)
-    .then(data => dispatch(familyActions.getCurrentFamilyuccess(data)))
+    .get(`/api/families/current`)
+    .then(({ data }) => dispatch(familyActions.getCurrentFamilySuccess(data)))
     .catch(({ message }) =>
       dispatch(familyActions.getCurrentFamilyError(message)),
     );
 };
 
+const updateGifts = credentials => dispatch => {
+  dispatch(familyActions.updateGiftsRequest());
+
+  axios
+    .put('api/gifts/unpack')
+    .then(({ data }) => dispatch(familyActions.updateGiftsSuccess(data)))
+    .catch(({ message }) => dispatch(familyActions.updateGiftsError(message)));
+};
+
 export default {
-  getFamily,
   addFamily,
   updateFamily,
   getCurrentFamily,
+  updateGifts,
 };

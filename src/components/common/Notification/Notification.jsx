@@ -34,7 +34,7 @@ class Notification extends Component {
 }
 
 const mapStateToProps = state => ({
-  authError: authSelectors.getError,
+  authError: authSelectors.getError(state),
 });
 
 const mapDispatchToProps = {

@@ -13,6 +13,7 @@ import storage from 'redux-persist/lib/storage';
 import authReducer from './auth/authReducer';
 import globalReducer from './global/globalReducer';
 import familyReducer from './family/familyReducer';
+import transactionReducer from './transaction/transactionReducer';
 
 const authPersistConfig = {
   key: 'auth',
@@ -25,6 +26,7 @@ export const store = configureStore({
     auth: persistReducer(authPersistConfig, authReducer),
     global: globalReducer,
     family: familyReducer,
+    transaction: transactionReducer,
   },
   middleware: getDefaultMiddleware({
     serializableCheck: {
@@ -38,34 +40,74 @@ export const persistor = persistStore(store);
 const state = {
   auth: {
     user: {
-      name: '',
+      id: '',
+      username: '',
       email: '',
+      familyId: '',
     },
     token: null,
-    loading: false,
+    isLoading: false,
     error: '',
   },
+
   family: {
     info: {
-      income: 0,
-      flatCost: 0,
-      flatMeters: 0,
-      accumulations: 0,
-      planning: 0,
+      id: '', //?
+      balance: 0,
+      flatPrice: 0,
+      flatSquareMeters: 0,
+      plans: {
+        totalSalary: 0,
+        passiveIncome: 0,
+        incomePercentagetoSavings: 0,
+        settledAt: '',
+      },
+    },
+    gifts: {
+      giftsUnpacked: 0,
+      giftsForUnpacking: 0,
     },
     isLoading: false,
     error: '',
   },
-  statistics: {
-    monthForStatistics: '',
+
+  transaction: {
+    transactionCategories: [],
+    category: '',
+    amount: 0,
+    comment: '',
   },
-  transactions: {
-    transactionsCategories: [],
-    expenses: 0,
-  },
+
   global: {
     isModalOpen: false,
     isRegistered: false,
     showExpensesPage: false,
+  },
+
+  statistics: {
+    startMonth: '', // расчитать
+    startYear: '', //?
+    dataForChart: [
+      {
+        month: 0,
+        savings: 0,
+        expenses: 0,
+        expectedSavings: 0,
+      },
+    ],
+  },
+
+  flatStatistics: {
+    flats: [
+      {
+        savingsPercentage: 0,
+        savingsValue: 0,
+        savingsInSquareMeters: 0,
+        totalSquareMeters: 0,
+        monthsLeftToSaveForFlat: 0,
+        savingsForNextSquareMeterLeft: 0,
+        giftsForUnpacking: 0,
+      },
+    ],
   },
 };
