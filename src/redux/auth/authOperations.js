@@ -22,7 +22,7 @@ const register = credentials => (dispatch, getState) => {
   isModalOpen && dispatch(globalActions.toggleModal());
 
   axios
-    .post('/api/auth/sign-up', credentials)
+    .post('/api/users/sign-up', credentials)
     .then(({ data }) => {
       dispatch(authActions.registerSuccess(data));
     })
@@ -33,7 +33,7 @@ const login = credentials => dispatch => {
   dispatch(authActions.loginRequest());
 
   axios
-    .post('/auth/api/sign-in', credentials)
+    .post('/api/users/sign-in', credentials)
     .then(({ data }) => {
       token.set(data.token);
       dispatch(authActions.loginSuccess(data));
@@ -54,7 +54,7 @@ const getCurrentUser = () => (dispatch, getState) => {
   dispatch(authActions.getCurrentUserRequest());
 
   axios
-    .get('/users/current')
+    .get('/api/users/current')
     .then(({ data }) => dispatch(authActions.getCurrentUserSuccess(data)))
     .catch(({ message }) => {
       dispatch(authActions.getCurrentUserError(message));
@@ -66,7 +66,7 @@ const logout = () => dispatch => {
   dispatch(authActions.logoutRequest());
 
   axios
-    .post('/api/auth/sign-out')
+    .post('/api/users/sign-out')
     .then(() => {
       token.unset();
       dispatch(authActions.logoutSuccess());

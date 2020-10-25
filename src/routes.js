@@ -10,6 +10,7 @@ export default [
       import('./pages/Home' /* webpackChunkName: "home-page" */),
     ),
     private: false,
+    restricted: false,
   },
   {
     name: 'Planning',
@@ -20,6 +21,7 @@ export default [
       import('./pages/Planning' /* webpackChunkName: "planning-page" */),
     ),
     private: true,
+    restricted: false,
   },
   {
     name: 'Expenses',
@@ -30,6 +32,7 @@ export default [
       import('./pages/Expenses' /* webpackChunkName: "expenses-page" */),
     ),
     private: true,
+    restricted: false,
   },
   {
     name: 'Dynamics',
@@ -40,6 +43,7 @@ export default [
       import('./pages/Dynamics' /* webpackChunkName: "dynamics-page" */),
     ),
     private: true,
+    restricted: false,
   },
   {
     name: 'Navigation',
@@ -50,5 +54,6 @@ export default [
       import('./pages/Navigation' /* webpackChunkName: "navigation-page" */),
     ),
     private: true,
+    restricted: false,
   },
 ];

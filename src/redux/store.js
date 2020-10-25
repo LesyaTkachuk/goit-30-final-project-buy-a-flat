@@ -23,7 +23,8 @@ const authPersistConfig = {
 
 export const store = configureStore({
   reducer: {
-    auth: persistReducer(authPersistConfig, authReducer),
+    // auth: persistReducer(authPersistConfig, authReducer),
+    auth: authReducer,
     global: globalReducer,
     family: familyReducer,
     transaction: transactionReducer,
@@ -40,7 +41,7 @@ export const persistor = persistStore(store);
 const state = {
   auth: {
     user: {
-      id: '',
+      id: '', // ??
       username: '',
       email: '',
       familyId: '',
@@ -81,6 +82,7 @@ const state = {
   global: {
     isModalOpen: false,
     isRegistered: false,
+    showNavPage: false,
     showExpensesPage: false,
   },
 

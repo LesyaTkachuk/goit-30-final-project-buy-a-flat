@@ -50,7 +50,7 @@ const getCurrentFamily = () => (dispatch, getState) => {
     );
 };
 
-const updateGifts = credentials => dispatch => {
+const updateGifts = () => dispatch => {
   dispatch(familyActions.updateGiftsRequest());
 
   axios
