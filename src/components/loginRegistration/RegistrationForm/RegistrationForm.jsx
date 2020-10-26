@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import styles from '../loginRegistForm.module.css';
+import { connect } from 'react-redux';
 import { Formik } from 'formik';
+import { authOperations } from '../../../redux/auth';
+import { globalActions, globalSelectors } from '../../../redux/global';
+import styles from '../LoginRegistForm.module.css';
 
 class RegistrationForm extends Component {
   state = {
@@ -34,14 +37,14 @@ class RegistrationForm extends Component {
     return errors;
   };
 
-  handleSubmit = async (values, { setSubmitting }) => {
+  handleSubmit = async values => {
     this.state.name = values.name;
     this.state.email = values.email;
     this.state.password = values.password;
 
-    // console.log(this.state.name, this.state.email, this.state.password);
-    this.props.onRegist({ ...this.state });
-    setSubmitting(false);
+    this.props.showModal && this.props.onToggleModal();
+    this.props.onToggleToLogin();
+    // this.props.onRegister({ ...this.state });
   };
 
   render() {
@@ -64,7 +67,6 @@ class RegistrationForm extends Component {
             isSubmitting,
             /* and other goodies */
           }) => (
-            // onSubmit={this.handleSubmit}
             <form onSubmit={handleSubmit} className={styles.loginRegist__form}>
               <h2 className={styles.loginRegist__heading}>Регистрация</h2>
 
@@ -158,11 +160,27 @@ class RegistrationForm extends Component {
           )}
         </Formik>
         <p className={styles.loginRegist_mobile__Text}>
-          Уже есть аккаунт?{' '}
-          <button className={styles.loginRegist_mobile__Bth}>Войти</button>
+          Уже есть аккаунт?
+          <button
+            className={styles.loginRegist_mobile__Bth}
+            onClick={() => this.props.onToggleToLogin()}
+          >
+            Войти
+          </button>
         </p>
       </div>
     );
   }
 }
-export default RegistrationForm;
+
+const mapStateToProps = state => ({
+  showModal: globalSelectors.getIsModalOpen(state),
+});
+
+const mapDispatchToProps = {
+  onToggleModal: globalActions.toggleModal,
+  onToggleToLogin: globalActions.toggleShowLogin,
+  onRegister: authOperations.register,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegistrationForm);

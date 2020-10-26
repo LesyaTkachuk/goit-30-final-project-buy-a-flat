@@ -8,7 +8,7 @@ const initialState = {
       email: '',
       familyId: '',
     },
-    token: '',
+    token: '111',
     isLoading: false,
     error: '',
   },

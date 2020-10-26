@@ -6,7 +6,7 @@ import NavigationBar from '../NavigationBar';
 import Media from 'react-media';
 import Modal from '../common/Modal';
 import styles from './HeaderContent.module.css';
-import LoginForm from '../LoginRegistration/LoginForm';
+import LoginForm from '../LoginRegistration/RegistrationForm';
 import RegistrationForm from '../LoginRegistration/RegistrationForm';
 import UserInfo from '../UserInfo/UserInfo';
 import { globalSelectors } from '../../redux/global';
@@ -29,14 +29,9 @@ class HeaderContent extends Component {
             render={() => <AuthButtonsWrapper />}
           />
         )}
-        {/* {this.props.showModal && (
-          <Modal>
-            <LoginForm />
-          </Modal>
-        )} */}
         {this.props.showModal && (
           <Modal>
-            <RegistrationForm />
+            {this.props.showLogin ? <LoginForm /> : <RegistrationForm />}
           </Modal>
         )}
       </div>
@@ -45,6 +40,7 @@ class HeaderContent extends Component {
 }
 
 const mapStateToProps = state => ({
+  showLogin: globalSelectors.getShowLoginForm(state),
   isAuthenticated: authSelectors.isAuthenticated(state),
   showModal: globalSelectors.getIsModalOpen(state),
 });

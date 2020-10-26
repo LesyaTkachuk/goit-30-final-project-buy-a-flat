@@ -43,7 +43,7 @@ const state = {
       email: '',
       familyId: '',
     },
-    token: null,
+    token: '',
     isLoading: false,
     error: '',
   },
@@ -89,12 +89,12 @@ const state = {
 
   global: {
     currentDate: {
-      currentMonth: '', // расчитать при логин и записать в чарт
-      currentYear: '', // расчитать при логин и записать в чарт
+      currentMonth: 0, // расчитать при логин и записать в чарт
+      currentYear: 0, // расчитать при логин и записать в чарт
     },
     chartDate: {
-      chartMonth: '',
-      chartYear: '',
+      chartMonth: 0,
+      chartYear: 0,
     },
     transactionCategories: [], // при логине
     isModalOpen: false,

@@ -4,12 +4,12 @@ import globalActions from './globalActions';
 const initialState = {
   global: {
     currentDate: {
-      currentMonth: '', // расчитать при логин и записать в чарт
-      currentYear: '', // расчитать при логин и записать в чарт
+      currentMonth: 0, // расчитать при логин и записать в чарт
+      currentYear: 0, // расчитать при логин и записать в чарт
     },
     chartDate: {
-      chartMonth: '',
-      chartYear: '',
+      chartMonth: 0,
+      chartYear: 0,
     },
     transactionCategories: [], // при логине
     isModalOpen: false,
@@ -31,7 +31,13 @@ const isModalOpen = createReducer(initialState.global.isModalOpen, {
 });
 
 const showLogin = createReducer(initialState.global.showLogin, {
-  [globalActions.toggleShowLogin]: (state, { payload }) => !state,
+  [globalActions.toggleShowLogin]: (state, { payload }) => {
+    if (payload) {
+      return payload === 'Войти' ? true : false;
+    }
+
+    return !state;
+  },
 });
 
 const showNavPage = createReducer(initialState.global.showNavPage, {

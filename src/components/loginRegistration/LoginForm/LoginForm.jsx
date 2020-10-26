@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Formik } from 'formik';
-import styles from '../loginRegistForm.module.css';
-// import {connect} from 'react-redux';
+import styles from '../LoginRegistForm.module.css';
+import { globalActions, globalSelectors } from '../../../redux/global';
+import { authOperations } from '../../../redux/auth';
 
 class LoginForm extends Component {
   state = {
@@ -26,9 +28,10 @@ class LoginForm extends Component {
     this.state.email = values.email;
     this.state.password = values.password;
 
-    // console.log(this.state.email, this.state.password);
-    this.props.onLogin({ ...this.state });
-    setSubmitting(false);
+    this.props.showModal && this.props.onToggleModal();
+    this.setState({ name: '', email: '', password: '' });
+    // this.props.onLogin({ ...this.state });
+    // setSubmitting(false);
   };
 
   render() {
@@ -114,7 +117,10 @@ class LoginForm extends Component {
         </Formik>
         <p className={styles.loginRegist_mobile__Text}>
           Уже есть аккаунт?{' '}
-          <button className={styles.loginRegist_mobile__Bth}>
+          <button
+            className={styles.loginRegist_mobile__Bth}
+            onClick={() => this.props.onToggleToRegistration()}
+          >
             Зарегистрироваться
           </button>
         </p>
@@ -122,4 +128,15 @@ class LoginForm extends Component {
     );
   }
 }
-export default LoginForm;
+
+const mapStateToProps = state => ({
+  showModal: globalSelectors.getIsModalOpen(state),
+});
+
+const mapDispatchToProps = {
+  onToggleModal: globalActions.toggleModal,
+  onToggleToRegistration: globalActions.toggleShowLogin,
+  onLogin: authOperations.login,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
