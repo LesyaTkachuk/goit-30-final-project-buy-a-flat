@@ -3,19 +3,35 @@ import globalActions from './globalActions';
 
 const initialState = {
   global: {
+    currentDate: {
+      currentMonth: '', // расчитать при логин и записать в чарт
+      currentYear: '', // расчитать при логин и записать в чарт
+    },
+    chartDate: {
+      chartMonth: '',
+      chartYear: '',
+    },
+    transactionCategories: [], // при логине
     isModalOpen: false,
-    isRegistered: true,
+    showLogin: true,
     showNavPage: false,
     showExpensesPage: false,
   },
 };
 
+const transactionCategories = createReducer(
+  initialState.global.transactionCategories,
+  {
+    [globalActions.getCategoriesSuccess]: (_, { payload }) => payload,
+  },
+);
+
 const isModalOpen = createReducer(initialState.global.isModalOpen, {
   [globalActions.toggleModal]: (state, { payload }) => !state,
 });
 
-const isRegistered = createReducer(initialState.global.isRegistered, {
-  [globalActions.toggleIsRegistered]: (state, { payload }) => payload,
+const showLogin = createReducer(initialState.global.showLogin, {
+  [globalActions.toggleShowLogin]: (state, { payload }) => !state,
 });
 
 const showNavPage = createReducer(initialState.global.showNavPage, {
@@ -27,8 +43,9 @@ const showExpensesPage = createReducer(initialState.global.showNavPage, {
 });
 
 export default combineReducers({
+  transactionCategories,
   isModalOpen,
-  isRegistered,
+  showLogin,
   showNavPage,
   showExpensesPage,
 });

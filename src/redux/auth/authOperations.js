@@ -2,7 +2,7 @@ import axios from 'axios';
 import { globalActions } from '../global';
 import authActions from './authActions';
 
-axios.defaults.baseURL = 'https://goit-phonebook-api.herokuapp.com';
+axios.defaults.baseURL = 'https://';
 
 const token = {
   set(token) {
@@ -26,7 +26,9 @@ const register = credentials => (dispatch, getState) => {
     .then(({ data }) => {
       dispatch(authActions.registerSuccess(data));
     })
-    .catch(({ message }) => dispatch(authActions.registerError(message)));
+    .catch(({ message, code }) =>
+      dispatch(authActions.registerError({ message, code })),
+    );
 };
 
 const login = credentials => dispatch => {
@@ -38,7 +40,9 @@ const login = credentials => dispatch => {
       token.set(data.token);
       dispatch(authActions.loginSuccess(data));
     })
-    .catch(({ message }) => dispatch(authActions.loginError(message)));
+    .catch(({ message, code }) =>
+      dispatch(authActions.loginError({ message, code })),
+    );
 };
 
 const getCurrentUser = () => (dispatch, getState) => {
@@ -56,9 +60,9 @@ const getCurrentUser = () => (dispatch, getState) => {
   axios
     .get('/api/users/current')
     .then(({ data }) => dispatch(authActions.getCurrentUserSuccess(data)))
-    .catch(({ message }) => {
-      dispatch(authActions.getCurrentUserError(message));
-      dispatch(authActions.clearToken());
+    .catch(({ message, code }) => {
+      dispatch(authActions.getCurrentUserError({ message, code }));
+      // dispatch(authActions.clearToken());
     });
 };
 
@@ -71,7 +75,9 @@ const logout = () => dispatch => {
       token.unset();
       dispatch(authActions.logoutSuccess());
     })
-    .catch(({ message }) => dispatch(authActions.logoutError(message)));
+    .catch(({ message, code }) =>
+      dispatch(authActions.logoutError({ message, code })),
+    );
 };
 
 export default {

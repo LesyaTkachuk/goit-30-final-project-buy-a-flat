@@ -4,12 +4,11 @@ import authActions from './authActions';
 const initialState = {
   auth: {
     user: {
-      id: '', //?
       name: '',
       email: '',
       familyId: '',
     },
-    token: '5464',
+    token: '',
     isLoading: false,
     error: '',
   },

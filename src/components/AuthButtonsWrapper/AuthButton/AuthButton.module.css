@@ -13,4 +13,9 @@
   line-height: 20px;
   text-align: center;
   color: var(--black-font-color);
+  background-color: var(--blue-button-color);
+}
+.authButton:focus {
+  background-color: var(--orange-color);
+  color: #fff;
 }

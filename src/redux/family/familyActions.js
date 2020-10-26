@@ -12,6 +12,18 @@ const getCurrentFamilyRequest = createAction('family/getCurrentRequest');
 const getCurrentFamilySuccess = createAction('family/getCurrentSuccess');
 const getCurrentFamilyError = createAction('family/getCurrentError');
 
+const createTransactionRequest = createAction('transactions/createRequest');
+const createTransactionSuccess = createAction('transactions/createSuccess');
+const createTransactionError = createAction('transactions/createError');
+
+const getChartDataRequest = createAction('family/getChartDataRequest');
+const getChartDataSuccess = createAction('family/getChartDataSuccess');
+const getChartDataError = createAction('family/getChartDataError');
+
+const getFinanceDataRequest = createAction('family/getFinanceDataRequest');
+const getFinanceDataSuccess = createAction('family/getFinanceDataSuccess');
+const getFinanceDataError = createAction('family/getFinanceDataError');
+
 const updateGiftsRequest = createAction('family/updateGiftsRequest');
 const updateGiftsSuccess = createAction('family/updateGiftsSuccess');
 const updateGiftsError = createAction('family/updateGiftsError');
@@ -28,6 +40,15 @@ export default {
   getCurrentFamilyRequest,
   getCurrentFamilySuccess,
   getCurrentFamilyError,
+  createTransactionRequest,
+  createTransactionSuccess,
+  createTransactionError,
+  getChartDataRequest,
+  getChartDataSuccess,
+  getChartDataError,
+  getFinanceDataRequest,
+  getFinanceDataSuccess,
+  getFinanceDataError,
   updateGiftsRequest,
   updateGiftsSuccess,
   updateGiftsError,
