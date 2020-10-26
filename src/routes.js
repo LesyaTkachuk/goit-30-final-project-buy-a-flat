@@ -41,4 +41,14 @@ export default [
     ),
     private: true,
   },
+  {
+    name: 'Navigation',
+    path: '/navigation',
+    showInMenu: false,
+    exact: true,
+    component: lazy(() =>
+      import('./pages/Navigation' /* webpackChunkName: "navigation-page" */),
+    ),
+    private: true,
+  },
 ];

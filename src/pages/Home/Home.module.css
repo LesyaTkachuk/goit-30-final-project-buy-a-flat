@@ -44,6 +44,7 @@
     background: url('../../assets/images/first-page-desctop.svg') no-repeat
       right bottom;
     padding: 70px 40px 0;
+    /* min-height: calc(100vh - 72px); */
     min-height: 648px;
     margin-bottom: 70px;
   }

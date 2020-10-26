@@ -11,7 +11,7 @@
 }
 
 .facebook_btn {
-  background-color: #e3eaff;
+  background-color: var(--blue-button-color);
 }
 
 @media (min-width: 1240px) {
