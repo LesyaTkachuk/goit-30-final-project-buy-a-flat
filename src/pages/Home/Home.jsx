@@ -1,5 +1,9 @@
+/* eslint-disable no-unused-expressions */
 import React, { Component } from 'react';
+import Media from 'react-media';
 import ButtonsWrapper from '../../components/ButtonsWrapper';
+import LoginForm from '../../components/LoginRegistration/RegistrationForm';
+import RegistrationForm from '../../components/LoginRegistration/RegistrationForm';
 import styles from './Home.module.css';
 
 class Home extends Component {
@@ -12,9 +16,17 @@ class Home extends Component {
           <span className={styles.title__orange}>накопления</span> на квартиру
         </h1>
         <ButtonsWrapper />
+        <Media
+          query="(max-width: 767px)"
+          render={() =>
+            this.props.showLoginForm ? <LoginForm /> : <RegistrationForm />
+          }
+        />
       </div>
     );
   }
 }
+
+
 
 export default Home;

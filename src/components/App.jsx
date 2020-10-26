@@ -1,16 +1,23 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Layout from './common/Layout';
 import Appbar from './common/Appbar';
 import Content from './Content';
+import Notification from './common/Notification';
+import { authSelectors } from '../redux/auth';
 
-const App = () => {
+const App = ({ error }) => {
   return (
     <Layout>
       <Appbar />
       <Content />
-      {/* {error && <Notification />} */}
+      {error && <Notification />}
     </Layout>
   );
 };
 
-export default App;
+const mapStateToProps = state => ({
+  error: authSelectors.getError(state),
+});
+
+export default connect(mapStateToProps)(App);

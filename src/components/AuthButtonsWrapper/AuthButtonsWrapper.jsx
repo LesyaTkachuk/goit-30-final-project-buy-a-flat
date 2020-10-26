@@ -5,8 +5,8 @@ import styles from './AuthButtonsWrapper.module.css';
 function AuthButtonsWrapper() {
   return (
     <div className={styles.authButtonsWrapper}>
-      <AuthButton label="Войти" className={styles.loginBtn} />
-      <AuthButton label="Регистрация" className={styles.registerBtn} />
+      <AuthButton label="Войти" />
+      <AuthButton label="Регистрация" />
     </div>
   );
 }
