@@ -130,10 +130,10 @@ class RegistrationForm extends Component {
                     
                     <br/>
                     <button type="submit" className={styles.loginRegist__Bth} disabled={isSubmitting}><p className={styles.loginRegist__Bth_text}>Зарегистрироваться</p></button>
-                    <p className={styles.loginRegist_mobile__Text}>Уже есть аккаунт? <button className={styles.loginRegist_mobile__Bth}>Войти</button></p>
                 </form>
                     )}
                 </Formik>
+                <p className={styles.loginRegist_mobile__Text}>Уже есть аккаунт? <button className={styles.loginRegist_mobile__Bth}>Войти</button></p>
             </div>
         )
     }
