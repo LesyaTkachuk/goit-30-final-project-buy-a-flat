@@ -69,6 +69,21 @@
     z-index: 3;
 }
 
+.loginRegist__input:focus{
+    border: 1px solid #2196F3;
+    color: #2196F3;
+}
+
+.loginRegist__input_error {
+  border-color: red;
+  color: red;
+}
+
+.loginRegist__input_error:focus{
+    border: 1px solid red;
+    color: red;
+}
+
 .loginRegist__invalid{
 
     margin: 70px 0 0 10px;

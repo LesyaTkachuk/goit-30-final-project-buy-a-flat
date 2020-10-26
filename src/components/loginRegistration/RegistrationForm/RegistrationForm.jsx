@@ -1,133 +1,142 @@
 import React, { Component } from 'react';
-import styles from '../LoginRegistForm.module.css';
-// import {connect} from 'react-redux';
+import styles from '../loginRegistForm.module.css';
+import { Formik } from 'formik';
 
 class RegistrationForm extends Component {
-  state = {
-    name: '',
-    email: '',
-    password: '',
+    state = {
+        name:'',
+        email:'',
+        password:'',
 
-    nameErorr: '',
-    emailErorr: '',
-    passwordErorr: '',
-  };
+     };
 
-  handleChange = ({ target: { name, value } }) => {
-    this.setState({ [name]: value });
-  };
+     initialValues = {name:'', email: '', password: '' };
 
-  handleSubmit = e => {
-    e.preventDefault();
+     validate = (values) => {
+          
+            const errors = {};
 
-    const isValid = this.validate();
+            console.log("validate");
 
-    if (isValid) {
-      this.setState({
-        nameErorr: '',
-        emailErorr: '',
-        passwordErorr: '',
-      });
+            if (!values.name) {
+                errors.name = 'Не указано имя пользователя';
+            }
 
-      this.props.onRegister({ ...this.state });
-    }
-  };
+            if (!values.email) {
+            errors.email = 'Не указан E-mail';
+            } else if (
+            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+            ) {
+            errors.email = 'Неправильный E-mail';
+            }
 
-  validate = () => {
-    console.log(this.state.name);
-    let nameErorr = '';
-    let emailErorr = '';
-    let passwordErorr = '';
 
-    console.log('validate');
-    console.log(this.state.name);
+            if (!values.password) {
+                errors.password = 'Не указан пароль';
+                } else if (
+                values.password.length < 3 || values.password.length > 8
+                ) {
+                errors.password = 'Пароль меньше 3 или больше 8 символов';
+                }
+            return errors;
 
-    if (!this.state.name) {
-      nameErorr = 'Не указано имя пользователя';
-    }
+     }
 
-    if (this.state.password.length < 3 || this.state.password.length > 8) {
-      passwordErorr = 'Пароль меньше 3 или больш 8 символов';
-    }
+     handleSubmit = async (values, {setSubmitting}) => {
+        this.state.name = values.name;
+        this.state.email = values.email;
+        this.state.password = values.password;
+        
+        // console.log(this.state.name, this.state.email, this.state.password);
+        this.props.onRegist({...this.state});
+        setSubmitting(false);
+     }
 
-    if (!this.state.email.includes('@')) {
-      emailErorr = 'Неправильный E-mail';
-    }
+    render() {
+        const {name, email, password} = this.state;
+        return (
+            <div className={styles.modal__Registration}>
 
-    if (nameErorr || emailErorr || passwordErorr) {
-      this.setState({ nameErorr, emailErorr, passwordErorr });
-      return false;
-    }
+            <Formik
+                initialValues={this.initialValues}
+                validate={this.validate}
+                handleChange={this.handleChange}
+                onSubmit={this.handleSubmit}
+                >
+                    {({
+                        values,
+                        errors,
+                        touched,
+                        handleChange,
+                        handleBlur,
+                        handleSubmit,
+                        isSubmitting,
+                        /* and other goodies */
+                    }) => (
+                        // onSubmit={this.handleSubmit}
+                <form onSubmit={handleSubmit} className={styles.loginRegist__form}>
 
-    return true;
-  };
-
-  render() {
-    const { name, email, password } = this.state;
-    return (
-      <div className={styles.modal__Registration}>
-        <form onSubmit={this.handleSubmit} className={styles.loginRegist__form}>
-          <h2 className={styles.loginRegist__heading}>Регистрация</h2>
-
-          <label className={styles.loginRegist__inputform}>
-            <label className={styles.loginRegist__input_text}>Имя</label>
-            <input
-              type="text"
-              name="name"
-              value={name}
-              placeholder="Введите ваше имя"
-              className={styles.loginRegist__input}
-              onChange={this.handleChange}
-              autoFocus
-            />
-            <div className={styles.loginRegist__invalid}>
-              {this.state.nameErorr}
+                    <h2 className={styles.loginRegist__heading}>Регистрация</h2>
+                    
+                    <label className={styles.loginRegist__inputform}>
+                        <label className={styles.loginRegist__input_text}>Имя</label>
+                        <input
+                            type="text"
+                            name="name"
+                            value={name}
+                            placeholder="Введите ваше имя"
+                            className={(errors.name && touched.name && (styles.loginRegist__input_error + ' ' + styles.loginRegist__input) || styles.loginRegist__input) }
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.name}
+                            autoFocus
+                        />
+                    <div className={styles.loginRegist__invalid}>{errors.name && touched.name && errors.name}</div>
+                    </label>
+                    
+                    <br/>
+                    <label className={styles.loginRegist__inputform}>
+                        <label className={styles.loginRegist__input_text}>E-mail</label>
+                        <input
+                            type="email"
+                            name="email"
+                            value={email}
+                            
+                            placeholder="Your@e-mail.com"
+                            className={(errors.email && touched.email && (styles.loginRegist__input_error + ' ' + styles.loginRegist__input) || styles.loginRegist__input) }
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.email}
+                        />
+                    <div className={styles.loginRegist__invalid}>{errors.email && touched.email && errors.email}</div>
+                    </label>
+                    
+                    <br/>
+                    <label className={styles.loginRegist__inputform}>
+                        <label className={styles.loginRegist__input_text}>Пароль</label>
+                        <input
+                            type="password"
+                            name="password"
+                            value={password}
+                            placeholder="Введите пароль"
+                            className={(errors.password && touched.password && (styles.loginRegist__input_error + ' ' + styles.loginRegist__input) || styles.loginRegist__input) }
+                            // onChange={this.handleChange}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.password}
+                        />
+                    <div className={styles.loginRegist__invalid}>{errors.password && touched.password && errors.password}</div>
+                    </label>
+                    
+                    <br/>
+                    <button type="submit" className={styles.loginRegist__Bth} disabled={isSubmitting}><p className={styles.loginRegist__Bth_text}>Зарегистрироваться</p></button>
+                    <p className={styles.loginRegist_mobile__Text}>Уже есть аккаунт? <button className={styles.loginRegist_mobile__Bth}>Войти</button></p>
+                </form>
+                    )}
+                </Formik>
             </div>
-          </label>
+        )
+    }
 
-          <br />
-          <label className={styles.loginRegist__inputform}>
-            <label className={styles.loginRegist__input_text}>E-mail</label>
-            <input
-              type="email"
-              name="email"
-              value={email}
-              placeholder="Your@e-mail.com"
-              className={styles.loginRegist__input}
-              onChange={this.handleChange}
-            />
-            <div className={styles.loginRegist__invalid}>
-              {this.state.emailErorr}
-            </div>
-          </label>
-
-          <br />
-          <label className={styles.loginRegist__inputform}>
-            <label className={styles.loginRegist__input_text}>Пароль</label>
-            <input
-              type="password"
-              name="password"
-              value={password}
-              placeholder="Введите пароль"
-              className={styles.loginRegist__input}
-              onChange={this.handleChange}
-            />
-            <div className={styles.loginRegist__invalid}>
-              {this.state.passwordErorr}
-            </div>
-          </label>
-
-          <br />
-          <button type="submit" className={styles.loginRegist__Bth}>
-            <p className={styles.loginRegist__Bth_text}>Зарегистрироваться</p>
-          </button>
-          <p className={styles.loginRegist_mobile__Text}>
-            Уже есть аккаунт?{' '}
-            <button className={styles.loginRegist_mobile__Bth}>Войти</button>
-          </p>
-        </form>
-      </div>
-    );
-  }
 }
 export default RegistrationForm;
