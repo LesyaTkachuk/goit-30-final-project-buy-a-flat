@@ -168,7 +168,7 @@ export default function MediaChart() {
   return (
     <Media
       queries={{
-        mobile: '(max-width: 768px)',
+        mobile: '(max-width: 767px)',
       }}
     >
       {matches => <MyChart media={matches.mobile ? 'mobile' : 'desctop'} />}
