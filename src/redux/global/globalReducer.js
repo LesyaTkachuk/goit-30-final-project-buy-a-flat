@@ -32,6 +32,7 @@ const isModalOpen = createReducer(initialState.global.isModalOpen, {
 
 const showLogin = createReducer(initialState.global.showLogin, {
   [globalActions.toggleShowLogin]: (state, { payload }) => {
+    console.log(payload);
     if (payload) {
       return payload === 'Войти' ? true : false;
     }
