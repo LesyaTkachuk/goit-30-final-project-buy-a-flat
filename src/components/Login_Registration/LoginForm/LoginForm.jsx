@@ -1,33 +1,20 @@
 import React, { Component } from 'react';
-import { Formik } from 'formik';
-import { authOperations } from '../../../redux/auth';
 import { connect } from 'react-redux';
+import { Formik } from 'formik';
+import styles from '../Login_Registration.module.css';
 import { globalActions, globalSelectors } from '../../../redux/global';
-import styles from '../LoginRegistForm.module.css';
+import { authOperations } from '../../../redux/auth';
 
-class RegistrationForm extends Component {
+class LoginForm extends Component {
   state = {
-    name: '',
     email: '',
     password: '',
   };
 
-  initialValues = { name: '', email: '', password: '' };
+  initialValues = { email: '', password: '' };
 
   validate = values => {
     const errors = {};
-
-    console.log('validate');
-
-    if (!values.name) {
-      errors.name = 'Не указано имя пользователя';
-    }
-
-    if (!values.email) {
-      errors.email = 'Не указан E-mail';
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-      errors.email = 'Неправильный E-mail';
-    }
 
     if (!values.password) {
       errors.password = 'Не указан пароль';
@@ -37,24 +24,24 @@ class RegistrationForm extends Component {
     return errors;
   };
 
-  handleSubmit = async values => {
-    this.state.name = values.name;
+  handleSubmit = async (values, { setSubmitting }) => {
     this.state.email = values.email;
     this.state.password = values.password;
 
     this.props.showModal && this.props.onToggleModal();
-    this.props.onToggleToLogin();
-    // this.props.onRegister({ ...this.state });
+    this.setState({ name: '', email: '', password: '' });
+    // this.props.onLogin({ ...this.state });
+    // setSubmitting(false);
   };
 
   render() {
-    const { name, email, password } = this.state;
+    const { email, password } = this.state;
+
     return (
-      <div className={styles.modal__Registration}>
+      <div className={styles.modal__login}>
         <Formik
           initialValues={this.initialValues}
           validate={this.validate}
-          handleChange={this.handleChange}
           onSubmit={this.handleSubmit}
         >
           {({
@@ -65,37 +52,10 @@ class RegistrationForm extends Component {
             handleBlur,
             handleSubmit,
             isSubmitting,
-            /* and other goodies */
           }) => (
             <form onSubmit={handleSubmit} className={styles.loginRegist__form}>
-              <h2 className={styles.loginRegist__heading}>Регистрация</h2>
+              <h2 className={styles.loginRegist__heading}>Вход</h2>
 
-              <label className={styles.loginRegist__inputform}>
-                <label className={styles.loginRegist__input_text}>Имя</label>
-                <input
-                  type="text"
-                  name="name"
-                  value={name}
-                  placeholder="Введите ваше имя"
-                  className={
-                    (errors.name &&
-                      touched.name &&
-                      styles.loginRegist__input_error +
-                        ' ' +
-                        styles.loginRegist__input) ||
-                    styles.loginRegist__input
-                  }
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.name}
-                  autoFocus
-                />
-                <div className={styles.loginRegist__invalid}>
-                  {errors.name && touched.name && errors.name}
-                </div>
-              </label>
-
-              <br />
               <label className={styles.loginRegist__inputform}>
                 <label className={styles.loginRegist__input_text}>E-mail</label>
                 <input
@@ -114,10 +74,8 @@ class RegistrationForm extends Component {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.email}
+                  autoFocus
                 />
-                <div className={styles.loginRegist__invalid}>
-                  {errors.email && touched.email && errors.email}
-                </div>
               </label>
 
               <br />
@@ -152,9 +110,7 @@ class RegistrationForm extends Component {
                 className={styles.loginRegist__Bth}
                 disabled={isSubmitting}
               >
-                <p className={styles.loginRegist__Bth_text}>
-                  Зарегистрироваться
-                </p>
+                <p className={styles.loginRegist__Bth_text}>Войти</p>
               </button>
             </form>
           )}
@@ -170,7 +126,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   onToggleModal: globalActions.toggleModal,
-  onRegister: authOperations.register,
+  onLogin: authOperations.login,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(RegistrationForm);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

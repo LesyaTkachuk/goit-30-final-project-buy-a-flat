@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import Media from 'react-media';
 import AuthSocialsNav from '../../components/AuthSocialsNav';
 import AuthToggler from '../../components/AuthToggler';
-import LoginForm from '../../components/LoginRegistration/LoginForm';
-import RegistrationForm from '../../components/LoginRegistration/RegistrationForm';
+import LoginForm from '../../components/Login_Registration/LoginForm';
+import RegistrationForm from '../../components/Login_Registration/RegistrationForm';
 import styles from './Home.module.css';
 
 class Home extends Component {
