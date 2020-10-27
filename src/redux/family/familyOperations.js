@@ -36,6 +36,17 @@ const getCurrentFamily = () => dispatch => {
     );
 };
 
+const getTransactions = () => dispatch => {
+  familyActions.getCategoriesRequest();
+
+  axios
+    .get('/api/transactions/categories')
+    .then(({ data }) => dispatch(familyActions.getCategoriesSuccess()))
+    .catch(({ message, status }) =>
+      dispatch(familyActions.getCategoriesError({ message, status })),
+    );
+};
+
 const createTransaction = credentials => dispatch => {
   familyActions.createTransactionRequest();
 
@@ -111,6 +122,7 @@ export default {
   addFamily,
   updateFamily,
   getCurrentFamily,
+  getTransactions,
   createTransaction,
   getChartData,
   getFinanceData,

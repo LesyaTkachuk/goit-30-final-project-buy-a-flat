@@ -19,13 +19,6 @@ const initialState = {
   },
 };
 
-const transactionCategories = createReducer(
-  initialState.global.transactionCategories,
-  {
-    [globalActions.getCategoriesSuccess]: (_, { payload }) => payload,
-  },
-);
-
 const isModalOpen = createReducer(initialState.global.isModalOpen, {
   [globalActions.toggleModal]: (state, { payload }) => !state,
 });
@@ -49,7 +42,6 @@ const showExpensesPage = createReducer(initialState.global.showNavPage, {
 });
 
 export default combineReducers({
-  transactionCategories,
   isModalOpen,
   showLogin,
   showNavPage,

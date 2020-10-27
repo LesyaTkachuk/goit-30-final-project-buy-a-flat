@@ -12,6 +12,10 @@ const getCurrentFamilyRequest = createAction('family/getCurrentRequest');
 const getCurrentFamilySuccess = createAction('family/getCurrentSuccess');
 const getCurrentFamilyError = createAction('family/getCurrentError');
 
+const getCategoriesRequest = createAction('transactions/getCategoriesRequest');
+const getCategoriesSuccess = createAction('transactions/getCategoriesSuccess');
+const getCategoriesError = createAction('transactions/getCategoriesError');
+
 const createTransactionRequest = createAction('transactions/createRequest');
 const createTransactionSuccess = createAction('transactions/createSuccess');
 const createTransactionError = createAction('transactions/createError');
@@ -40,6 +44,9 @@ export default {
   getCurrentFamilyRequest,
   getCurrentFamilySuccess,
   getCurrentFamilyError,
+  getCategoriesRequest,
+  getCategoriesSuccess,
+  getCategoriesError,
   createTransactionRequest,
   createTransactionSuccess,
   createTransactionError,
