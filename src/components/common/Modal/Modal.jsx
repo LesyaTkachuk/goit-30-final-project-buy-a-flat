@@ -1,45 +1,60 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { globalActions } from '../../../redux/global';
+import { authSelectors, authActions } from '../../../redux/auth';
+import { familySelectors, familyActions } from '../../../redux/family';
 import styles from './Modal.module.css';
-// import style from './modal.css';
 
 class Modal extends Component {
   componentDidMount() {
-    // console.log('Modal componentDidMount');
-
     window.addEventListener('keydown', this.handleKeyDown);
   }
   componentWillUnmount() {
-    // console.log('Modal componentWillUnmount');
     window.removeEventListener('keydown', this.handleKeyDown);
   }
   handleKeyDown = e => {
     if (e.code === 'Escape') {
-      this.props.onClose();
+      this.checkForError();
     }
   };
 
   handleBackdropClick = e => {
-    // console.log(e.target);
-    // console.log(e.currentTarget);
     if (e.target === e.currentTarget) {
-      this.props.onClose();
+      this.checkForError();
     }
+  };
+
+  checkForError = () => {
+    const {
+      toggleModal,
+      authError,
+      familyError,
+      unsetAuthError,
+      unsetFamilyError,
+    } = this.props;
+    toggleModal();
+    authError && unsetAuthError();
+    familyError && unsetFamilyError();
   };
 
   render() {
     return (
       <div className={styles.overlay} onClick={this.handleBackdropClick}>
-        {/* <div className={styles.modal}>{this.props.children}</div> */}
         {this.props.children}
       </div>
     );
   }
 }
 
+const mapStateToProps = state => ({
+  authError: authSelectors.getError(state),
+  familyError: familySelectors.getError(state),
+});
+
 const mapDispatchToProps = {
-  onClose: globalActions.toggleModal,
+  toggleModal: globalActions.toggleModal,
+  unsetAuthError: authActions.unsetError,
+  unsetFamilyError: familyActions.unsetError,
 };
 
-export default connect(null, mapDispatchToProps)(Modal);
+export default connect(mapStateToProps, mapDispatchToProps)(Modal);

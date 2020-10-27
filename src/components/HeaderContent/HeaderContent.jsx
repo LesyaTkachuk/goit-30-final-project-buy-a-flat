@@ -11,9 +11,18 @@ import RegistrationForm from '../Login_Registration/RegistrationForm';
 import UserInfo from '../UserInfo/UserInfo';
 import { globalSelectors } from '../../redux/global';
 import { authSelectors } from '../../redux/auth';
+import { familySelectors } from '../../redux/family';
 
 class HeaderContent extends Component {
   render() {
+    const {
+      isAuthenticated,
+      authError,
+      familyError,
+      showModal,
+      showLogin,
+    } = this.props;
+
     return (
       <div className={styles.headerContentWrapper}>
         {this.props.isAuthenticated && (
@@ -21,15 +30,13 @@ class HeaderContent extends Component {
         )}
         <Logo />
 
-        {this.props.isAuthenticated ? (
+        {isAuthenticated ? (
           <UserInfo />
         ) : (
           <Media query="(min-width: 768px)" render={() => <AuthNav />} />
         )}
-        {this.props.showModal && (
-          <Modal>
-            {this.props.showLogin ? <LoginForm /> : <RegistrationForm />}
-          </Modal>
+        {showModal && !authError && !familyError && (
+          <Modal>{showLogin ? <LoginForm /> : <RegistrationForm />}</Modal>
         )}
       </div>
     );
@@ -40,6 +47,8 @@ const mapStateToProps = state => ({
   showLogin: globalSelectors.getShowLoginForm(state),
   isAuthenticated: authSelectors.isAuthenticated(state),
   showModal: globalSelectors.getIsModalOpen(state),
+  authError: authSelectors.getError(state),
+  familyError: familySelectors.getError(state),
 });
 
 export default connect(mapStateToProps)(HeaderContent);

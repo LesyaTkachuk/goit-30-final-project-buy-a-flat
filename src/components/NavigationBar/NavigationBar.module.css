@@ -13,7 +13,6 @@
   font-size: 14px;
   line-height: 20px;
   color: var(--black-font-color);
-  margin-bottom: 20px;
 }
 
 .activenavigationLink {
@@ -36,5 +35,6 @@
   }
   .navigationItem {
     margin-right: 32px;
+    margin-bottom: 0;
   }
 }
