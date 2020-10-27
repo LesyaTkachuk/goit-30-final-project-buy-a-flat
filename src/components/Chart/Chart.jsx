@@ -87,7 +87,18 @@ class MyChart extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { media } = this.props;
+    const { media, data, familyId, getChartData } = this.props;
+
+    if (!data.length) {
+      getChartData({
+        params: {
+          month: new Date().getMonth(),
+          year: new Date().getFullYear(),
+        },
+        familyId,
+      });
+    }
+
     if (prevProps.media !== media) {
       this.createChart();
     }
@@ -164,14 +175,16 @@ class MyChart extends Component {
   }
 }
 
-export default function MediaChart() {
+export default function MediaChart(props) {
   return (
     <Media
       queries={{
         mobile: '(max-width: 767px)',
       }}
     >
-      {matches => <MyChart media={matches.mobile ? 'mobile' : 'desctop'} />}
+      {matches => (
+        <MyChart media={matches.mobile ? 'mobile' : 'desctop'} {...props} />
+      )}
     </Media>
   );
 }
