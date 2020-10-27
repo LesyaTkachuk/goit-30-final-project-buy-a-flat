@@ -77,6 +77,8 @@ const state = {
       giftsForUnpacking: 0,
     },
 
+    transactionCategories: [],
+
     transaction: {
       category: '',
       amount: 0,

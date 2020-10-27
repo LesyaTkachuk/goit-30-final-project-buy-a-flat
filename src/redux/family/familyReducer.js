@@ -13,6 +13,8 @@ const initialState = {
       incomePercentagetoSavings: 0,
     },
 
+    transactionCategories: [],
+
     transaction: {
       category: '',
       amount: 0,
@@ -54,6 +56,15 @@ const info = createReducer(initialState.family.info, {
   [authActions.logoutSuccess]: () => initialState.family.info,
 });
 
+const transactionCategories = createReducer(
+  initialState.family.transactionCategories,
+  {
+    [familyActions.getCategoriesSuccess]: (_, { payload }) => payload,
+    [authActions.logoutSuccess]: () =>
+      initialState.family.transactionCategories,
+  },
+);
+
 const transaction = createReducer(initialState.family.transaction, {
   [familyActions.createTransactionSuccess]: (_, { payload }) => payload,
   [authActions.logoutSuccess]: () => initialState.family.transaction,
@@ -61,7 +72,8 @@ const transaction = createReducer(initialState.family.transaction, {
 
 const chart = createReducer(initialState.family.chartStatistics.dataForChart, {
   [familyActions.getChartDataSuccess]: (_, { payload }) => payload,
-  [authActions.logoutSuccess]: () => initialState.family.chartStatistics.dataForChart,
+  [authActions.logoutSuccess]: () =>
+    initialState.family.chartStatistics.dataForChart,
 });
 
 const finance = createReducer(initialState.family.financeStatistics, {
@@ -120,6 +132,7 @@ const error = createReducer(initialState.family.error, {
 
 export default combineReducers({
   info,
+  transactionCategories,
   transaction,
   chart,
   finance,
