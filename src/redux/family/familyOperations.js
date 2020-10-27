@@ -9,8 +9,8 @@ const addFamily = credentials => dispatch => {
   axios
     .post('/api/families', credentials)
     .then(({ data }) => dispatch(familyActions.addFamilySuccess(data)))
-    .catch(({ message, code }) =>
-      dispatch(familyActions.addFamilyError({ message, code })),
+    .catch(({ message, status }) =>
+      dispatch(familyActions.addFamilyError({ message, status })),
     );
 };
 
@@ -20,29 +20,19 @@ const updateFamily = credentials => dispatch => {
   axios
     .put(`/api/families`, credentials)
     .then(({ data }) => dispatch(familyActions.updateFamilySuccess(data)))
-    .catch(({ message, code }) =>
-      dispatch(familyActions.updateFamilyError({ message, code })),
+    .catch(({ message, status }) =>
+      dispatch(familyActions.updateFamilyError({ message, status })),
     );
 };
 
-const getCurrentFamily = () => (dispatch, getState) => {
-  const {
-    auth: {
-      user: { familyId },
-    },
-  } = getState();
-
-  if (!familyId) {
-    return;
-  }
-
+const getCurrentFamily = () => dispatch => {
   dispatch(familyActions.getCurrentFamilyRequest());
 
   axios
-    .get(`/api/families/current/${familyId}`)
+    .get(`/api/families/current`)
     .then(({ data }) => dispatch(familyActions.getCurrentFamilySuccess(data)))
-    .catch(({ message, code }) =>
-      dispatch(familyActions.getCurrentFamilyError({ message, code })),
+    .catch(({ message, status }) =>
+      dispatch(familyActions.getCurrentFamilyError({ message, status })),
     );
 };
 
@@ -52,8 +42,8 @@ const createTransaction = credentials => dispatch => {
   axios
     .post('/api/transactions', credentials)
     .then(({ data }) => dispatch(familyActions.createTransactionSuccess(data)))
-    .catch(({ message, code }) =>
-      dispatch(familyActions.createTransactionError({ message, code })),
+    .catch(({ message, status }) =>
+      dispatch(familyActions.createTransactionError({ message, status })),
     );
 };
 
@@ -80,8 +70,8 @@ const getChartData = () => (dispatch, getState) => {
       `/api/finance-stats/annual/:${familyId}?${monthForRequest}&${yearForRequest}`,
     )
     .then(({ data }) => dispatch(familyActions.getChartDataSuccess(data)))
-    .catch(({ message, code }) =>
-      familyActions.getCurrentFamilyError({ message, code }),
+    .catch(({ message, status }) =>
+      familyActions.getCurrentFamilyError({ message, status }),
     );
 };
 
@@ -101,8 +91,8 @@ const getFinanceData = () => (dispatch, getState) => {
   axios
     .get('/api/finance-stats/flat')
     .then(({ data }) => dispatch(data))
-    .catch(({ message, code }) =>
-      dispatch(familyActions.getFinanceDataError({ message, code })),
+    .catch(({ message, status }) =>
+      dispatch(familyActions.getFinanceDataError({ message, status })),
     );
 };
 
@@ -112,8 +102,8 @@ const updateGifts = () => dispatch => {
   axios
     .put('api/gifts/unpack')
     .then(({ data }) => dispatch(familyActions.updateGiftsSuccess(data)))
-    .catch(({ message, code }) =>
-      dispatch(familyActions.updateGiftsError({ message, code })),
+    .catch(({ message, status }) =>
+      dispatch(familyActions.updateGiftsError({ message, status })),
     );
 };
 

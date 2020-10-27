@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import { authOperations } from '../../../redux/auth';
+import { connect } from 'react-redux';
 import { globalActions, globalSelectors } from '../../../redux/global';
 import styles from '../LoginRegistForm.module.css';
 
@@ -159,15 +159,6 @@ class RegistrationForm extends Component {
             </form>
           )}
         </Formik>
-        <p className={styles.loginRegist_mobile__Text}>
-          Уже есть аккаунт?
-          <button
-            className={styles.loginRegist_mobile__Bth}
-            onClick={() => this.props.onToggleToLogin()}
-          >
-            Войти
-          </button>
-        </p>
       </div>
     );
   }
@@ -179,7 +170,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   onToggleModal: globalActions.toggleModal,
-  onToggleToLogin: globalActions.toggleShowLogin,
   onRegister: authOperations.register,
 };
 

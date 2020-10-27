@@ -9,8 +9,8 @@ const getTransactions = () => dispatch => {
   axios
     .get('/api/transactions/categories')
     .then(({ data }) => dispatch(globalActions.getCategoriesSuccess()))
-    .catch(({ message, code }) =>
-      dispatch(globalActions.getCategoriesError({ message, code })),
+    .catch(({ message, status }) =>
+      dispatch(globalActions.getCategoriesError({ message, status })),
     );
 };
 

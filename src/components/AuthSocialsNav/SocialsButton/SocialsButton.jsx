@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Button.module.css';
+import styles from './SocialsButton.module.css';
 
 function Button({ label, className: classForBtn, image }) {
   return (
