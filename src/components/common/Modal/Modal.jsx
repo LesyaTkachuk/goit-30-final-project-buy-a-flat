@@ -47,8 +47,8 @@ class Modal extends Component {
 }
 
 const mapStateToProps = state => ({
-  authError: authSelectors.getError(state),
-  familyError: familySelectors.getError(state),
+  authError: authSelectors.getErrorMessage(state),
+  familyError: familySelectors.getErrorMessage(state),
 });
 
 const mapDispatchToProps = {

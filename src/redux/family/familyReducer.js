@@ -41,13 +41,16 @@ const initialState = {
     },
 
     isLoading: false,
-    error: '',
+    error: {
+      status: '',
+      message: '',
+    },
   },
 };
 
 const setFamily = (state, { payload }) => ({ ...state, ...payload });
 const setError = (_, { payload }) => payload;
-const unsetError = () => null;
+const unsetError = () => initialState.family.error;
 
 const info = createReducer(initialState.family.info, {
   [familyActions.addFamilySuccess]: setFamily,

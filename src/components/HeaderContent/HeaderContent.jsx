@@ -47,8 +47,8 @@ const mapStateToProps = state => ({
   showLogin: globalSelectors.getShowLoginForm(state),
   isAuthenticated: authSelectors.isAuthenticated(state),
   showModal: globalSelectors.getIsModalOpen(state),
-  authError: authSelectors.getError(state),
-  familyError: familySelectors.getError(state),
+  authError: authSelectors.getErrorMessage(state),
+  familyError: familySelectors.getErrorMessage(state),
 });
 
 export default connect(mapStateToProps)(HeaderContent);

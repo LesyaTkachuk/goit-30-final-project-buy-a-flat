@@ -23,8 +23,8 @@ const App = ({ familyError, authError }) => {
 };
 
 const mapStateToProps = state => ({
-  authError: authSelectors.getError(state),
-  familyError: familySelectors.getError(state),
+  authError: authSelectors.getErrorMessage(state),
+  familyError: familySelectors.getErrorMessage(state),
 });
 
 export default connect(mapStateToProps)(App);

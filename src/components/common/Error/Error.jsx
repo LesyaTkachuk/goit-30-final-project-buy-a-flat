@@ -25,6 +25,13 @@ class Error extends Component {
   }
 
   render() {
+    const {
+      authError,
+      familyError,
+      authErrorStatus,
+      familyErrorStatus,
+    } = this.props;
+
     return (
       <div className={styles.container}>
         <Link
@@ -34,12 +41,12 @@ class Error extends Component {
         <div className={styles.errorWrapper}>
           <h2 className={styles.errorTitle}>Oops, an error occurred</h2>
           <p className={styles.errorText}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum
-            dolor sit.
+            Status code: {authErrorStatus || familyErrorStatus}{' '}
           </p>
-          <Link to="/" className={styles.link}>
+          <p className={styles.errorText}>{authError || familyError}</p>
+          {/* <Link to="/" className={styles.link}>
             Go to home page
-          </Link>
+          </Link> */}
         </div>
       </div>
     );
@@ -47,8 +54,10 @@ class Error extends Component {
 }
 
 const mapStateToProps = state => ({
-  authError: authSelectors.getError(state),
-  familyError: familySelectors.getError(state),
+  authError: authSelectors.getErrorMessage(state),
+  familyError: familySelectors.getErrorMessage(state),
+  authErrorStatus: authSelectors.getErrorStatus(state),
+  familyErrorStatus: familySelectors.getErrorStatus(state),
 });
 
 const mapDispatchToProps = {
