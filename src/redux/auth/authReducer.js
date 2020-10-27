@@ -10,7 +10,10 @@ const initialState = {
     },
     token: '111',
     isLoading: false,
-    error: '',
+    error: {
+      status: '',
+      message: '',
+    },
   },
 };
 
@@ -18,7 +21,7 @@ const setUser = (state, { payload }) => ({ ...state, ...payload.user });
 const setCurrentUser = (_, { payload }) => payload;
 const setToken = (_, { payload }) => payload.token;
 const setError = (_, { payload }) => payload;
-const unsetError = () => null;
+const unsetError = () => initialState.auth.error;
 
 const user = createReducer(initialState.auth.user, {
   [authActions.registerSuccess]: setUser,

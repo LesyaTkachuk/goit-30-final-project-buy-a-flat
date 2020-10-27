@@ -43,7 +43,7 @@ class RegistrationForm extends Component {
     this.state.password = values.password;
 
     this.props.showModal && this.props.onToggleModal();
-    this.props.onToggleToLogin();
+    // this.props.onToggleToLogin();
     // this.props.onRegister({ ...this.state });
   };
 
