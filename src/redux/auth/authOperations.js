@@ -26,8 +26,8 @@ const register = credentials => (dispatch, getState) => {
     .then(({ data }) => {
       dispatch(authActions.registerSuccess(data));
     })
-    .catch(({ message, code }) =>
-      dispatch(authActions.registerError({ message, code })),
+    .catch(({ message, status }) =>
+      dispatch(authActions.registerError({ message, status })),
     );
 };
 
@@ -40,8 +40,8 @@ const login = credentials => dispatch => {
       token.set(data.token);
       dispatch(authActions.loginSuccess(data));
     })
-    .catch(({ message, code }) =>
-      dispatch(authActions.loginError({ message, code })),
+    .catch(({ message, status }) =>
+      dispatch(authActions.loginError({ message, status })),
     );
 };
 
@@ -60,8 +60,8 @@ const getCurrentUser = () => (dispatch, getState) => {
   axios
     .get('/api/users/current')
     .then(({ data }) => dispatch(authActions.getCurrentUserSuccess(data)))
-    .catch(({ message, code }) => {
-      dispatch(authActions.getCurrentUserError({ message, code }));
+    .catch(({ message, status }) => {
+      dispatch(authActions.getCurrentUserError({ message, status }));
       // dispatch(authActions.clearToken());
     });
 };
@@ -75,8 +75,8 @@ const logout = () => dispatch => {
       token.unset();
       dispatch(authActions.logoutSuccess());
     })
-    .catch(({ message, code }) =>
-      dispatch(authActions.logoutError({ message, code })),
+    .catch(({ message, status }) =>
+      dispatch(authActions.logoutError({ message, status })),
     );
 };
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import AuthButtonsWrapper from '../AuthButtonsWrapper';
+import AuthNav from '../AuthNav';
 import Logo from '../Logo';
 import NavigationBar from '../NavigationBar';
 import Media from 'react-media';
@@ -24,10 +24,7 @@ class HeaderContent extends Component {
         {this.props.isAuthenticated ? (
           <UserInfo />
         ) : (
-          <Media
-            query="(min-width: 768px)"
-            render={() => <AuthButtonsWrapper />}
-          />
+          <Media query="(min-width: 768px)" render={() => <AuthNav />} />
         )}
         {this.props.showModal && (
           <Modal>

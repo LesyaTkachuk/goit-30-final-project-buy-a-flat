@@ -115,15 +115,6 @@ class LoginForm extends Component {
             </form>
           )}
         </Formik>
-        <p className={styles.loginRegist_mobile__Text}>
-          Уже есть аккаунт?{' '}
-          <button
-            className={styles.loginRegist_mobile__Bth}
-            onClick={() => this.props.onToggleToRegistration()}
-          >
-            Зарегистрироваться
-          </button>
-        </p>
       </div>
     );
   }
@@ -135,7 +126,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   onToggleModal: globalActions.toggleModal,
-  onToggleToRegistration: globalActions.toggleShowLogin,
   onLogin: authOperations.login,
 };
 
