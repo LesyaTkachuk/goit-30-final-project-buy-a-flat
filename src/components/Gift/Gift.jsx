@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Gift.module.css';
 import localCurrency from '../../assets/icons/local_currency.svg';
 import gift from '../../assets/images/gift.svg';
-import click from '../../assets/images/click.svg.svg';
+import click from '../../assets/images/click.svg';
 
 function Gift() {
   return (

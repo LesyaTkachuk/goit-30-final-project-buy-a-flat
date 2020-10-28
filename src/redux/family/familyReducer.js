@@ -53,6 +53,7 @@ const setError = (_, { payload }) => payload;
 const unsetError = () => initialState.family.error;
 
 const info = createReducer(initialState.family.info, {
+  [familyActions.updateOrSetFamily]: setFamily,
   [familyActions.addFamilySuccess]: setFamily,
   [familyActions.updateFamilySuccess]: setFamily,
   [familyActions.getCurrentFamilySuccess]: setFamily,

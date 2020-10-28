@@ -66,20 +66,15 @@ const getChartData = () => (dispatch, getState) => {
       currentDate: { currentMonth, currentYear },
     },
   } = getState();
+  if (!familyId) return;
 
-  if (!familyId) {
-    return;
-  }
-
-  const monthForRequest = chartMonth ? chartMonth : currentMonth;
-  const yearForRequest = chartYear ? chartYear : currentYear;
+  const month = chartMonth || currentMonth;
+  const year = chartYear || currentYear;
 
   dispatch(familyActions.getChartDataRequest());
 
   axios
-    .get(
-      `/api/finance-stats/annual/:${familyId}?${monthForRequest}&${yearForRequest}`,
-    )
+    .get(`/api/finance-stats/annual/${familyId}`, { params: { month, year } })
     .then(({ data }) => dispatch(familyActions.getChartDataSuccess(data)))
     .catch(({ message, status }) =>
       familyActions.getCurrentFamilyError({ message, status }),
