@@ -6,6 +6,7 @@ const getFamiltGifts = state => state.family.gifts;
 const getErrorMessage = state => state.family.error.message;
 const getErrorStatus = state => state.family.error.status;
 const getLoading = state => state.family.isLoading;
+const getChartData = state => state.family.chart;
 
 export default {
   getFamilyInfo,
@@ -16,4 +17,5 @@ export default {
   getErrorStatus,
   getLoading,
   getFamiltGifts,
+  getChartData,
 };
