@@ -2,7 +2,7 @@ import axios from 'axios';
 import { globalActions } from '../global';
 import authActions from './authActions';
 
-axios.defaults.baseURL = 'https://';
+axios.defaults.baseURL = 'https://flat-finance.herokuapp.com';
 
 const token = {
   set(token) {
@@ -40,9 +40,9 @@ const login = credentials => dispatch => {
       token.set(data.token);
       dispatch(authActions.loginSuccess(data));
     })
-    .catch(({ message, status }) =>
-      dispatch(authActions.loginError({ message, status })),
-    );
+    .catch(({ message }) => {
+      dispatch(authActions.loginError(message));
+    });
 };
 
 const getCurrentUser = () => (dispatch, getState) => {

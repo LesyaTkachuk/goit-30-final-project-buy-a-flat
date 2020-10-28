@@ -8,7 +8,7 @@ function PublicRoute({ component: Component, isAuthenticated, ...routeProps }) {
       {...routeProps}
       render={props =>
         isAuthenticated && routeProps.restricted ? (
-          <Redirect to="/expenses" />
+          <Redirect to="/planning" />
         ) : (
           <Component {...props} />
         )
