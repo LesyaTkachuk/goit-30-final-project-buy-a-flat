@@ -5,6 +5,7 @@ import {
   familyOperations,
   familySelectors,
 } from '../../redux/family';
+import { authSelectors } from '../../redux/auth';
 import styles from './PlanForm.module.css';
 
 class PlanForm extends Component {
@@ -21,8 +22,9 @@ class PlanForm extends Component {
   };
 
   componentDidMount() {
-    const familyInfo = this.props.getFamily();
-    if (familyInfo) {
+    const familyId = this.props.getFamilyId();
+    if (familyId) {
+      const familyInfo = this.props.getFamily();
       this.setState({ family: familyInfo });
     }
   }
@@ -138,6 +140,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   getFamily: familyOperations.getCurrentFamily,
   setFamily: familyActions.updateOrSetFamily,
+  getFamilyId: authSelectors.getFamilyId,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlanForm);
