@@ -87,17 +87,12 @@ class MyChart extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { media, data, familyId, getChartData } = this.props;
+    const { media } = this.props;
+    // const { media, data, getChartData } = this.props;
 
-    if (!data.length) {
-      getChartData({
-        params: {
-          month: new Date().getMonth(),
-          year: new Date().getFullYear(),
-        },
-        familyId,
-      });
-    }
+    // if (!data.length) {
+    //   getChartData();
+    // }
 
     if (prevProps.media !== media) {
       this.createChart();
