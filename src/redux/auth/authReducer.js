@@ -4,7 +4,7 @@ import authActions from './authActions';
 const initialState = {
   auth: {
     user: {
-      name: '',
+      username: '',
       email: '',
       familyId: '',
     },

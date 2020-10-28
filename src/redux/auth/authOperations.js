@@ -40,9 +40,9 @@ const login = credentials => dispatch => {
       token.set(data.token);
       dispatch(authActions.loginSuccess(data));
     })
-    .catch(({ message, status }) =>
-      dispatch(authActions.loginError({ message, status })),
-    );
+    .catch(({ message }) => {
+      dispatch(authActions.loginError(message));
+    });
 };
 
 const getCurrentUser = () => (dispatch, getState) => {

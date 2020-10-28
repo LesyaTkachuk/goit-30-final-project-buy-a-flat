@@ -10,7 +10,7 @@ const initialState = {
       flatSquareMeters: 0,
       totalSalary: 0,
       passiveIncome: 0,
-      incomePercentagetoSavings: 0,
+      incomePercentageToSavings: 0,
     },
 
     transactionCategories: [],
@@ -48,12 +48,15 @@ const initialState = {
   },
 };
 
-const setFamily = (state, { payload }) => ({ ...state, ...payload });
+const setFamily = (state, { payload }) => ({ ...state, ...payload.info });
 const setError = (_, { payload }) => payload;
 const unsetError = () => initialState.family.error;
 
 const info = createReducer(initialState.family.info, {
-  [familyActions.updateOrSetFamily]: setFamily,
+  [familyActions.updateOrSetFamily]: (state, { payload }) => ({
+    ...state,
+    ...payload,
+  }),
   [familyActions.addFamilySuccess]: setFamily,
   [familyActions.updateFamilySuccess]: setFamily,
   [familyActions.getCurrentFamilySuccess]: setFamily,

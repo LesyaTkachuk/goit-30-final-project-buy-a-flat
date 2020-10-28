@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { authSelectors } from '../../redux/auth';
 import {
   familyActions,
   familyOperations,
@@ -15,15 +16,16 @@ class PlanForm extends Component {
       balance: '',
       flatPrice: '',
       flatSquareMeters: '',
-      incomePercentagetoSavings: '',
+      incomePercentageToSavings: '',
     },
     disabledButton: false,
   };
 
   componentDidMount() {
-    const familyInfo = this.props.getFamily();
-    if (familyInfo) {
-      this.setState({ family: familyInfo });
+    const { familyId, currentFamily } = this.props;
+    if (familyId) {
+      // тут еще операция
+      this.setState({ family: currentFamily });
     }
   }
 
@@ -107,9 +109,9 @@ class PlanForm extends Component {
               <label>6. Накопление, %</label>
               <input
                 data-limit="2"
-                name="incomePercentagetoSavings"
+                name="incomePercentageToSavings"
                 type="number"
-                value={this.state.family.incomePercentagetoSavings}
+                value={this.state.family.incomePercentageToSavings}
                 onChange={this.handleInput}
               />
             </div>
@@ -132,7 +134,8 @@ class PlanForm extends Component {
 }
 
 const mapStateToProps = state => ({
-  familyInfo: familySelectors.getFamilyInfo(state),
+  familyId: authSelectors.getFamilyId(state),
+  currentFamily: familySelectors.getFamilyInfo(state),
 });
 
 const mapDispatchToProps = {
