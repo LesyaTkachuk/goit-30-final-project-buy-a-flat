@@ -4,6 +4,8 @@ const addFamilyRequest = createAction('family/addRequest');
 const addFamilySuccess = createAction('family/addSuccess');
 const addFamilyError = createAction('family/addError');
 
+const updateOrSetFamily = createAction('family/updateSetSuccess');
+
 const updateFamilyRequest = createAction('family/updateRequest');
 const updateFamilySuccess = createAction('family/updateSuccess');
 const updateFamilyError = createAction('family/updateError');
@@ -38,6 +40,7 @@ export default {
   addFamilyRequest,
   addFamilySuccess,
   addFamilyError,
+  updateOrSetFamily,
   updateFamilyRequest,
   updateFamilySuccess,
   updateFamilyError,
