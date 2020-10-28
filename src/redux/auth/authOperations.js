@@ -2,7 +2,7 @@ import axios from 'axios';
 import { globalActions } from '../global';
 import authActions from './authActions';
 
-axios.defaults.baseURL = 'https://';
+axios.defaults.baseURL = 'https://flat-finance.herokuapp.com';
 
 const token = {
   set(token) {

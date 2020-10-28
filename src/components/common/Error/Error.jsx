@@ -40,9 +40,9 @@ class Error extends Component {
         ></Link>
         <div className={styles.errorWrapper}>
           <h2 className={styles.errorTitle}>Oops, an error occurred</h2>
-          <p className={styles.errorText}>
+          {/* <p className={styles.errorText}>
             Status code: {authErrorStatus || familyErrorStatus}{' '}
-          </p>
+          </p> */}
           <p className={styles.errorText}>{authError || familyError}</p>
           {/* <Link to="/" className={styles.link}>
             Go to home page

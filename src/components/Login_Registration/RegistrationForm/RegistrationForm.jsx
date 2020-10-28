@@ -43,8 +43,8 @@ class RegistrationForm extends Component {
     this.state.password = values.password;
 
     this.props.showModal && this.props.onToggleModal();
-    // this.props.onToggleToLogin();
-    // this.props.onRegister({ ...this.state });
+    this.props.onToggleToLogin();
+    this.props.onRegister({ ...this.state });
   };
 
   render() {
@@ -136,7 +136,6 @@ class RegistrationForm extends Component {
                         styles.loginRegist__input) ||
                     styles.loginRegist__input
                   }
-                  // onChange={this.handleChange}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.password}
@@ -170,6 +169,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   onToggleModal: globalActions.toggleModal,
+  onToggleToLogin: globalActions.toggleShowLogin,
   onRegister: authOperations.register,
 };
 

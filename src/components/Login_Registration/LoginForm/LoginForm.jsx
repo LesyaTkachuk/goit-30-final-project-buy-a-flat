@@ -29,9 +29,8 @@ class LoginForm extends Component {
     this.state.password = values.password;
 
     this.props.showModal && this.props.onToggleModal();
-    this.setState({ name: '', email: '', password: '' });
-    // this.props.onLogin({ ...this.state });
-    // setSubmitting(false);
+    this.props.onLogin({ ...this.state });
+    this.setState({ email: '', password: '' });
   };
 
   render() {
