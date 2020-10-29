@@ -26,7 +26,6 @@ class Modal extends Component {
 
   toggleStateData = () => {
     const {
-      toggleModal,
       authError,
       familyError,
       unsetAuthError,
@@ -40,7 +39,7 @@ class Modal extends Component {
       removeGift,
       removeNotif,
     } = this.props;
-    toggleModal();
+
     isAuthFormOpen && removeAuthForm();
     isLogoutOpen && removeLogout();
     isGiftsNotifOpen && removeGift();
@@ -68,13 +67,12 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  toggleModal: globalActions.toggleModal,
   unsetAuthError: authActions.unsetError,
   unsetFamilyError: familyActions.unsetError,
   removeAuthForm: globalActions.toggleAuthForm,
   removeGift: globalActions.toggleHasGifts,
   removeLogout: globalActions.toggleLogout,
-  removeNotif: globalActions.toggletVerifyNotif,
+  removeNotif: globalActions.toggleVerifyNotif,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Modal);

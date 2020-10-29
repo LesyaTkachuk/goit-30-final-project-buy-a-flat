@@ -30,10 +30,6 @@ const hasGifts = createReducer(initialState.global.hasGifts, {
   [globalActions.toggleHasGifts]: (state, { payload }) => !state,
 });
 
-const isAuthFormOpen = createReducer(initialState.global.isAuthFormOpen, {
-  [globalActions.toggleAuthForm]: (state, { payload }) => !state,
-});
-
 const isLogoutOpen = createReducer(initialState.global.isLogoutOpen, {
   [globalActions.toggleLogout]: (state, { payload }) => !state,
 });
@@ -50,6 +46,10 @@ const showLogin = createReducer(initialState.global.showLogin, {
 
     return !state;
   },
+});
+
+const isAuthFormOpen = createReducer(initialState.global.isAuthFormOpen, {
+  [globalActions.toggleAuthForm]: (state, { payload }) => !state,
 });
 
 const showNavPage = createReducer(initialState.global.showNavPage, {

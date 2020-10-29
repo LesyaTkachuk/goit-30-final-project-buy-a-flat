@@ -19,14 +19,28 @@ class PlanForm extends Component {
       incomePercentageToSavings: '',
     },
     disabledButton: false,
+    timout: null,
   };
 
   componentDidMount() {
-    const { familyId, currentFamily } = this.props;
+    const { familyId, currentFamily, getFamily } = this.props;
     if (familyId) {
-      // тут еще операция
-      this.setState({ family: currentFamily });
+      getFamily();
+      this.setState({
+        ...this.state,
+        timout: setTimeout(
+          () => this.setState({ family: currentFamily }),
+          4000,
+        ),
+      });
     }
+  }
+
+  componentWillUnmount() {
+    this.setState({
+      ...this.state,
+      timout: clearTimeout(this.timout),
+    });
   }
 
   handleInput = e => {

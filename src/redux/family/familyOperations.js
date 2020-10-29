@@ -32,6 +32,17 @@ const getCurrentFamily = () => dispatch => {
     );
 };
 
+// const getCurrentFamily = () => async dispatch => {
+//   try {
+//     dispatch(familyActions.getCurrentFamilyRequest());
+
+//     const { data } = await axios.get(`/api/families/current`);
+//     dispatch(familyActions.getCurrentFamilySuccess(data));
+//   } catch ({ message }) {
+//     dispatch(familyActions.getCurrentFamilyError(message));
+//   }
+// };
+
 const getTransactions = () => dispatch => {
   familyActions.getCategoriesRequest();
 
