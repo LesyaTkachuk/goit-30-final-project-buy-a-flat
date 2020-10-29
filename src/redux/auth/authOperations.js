@@ -26,9 +26,7 @@ const register = credentials => (dispatch, getState) => {
     .then(({ data }) => {
       dispatch(authActions.registerSuccess(data));
     })
-    .catch(({ message, status }) =>
-      dispatch(authActions.registerError({ message, status })),
-    );
+    .catch(({ message }) => dispatch(authActions.registerError(message)));
 };
 
 const login = credentials => dispatch => {
@@ -60,8 +58,8 @@ const getCurrentUser = () => (dispatch, getState) => {
   axios
     .get('/api/users/current')
     .then(({ data }) => dispatch(authActions.getCurrentUserSuccess(data)))
-    .catch(({ message, status }) => {
-      dispatch(authActions.getCurrentUserError({ message, status }));
+    .catch(({ message }) => {
+      dispatch(authActions.getCurrentUserError(message));
       // dispatch(authActions.clearToken());
     });
 };
@@ -75,9 +73,7 @@ const logout = () => dispatch => {
       token.unset();
       dispatch(authActions.logoutSuccess());
     })
-    .catch(({ message, status }) =>
-      dispatch(authActions.logoutError({ message, status })),
-    );
+    .catch(({ message }) => dispatch(authActions.logoutError(message)));
 };
 
 export default {
