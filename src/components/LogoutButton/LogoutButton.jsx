@@ -4,8 +4,8 @@ import styles from './LogoutButton.module.css';
 import logoutIco from '../../assets/icons/logout.svg';
 import { globalActions } from '../../redux/global';
 
-const LogoutButton = ({ toggleLogout }) => (
-  <div className={styles.buttonLogout} onClick={() => toggleLogout()}>
+const LogoutButton = ({ openLogout }) => (
+  <div className={styles.buttonLogout} onClick={() => openLogout()}>
     <p className={styles.buttonLogoutTitle}>Выйти</p>
     <img className={styles.buttonLogoutIcon} src={logoutIco} alt={'Выйти'} />
   </div>
