@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { familyOperations, familySelectors } from '../../redux/family';
+import {
+  familyActions,
+  familyOperations,
+  familySelectors,
+} from '../../redux/family';
 import Calculator from '../Calculator';
 import styles from './ExpenseForm.module.css';
 
@@ -20,23 +24,24 @@ class ExpensesForm extends Component {
     const { familyBalance, transactionCategories } = this.props;
 
     if (familyBalance) {
-      this.setState({ balance: familyBalance });
+      this.setState({
+        balance: familyBalance,
+      });
     }
 
-    if (!transactionCategories) {
+    if (transactionCategories.length === 0) {
       this.props.getCategories();
     }
   }
 
-  handleClick(e) {
+  handleClick = () => {
     this.setState(state => ({
       isClicked: !state.isClicked,
     }));
-  }
+  };
 
   handleInput = e => {
     const { name, value } = e.target;
-    // this.setState({ [name]: value });
 
     this.setState(prevState => ({
       transaction: { ...prevState.transaction, [name]: value },
@@ -49,12 +54,13 @@ class ExpensesForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.transaction(this.state);
+    this.props.setTransaction(this.state.transaction);
     this.setState({ disabledButton: true });
   };
 
   render() {
     const { balance, transaction, isClicked, disabledButton } = this.state;
+
     const { transactionCategories } = this.props;
 
     return (
@@ -106,12 +112,6 @@ class ExpensesForm extends Component {
                     {category}
                   </option>
                 ))}
-              {/* <option value="entertainment">Развлечения</option>
-              <option value="health">Здоровье</option>
-              <option value="products">Продукты</option>
-              <option value="transport">Транспорт</option>
-              <option value="sport">Спорт</option>
-              <option value="clothes">Одежда</option> */}
             </select>
           </div>
           <div className={styles.formItem}>
@@ -154,11 +154,11 @@ class ExpensesForm extends Component {
 const mapStateToProps = state => ({
   familyBalance: familySelectors.getFamilyBalance(state),
   transactionCategories: familySelectors.getTransactionCategories(state),
-  // transaction: familySelectors.getTransaction(state),
 });
 
 const mapDispatchToProps = {
   getCategories: familyOperations.getTransactions,
+  setTransaction: familyActions.setTransaction,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExpensesForm);

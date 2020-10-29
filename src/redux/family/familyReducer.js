@@ -13,7 +13,7 @@ const initialState = {
       incomePercentageToSavings: 0,
     },
 
-    transactionCategories: ['Products', 'Sport', 'Health'],
+    transactionCategories: [],
 
     transaction: {
       category: '',
@@ -70,6 +70,10 @@ const transactionCategories = createReducer(
 );
 
 const transaction = createReducer(initialState.family.transaction, {
+  [familyActions.setTransaction]: (state, { payload }) => ({
+    ...state,
+    ...payload,
+  }),
   [familyActions.createTransactionSuccess]: (_, { payload }) => payload,
   [authActions.logoutSuccess]: () => initialState.family.transaction,
 });
