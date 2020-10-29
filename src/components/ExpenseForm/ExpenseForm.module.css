@@ -1,16 +1,41 @@
-.formItem {
+.formContainer {
+  position: relative;
+  margin-bottom: 26px;
+}
+
+.form {
+  margin-bottom: 26px;
+}
+.formItem:not(:last-child) {
   display: block;
   margin-bottom: 35px;
 }
 
-.formItem:nth-child(4) {
-  background-image: url(../../assets/icons/calculator.svg);
-  background-repeat: no-repeat;
-  background-position: bottom 19px right 12px;
-}
-
 .formItem:focus-within label {
   color: #2196f3;
+}
+
+.formItem:hover label {
+  color: #2196f3;
+}
+
+.formItem {
+  position: relative;
+  /* width: 280px; */
+}
+.calculatorBtn {
+  position: absolute;
+  background-image: url(../../assets/icons/calculator.svg);
+  background-repeat: no-repeat;
+  top: 18px;
+  right: 18px;
+  width: 20px;
+  height: 20px;
+}
+.calculator {
+  position: absolute;
+  top: 329px;
+  right: 9px;
 }
 
 .formLabel {
@@ -22,7 +47,7 @@
   font-size: 12px;
   line-height: 14px;
   color: var(--grey-font-color);
-  padding-top: 6px;
+  padding-top: 4px;
   padding-left: 12px;
 }
 
@@ -39,11 +64,33 @@
   line-height: 19px;
   color: rgba(24, 25, 31, 0.87);
   border-bottom: 1px solid rgba(24, 25, 31, 0.36);
-  padding: 2px 0px 0 12px;
+  padding: 12px 0px 0 12px;
 }
 
+.formInput:hover {
+  border-bottom: 1px solid #2196f3;
+}
 .formInput:focus {
   border-bottom: 1px solid #2196f3;
+}
+.formButton {
+  display: block;
+  margin: 0 auto;
+  width: 200px;
+  height: 56px;
+  background: #ff6c00;
+  border-radius: 8px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 20px;
+  color: #ffffff;
+}
+
+.formButton:disabled {
+  background: rgba(0, 0, 0, 0.1);
+  color: rgba(255, 255, 255, 0.7);
 }
 
 @media (min-width: 768px) {
@@ -52,6 +99,10 @@
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+  }
+
+  .formItem:nth-child(2) {
+    margin-bottom: 0px;
   }
 
   .formItem:nth-child(3) {
@@ -69,12 +120,16 @@
   .formInput {
     width: 330px;
   }
+  .calculator {
+    top: 147px;
+    right: 0px;
+  }
 }
 
 @media (min-width: 1240px) {
   .formContainer {
     width: 770px;
-    margin: 0 auto;
+    /* margin: 0 auto; */
   }
   .formInput {
     width: 370px;

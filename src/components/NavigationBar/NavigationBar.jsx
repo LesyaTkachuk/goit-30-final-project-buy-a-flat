@@ -16,7 +16,7 @@ function NavigationBar() {
                 className={styles.navigationLink}
                 activeClassName={styles.activenavigationLink}
               >
-                {name}
+                {showInMenu}
               </NavLink>
             </li>
           ),

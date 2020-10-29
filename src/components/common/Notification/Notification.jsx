@@ -1,11 +1,10 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { ToastContainer, toast } from "react-toastify";
-import { connect } from "react-redux";
-import contactsSelectors from "../modules/contacts/contactsSelectors";
-import contactsActions from "../modules/contacts/contactsActions";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { ToastContainer, toast } from 'react-toastify';
+import { connect } from 'react-redux';
+import { authActions, authSelectors } from '../../../redux/auth';
 
-import "react-toastify/dist/ReactToastify.css";
+import 'react-toastify/dist/ReactToastify.css';
 
 class Notification extends Component {
   static propTypes = {
@@ -17,7 +16,7 @@ class Notification extends Component {
     const { error } = this.props;
     toast(`🦄 ${error}`);
     setTimeout(() => {
-      this.props.toggleError();
+      this.props.unsetError();
     }, 5000);
   }
 
@@ -34,12 +33,12 @@ class Notification extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  error: contactsSelectors.getError(state),
+const mapStateToProps = state => ({
+  authError: authSelectors.getError(state),
 });
 
 const mapDispatchToProps = {
-  toggleError: contactsActions.toggleError,
+  unsetError: authActions.unsetError,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Notification);

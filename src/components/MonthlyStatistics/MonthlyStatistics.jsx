@@ -4,7 +4,7 @@ import styles from './MonthlyStatistics.module.css';
 function MonthlySavings() {
   return (
     <div className={styles.container}>
-      <label className={styles.monthSelectLabel} for="month">
+      <label className={styles.monthSelectLabel} htmlFor="month">
         Месяц
       </label>
       <select className={styles.monthSelect} name="month" id="month">
