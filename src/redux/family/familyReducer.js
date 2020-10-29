@@ -41,10 +41,7 @@ const initialState = {
     },
 
     isLoading: false,
-    error: {
-      status: '',
-      message: '',
-    },
+    error: '',
   },
 };
 
@@ -96,7 +93,7 @@ const gifts = createReducer(initialState.family.gifts, {
   [authActions.logoutSuccess]: () => initialState.family.gifts,
 });
 
-const loading = createReducer(initialState.family.isLoading, {
+const isLoading = createReducer(initialState.family.isLoading, {
   [familyActions.addFamilyRequest]: () => true,
   [familyActions.addFamilySuccess]: () => false,
   [familyActions.addFamilyError]: () => false,
@@ -144,6 +141,6 @@ export default combineReducers({
   chart,
   finance,
   gifts,
-  loading,
+  isLoading,
   error,
 });

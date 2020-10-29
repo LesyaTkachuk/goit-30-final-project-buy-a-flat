@@ -8,16 +8,16 @@ const getFamilyId = state => state.auth.user.familyId;
 
 const getLoader = state => state.auth.loading;
 
-const getErrorMessage = state => state.auth.error.message;
+const getErrorMessage = state => state.auth.error;
 
-const getErrorStatus = state => state.auth.error.status;
+const getAuthLoading = state => state.auth.isLoading;
 
 export default {
   isAuthenticated,
   getUserName,
   getLoader,
   getErrorMessage,
-  getErrorStatus,
   getUserEmail,
   getFamilyId,
+  getAuthLoading,
 };
