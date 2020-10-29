@@ -4,16 +4,13 @@ import authActions from './authActions';
 const initialState = {
   auth: {
     user: {
-      name: '',
+      username: '',
       email: '',
       familyId: '',
     },
-    token: '111',
+    token: '',
     isLoading: false,
-    error: {
-      status: '',
-      message: '',
-    },
+    error: '',
   },
 };
 
@@ -36,7 +33,7 @@ const token = createReducer(initialState.auth.token, {
   [authActions.clearToken]: () => null,
 });
 
-const loading = createReducer(initialState.auth.isLoading, {
+const isLoading = createReducer(initialState.auth.isLoading, {
   [authActions.registerRequest]: () => true,
   [authActions.loginRequest]: () => true,
   [authActions.logoutRequest]: () => true,
@@ -69,5 +66,5 @@ export default combineReducers({
   user,
   token,
   error,
-  loading,
+  isLoading,
 });

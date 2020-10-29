@@ -1,4 +1,5 @@
 import React from 'react';
+import Media from 'react-media';
 import { Route, Redirect } from 'react-router-dom';
 import withAuth from './hoc/withAuth';
 

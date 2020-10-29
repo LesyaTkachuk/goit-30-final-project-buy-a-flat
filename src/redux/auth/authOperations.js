@@ -2,7 +2,7 @@ import axios from 'axios';
 import { globalActions } from '../global';
 import authActions from './authActions';
 
-axios.defaults.baseURL = 'https://';
+axios.defaults.baseURL = 'https://flat-finance.herokuapp.com';
 
 const token = {
   set(token) {
@@ -26,9 +26,7 @@ const register = credentials => (dispatch, getState) => {
     .then(({ data }) => {
       dispatch(authActions.registerSuccess(data));
     })
-    .catch(({ message, status }) =>
-      dispatch(authActions.registerError({ message, status })),
-    );
+    .catch(({ message }) => dispatch(authActions.registerError(message)));
 };
 
 const login = credentials => dispatch => {
@@ -40,9 +38,9 @@ const login = credentials => dispatch => {
       token.set(data.token);
       dispatch(authActions.loginSuccess(data));
     })
-    .catch(({ message, status }) =>
-      dispatch(authActions.loginError({ message, status })),
-    );
+    .catch(({ message }) => {
+      dispatch(authActions.loginError(message));
+    });
 };
 
 const getCurrentUser = () => (dispatch, getState) => {
@@ -60,8 +58,8 @@ const getCurrentUser = () => (dispatch, getState) => {
   axios
     .get('/api/users/current')
     .then(({ data }) => dispatch(authActions.getCurrentUserSuccess(data)))
-    .catch(({ message, status }) => {
-      dispatch(authActions.getCurrentUserError({ message, status }));
+    .catch(({ message }) => {
+      dispatch(authActions.getCurrentUserError(message));
       // dispatch(authActions.clearToken());
     });
 };
@@ -75,9 +73,7 @@ const logout = () => dispatch => {
       token.unset();
       dispatch(authActions.logoutSuccess());
     })
-    .catch(({ message, status }) =>
-      dispatch(authActions.logoutError({ message, status })),
-    );
+    .catch(({ message }) => dispatch(authActions.logoutError(message)));
 };
 
 export default {

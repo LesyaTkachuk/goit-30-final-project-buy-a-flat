@@ -91,16 +91,19 @@ const state = {
 
   global: {
     currentDate: {
-      currentMonth: 0, // расчитать при логин и записать в чарт
-      currentYear: 0, // расчитать при логин и записать в чарт
+      currentMonth: 0,
+      currentYear: 0,
     },
     chartDate: {
       chartMonth: 0,
       chartYear: 0,
     },
-    transactionCategories: [], // при логине
     isModalOpen: false,
-    isRegistered: false,
+    isLogoutOpen: false,
+    isVerifyNotifOpen: false,
+    isAuthFormOpen: false,
+    hasGifts: false,
+    showLogin: true,
     showNavPage: false,
     showExpensesPage: false,
   },
@@ -111,6 +114,7 @@ const state = {
   //   dataForChart: [
   //     {
   //       month: 0,
+  //       year: 0,
   //       savings: 0,
   //       expenses: 0,
   //       expectedSavings: 0,

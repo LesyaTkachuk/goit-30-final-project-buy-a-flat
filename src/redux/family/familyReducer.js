@@ -10,7 +10,7 @@ const initialState = {
       flatSquareMeters: 0,
       totalSalary: 0,
       passiveIncome: 0,
-      incomePercentagetoSavings: 0,
+      incomePercentageToSavings: 0,
     },
 
     transactionCategories: [],
@@ -41,18 +41,19 @@ const initialState = {
     },
 
     isLoading: false,
-    error: {
-      status: '',
-      message: '',
-    },
+    error: '',
   },
 };
 
-const setFamily = (state, { payload }) => ({ ...state, ...payload });
+const setFamily = (state, { payload }) => ({ ...state, ...payload.info });
 const setError = (_, { payload }) => payload;
 const unsetError = () => initialState.family.error;
 
 const info = createReducer(initialState.family.info, {
+  [familyActions.updateOrSetFamily]: (state, { payload }) => ({
+    ...state,
+    ...payload,
+  }),
   [familyActions.addFamilySuccess]: setFamily,
   [familyActions.updateFamilySuccess]: setFamily,
   [familyActions.getCurrentFamilySuccess]: setFamily,
@@ -92,7 +93,7 @@ const gifts = createReducer(initialState.family.gifts, {
   [authActions.logoutSuccess]: () => initialState.family.gifts,
 });
 
-const loading = createReducer(initialState.family.isLoading, {
+const isLoading = createReducer(initialState.family.isLoading, {
   [familyActions.addFamilyRequest]: () => true,
   [familyActions.addFamilySuccess]: () => false,
   [familyActions.addFamilyError]: () => false,
@@ -140,6 +141,6 @@ export default combineReducers({
   chart,
   finance,
   gifts,
-  loading,
+  isLoading,
   error,
 });
