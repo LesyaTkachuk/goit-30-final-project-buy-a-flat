@@ -1,47 +1,81 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import {
+  familyActions,
+  familyOperations,
+  familySelectors,
+} from '../../redux/family';
+import Calculator from '../Calculator';
 import styles from './ExpenseForm.module.css';
 
 class ExpensesForm extends Component {
   state = {
-    account: '',
-    expenseName: '',
-    category: '',
-    amount: '',
+    transaction: {
+      comment: '',
+      category: '',
+      amount: '',
+    },
+    balance: '',
+    isClicked: false,
+    disabledButton: false,
   };
 
-  handleAccount = e => {
-    this.setState({ account: e.target.value });
+  componentDidMount() {
+    const { familyBalance, transactionCategories } = this.props;
+
+    if (familyBalance) {
+      this.setState({
+        balance: familyBalance,
+      });
+    }
+
+    if (transactionCategories.length === 0) {
+      this.props.getCategories();
+    }
+  }
+
+  handleClick = () => {
+    this.setState(state => ({
+      isClicked: !state.isClicked,
+    }));
   };
 
-  handleExpenseName = e => {
-    this.setState({ expenseName: e.target.value });
+  handleInput = e => {
+    const { name, value } = e.target;
+
+    this.setState(prevState => ({
+      transaction: { ...prevState.transaction, [name]: value },
+    }));
+
+    if (this.state.disabledButton) {
+      this.setState({ disabledButton: false });
+    }
   };
 
-  handleCategory = e => {
-    this.setState({ category: e.target.value });
-  };
-
-  handleAmount = e => {
-    this.setState({ amount: e.target.value });
+  handleSubmit = e => {
+    e.preventDefault();
+    this.props.setTransaction(this.state.transaction);
+    this.setState({ disabledButton: true });
   };
 
   render() {
-    const { account, expenseName, category, amount } = this.state;
+    const { balance, transaction, isClicked, disabledButton } = this.state;
+
+    const { transactionCategories } = this.props;
+
     return (
       <div className={styles.formContainer}>
-        <form className={styles.form} action="">
+        <form className={styles.form}>
           <div className={styles.formItem}>
-            <label className={styles.formLabel} htmlFor="account">
-              {/* Со счета  */}
+            <label className={styles.formLabel} htmlFor="balance">
               Сумма на счету
             </label>
             <input
               className={styles.formInput}
-              type="text"
-              name="account"
-              id="account"
-              value={account}
-              onChange={this.handleAccount}
+              type="number"
+              name="balance"
+              id="balance"
+              value={balance}
               readOnly
             />
             {/* <label className={styles.formLabel} htmlFor="account">
@@ -49,16 +83,16 @@ class ExpensesForm extends Component {
             </label> */}
           </div>
           <div className={styles.formItem}>
-            <label className={styles.formLabel} htmlFor="expense-name">
-              Название статьи
+            <label className={styles.formLabel} htmlFor="comment">
+              Комментарий
             </label>
             <input
               className={styles.formInput}
               type="text"
-              name="expense-name"
-              id="expense-name"
-              value={expenseName}
-              onChange={this.handleExpenseName}
+              name="comment"
+              id="comment"
+              value={transaction.comment}
+              onChange={this.handleInput}
             />
           </div>
           <div className={styles.formItem}>
@@ -69,15 +103,15 @@ class ExpensesForm extends Component {
               className={styles.formInput}
               name="category"
               id="category"
-              value={category}
-              onChange={this.handleCategory}
+              value={transaction.category}
+              onChange={this.handleInput}
             >
-              <option value="entertainment">Развлечения</option>
-              <option value="health">Здоровье</option>
-              <option value="products">Продукты</option>
-              <option value="transport">Транспорт</option>
-              <option value="sport">Спорт</option>
-              <option value="clothes">Одежда</option>
+              {transactionCategories &&
+                transactionCategories.map(category => (
+                  <option key={category} value={category}>
+                    {category}
+                  </option>
+                ))}
             </select>
           </div>
           <div className={styles.formItem}>
@@ -89,15 +123,42 @@ class ExpensesForm extends Component {
               type="number"
               name="amount"
               id="amount"
-              value={amount}
-              onChange={this.handleAmount}
+              data-limit="6"
+              value={transaction.amount}
+              onChange={this.handleInput}
               placeholder="00.00"
             />
+            <span
+              className={styles.calculatorBtn}
+              onClick={this.handleClick.bind(this)}
+            ></span>
           </div>
         </form>
+        {isClicked && (
+          <div className={styles.calculator}>
+            <Calculator />
+          </div>
+        )}
+        <button
+          disabled={disabledButton}
+          className={styles.formButton}
+          onClick={this.handleSubmit}
+        >
+          Раcсчитать
+        </button>
       </div>
     );
   }
 }
 
-export default ExpensesForm;
+const mapStateToProps = state => ({
+  familyBalance: familySelectors.getFamilyBalance(state),
+  transactionCategories: familySelectors.getTransactionCategories(state),
+});
+
+const mapDispatchToProps = {
+  getCategories: familyOperations.getTransactions,
+  setTransaction: familyActions.setTransaction,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ExpensesForm);
