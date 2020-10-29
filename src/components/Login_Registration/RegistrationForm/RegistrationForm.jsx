@@ -61,7 +61,6 @@ class RegistrationForm extends Component {
         <Formik
           initialValues={this.initialValues}
           validate={this.validate}
-          handleChange={this.handleChange}
           onSubmit={this.handleSubmit}
         >
           {({
