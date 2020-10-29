@@ -1,11 +1,28 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { authOperations, authSelectors } from '../../redux/auth';
 import { familyOperations, familySelectors } from '../../redux/family';
+import { globalSelectors } from '../../redux/global';
 import styles from './PrognosisBuy.module.css';
 
 class PrognosisBuy extends Component {
   handleClick = () => {
-    this.props.addFamily(this.props.family);
+    const {
+      addFamily,
+      updateFamily,
+      familyId,
+      family,
+      getCurrentUser,
+    } = this.props;
+    console.log('family Id', familyId);
+    if (familyId) {
+      console.log('id', familyId);
+      updateFamily(family);
+    } else {
+      console.log('here');
+      addFamily(family);
+      getCurrentUser();
+    }
   };
 
   render() {
@@ -37,11 +54,14 @@ class PrognosisBuy extends Component {
 }
 
 const mapStateToProps = state => ({
+  familyId: authSelectors.getFamilyId(state),
   family: familySelectors.getFamilyInfo(state),
 });
 
 const mapDispatchToProps = {
   addFamily: familyOperations.addFamily,
+  updateFamily: familyOperations.updateFamily,
+  getCurrentUser: authOperations.getCurrentUser,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PrognosisBuy);
