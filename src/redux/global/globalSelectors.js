@@ -14,6 +14,8 @@ const getShowLoginForm = state => state.global.showLogin;
 
 const getShowExpensesPage = state => state.global.showExpensesPage;
 
+const getIsCalculatorOpen = state => state.global.isCalculatorOpen;
+
 export default {
   getIsLogoutOpen,
   getIsVerifyNotifOpen,
@@ -23,4 +25,5 @@ export default {
   getShowNavPage,
   getIsModalOpen,
   getShowLoginForm,
+  getIsCalculatorOpen,
 };
