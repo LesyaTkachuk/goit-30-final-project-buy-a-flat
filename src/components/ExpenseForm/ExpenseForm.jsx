@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { familyOperations, familySelectors } from '../../redux/family';
+import {
+  familyActions,
+  familyOperations,
+  familySelectors,
+} from '../../redux/family';
 import Calculator from '../Calculator';
 import styles from './ExpenseForm.module.css';
 
@@ -17,18 +21,24 @@ class ExpensesForm extends Component {
   };
 
   componentDidMount() {
-    const { familyBalance } = this.props;
+    const { familyBalance, transactionCategories } = this.props;
 
     if (familyBalance) {
-      this.setState({ balance: familyBalance });
+      this.setState({
+        balance: familyBalance,
+      });
+    }
+
+    if (transactionCategories.length === 0) {
+      this.props.getCategories();
     }
   }
 
-  handleClick(e) {
+  handleClick = () => {
     this.setState(state => ({
       isClicked: !state.isClicked,
     }));
-  }
+  };
 
   handleInput = e => {
     const { name, value } = e.target;
@@ -42,12 +52,16 @@ class ExpensesForm extends Component {
     }
   };
 
-  handleSubmit = () => {
+  handleSubmit = e => {
+    e.preventDefault();
+    this.props.setTransaction(this.state.transaction);
     this.setState({ disabledButton: true });
   };
 
   render() {
     const { balance, transaction, isClicked, disabledButton } = this.state;
+
+    const { transactionCategories } = this.props;
 
     return (
       <div className={styles.formContainer}>
@@ -92,18 +106,12 @@ class ExpensesForm extends Component {
               value={transaction.category}
               onChange={this.handleInput}
             >
-              {/* {categories &&
-                categories.map(category => (
+              {transactionCategories &&
+                transactionCategories.map(category => (
                   <option key={category} value={category}>
                     {category}
                   </option>
-                ))} */}
-              <option value="entertainment">Развлечения</option>
-              <option value="health">Здоровье</option>
-              <option value="products">Продукты</option>
-              <option value="transport">Транспорт</option>
-              <option value="sport">Спорт</option>
-              <option value="clothes">Одежда</option>
+                ))}
             </select>
           </div>
           <div className={styles.formItem}>
@@ -145,12 +153,12 @@ class ExpensesForm extends Component {
 
 const mapStateToProps = state => ({
   familyBalance: familySelectors.getFamilyBalance(state),
-  categories: familySelectors.getTransactionCategories(state),
+  transactionCategories: familySelectors.getTransactionCategories(state),
 });
 
 const mapDispatchToProps = {
   getCategories: familyOperations.getTransactions,
-  createTransaction: familyOperations.createTransaction,
+  setTransaction: familyActions.setTransaction,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExpensesForm);

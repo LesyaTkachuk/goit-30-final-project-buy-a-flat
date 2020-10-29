@@ -37,7 +37,9 @@ const getTransactions = () => dispatch => {
 
   axios
     .get('/api/transactions/categories')
-    .then(({ data }) => dispatch(familyActions.getCategoriesSuccess()))
+    .then(({ data }) =>
+      dispatch(familyActions.getCategoriesSuccess(data.transactionCategories)),
+    )
     .catch(({ message }) =>
       dispatch(familyActions.getCategoriesError(message)),
     );
