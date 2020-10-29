@@ -23,24 +23,10 @@ class PlanForm extends Component {
   };
 
   componentDidMount() {
-    const { familyId, currentFamily, getFamily } = this.props;
+    const { familyId, currentFamily } = this.props;
     if (familyId) {
-      getFamily();
-      this.setState({
-        ...this.state,
-        timout: setTimeout(
-          () => this.setState({ family: currentFamily }),
-          4000,
-        ),
-      });
+      this.setState({ family: currentFamily });
     }
-  }
-
-  componentWillUnmount() {
-    this.setState({
-      ...this.state,
-      timout: clearTimeout(this.timout),
-    });
   }
 
   handleInput = e => {
