@@ -26,6 +26,10 @@ const setTransaction = createAction(
   'family/transactions/setTransactionSuccess',
 );
 
+const setTransactionAmount = createAction(
+  'family/transactions/setAmountSuccess',
+);
+
 const getChartDataRequest = createAction('family/getChartDataRequest');
 const getChartDataSuccess = createAction('family/getChartDataSuccess');
 const getChartDataError = createAction('family/getChartDataError');
@@ -58,6 +62,7 @@ export default {
   createTransactionSuccess,
   createTransactionError,
   setTransaction,
+  setTransactionAmount,
   getChartDataRequest,
   getChartDataSuccess,
   getChartDataError,

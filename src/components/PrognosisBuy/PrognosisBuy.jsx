@@ -14,10 +14,22 @@ class PrognosisBuy extends Component {
       family,
       getCurrentUser,
     } = this.props;
-    console.log('family Id', familyId);
+
     if (familyId) {
-      console.log('id', familyId);
-      updateFamily(family);
+      const {
+        flatPrice,
+        flatSquareMeters,
+        totalSalary,
+        passiveIncome,
+        incomePercentageToSavings,
+      } = family;
+      updateFamily({
+        flatPrice,
+        flatSquareMeters,
+        totalSalary,
+        passiveIncome,
+        incomePercentageToSavings,
+      });
     } else {
       console.log('here');
       addFamily(family);
