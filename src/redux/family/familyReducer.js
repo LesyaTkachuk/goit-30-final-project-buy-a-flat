@@ -13,7 +13,7 @@ const initialState = {
       incomePercentageToSavings: 0,
     },
 
-    transactionCategories: [],
+    transactionCategories: ['Products', 'Sport', 'Health'],
 
     transaction: {
       category: '',
