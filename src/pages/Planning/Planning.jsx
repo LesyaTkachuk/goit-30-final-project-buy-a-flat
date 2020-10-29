@@ -3,7 +3,7 @@ import styles from './Planning.module.css';
 import PrognosisBuy from '../../components/PrognosisBuy';
 import PlanForm from '../../components/PlanForm';
 
-export default class Planning extends Component {
+class Planning extends Component {
   render() {
     return (
       <div className={styles.planningPage}>
@@ -19,3 +19,5 @@ export default class Planning extends Component {
     );
   }
 }
+
+export default Planning;

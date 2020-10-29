@@ -25,6 +25,7 @@ const register = credentials => (dispatch, getState) => {
     .post('/api/users/sign-up', credentials)
     .then(({ data }) => {
       dispatch(authActions.registerSuccess(data));
+      dispatch(globalActions.toggleVerifyNotif());
     })
     .catch(({ message }) => dispatch(authActions.registerError(message)));
 };

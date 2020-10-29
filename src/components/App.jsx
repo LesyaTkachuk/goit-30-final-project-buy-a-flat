@@ -21,7 +21,7 @@ class App extends Component {
     return (
       <Layout>
         <Appbar />
-        {/* {(isFamilyLoading || isAuthLoading) && <Spinner />} */}
+        {(isFamilyLoading || isAuthLoading) && <Spinner />}
         <Content />
         {(authError || familyError) && (
           <Modal>
