@@ -70,7 +70,12 @@ const transactionCategories = createReducer(
 );
 
 const transaction = createReducer(initialState.family.transaction, {
+  [familyActions.setTransactionAmount]: (state, { payload }) => ({
+    ...state,
+    amount: payload,
+  }),
   [familyActions.createTransactionSuccess]: (_, { payload }) => payload,
+
   [authActions.logoutSuccess]: () => initialState.family.transaction,
 });
 
