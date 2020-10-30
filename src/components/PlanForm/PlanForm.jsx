@@ -29,6 +29,14 @@ class PlanForm extends Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    const { familyId, currentFamily } = this.props;
+    if (prevProps?.currentFamily?.totalSalary === currentFamily.totalSalary)
+      return;
+
+    this.setState({ family: currentFamily });
+  }
+
   handleInput = e => {
     const name = e.target.name;
     const limit = e.target.dataset.limit;
