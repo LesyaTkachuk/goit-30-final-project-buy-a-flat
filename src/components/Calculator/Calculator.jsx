@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { familyActions } from '../../redux/family';
+import { globalActions } from '../../redux/global';
 import Engine from './Engine';
 import Display from './Display';
 import Button from './Button';
@@ -31,6 +32,7 @@ class Calculator extends React.Component {
     this.setState({
       display: '0',
     });
+    this.props.setCalculatorOpen();
   }
 
   render() {
@@ -163,6 +165,7 @@ class Calculator extends React.Component {
 
 const mapDispatchToProps = {
   setTransactionAmount: familyActions.setTransactionAmount,
+  setCalculatorOpen: globalActions.to,
 };
 
 export default connect(null, mapDispatchToProps)(Calculator);
