@@ -32,12 +32,25 @@ const getCurrentFamily = () => dispatch => {
     );
 };
 
+// const getCurrentFamily = () => async dispatch => {
+//   try {
+//     dispatch(familyActions.getCurrentFamilyRequest());
+
+//     const { data } = await axios.get(`/api/families/current`);
+//     dispatch(familyActions.getCurrentFamilySuccess(data));
+//   } catch ({ message }) {
+//     dispatch(familyActions.getCurrentFamilyError(message));
+//   }
+// };
+
 const getTransactions = () => dispatch => {
   familyActions.getCategoriesRequest();
 
   axios
     .get('/api/transactions/categories')
-    .then(({ data }) => dispatch(familyActions.getCategoriesSuccess()))
+    .then(({ data }) =>
+      dispatch(familyActions.getCategoriesSuccess(data.transactionCategories)),
+    )
     .catch(({ message }) =>
       dispatch(familyActions.getCategoriesError(message)),
     );
@@ -68,7 +81,7 @@ const getChartData = () => (dispatch, getState) => {
   dispatch(familyActions.getChartDataRequest());
 
   axios
-    .get('/api/transactions/stats/annual', { params: { month, year } })
+    .get(`/api/transactions/stats/annual?${month}&${year}`)
     .then(({ data }) => dispatch(familyActions.getChartDataSuccess(data)))
     .catch(({ message }) => familyActions.getCurrentFamilyError(message));
 };

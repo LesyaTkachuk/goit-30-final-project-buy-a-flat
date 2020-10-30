@@ -6,19 +6,14 @@ import { authActions, authSelectors } from '../../../redux/auth';
 import styles from './Error.module.css';
 
 class Error extends Component {
-  componentDidMount() {
-    this.props.toggleModal();
-  }
 
   handleClick() {
     const {
-      toggleModal,
       authError,
       familyError,
       unsetAuthError,
       unsetFamilyError,
     } = this.props;
-    toggleModal();
     authError && unsetAuthError();
     familyError && unsetFamilyError();
   }
@@ -47,7 +42,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  toggleModal: globalActions.toggleModal,
   unsetAuthError: authActions.unsetError,
   unsetFamilyError: familyActions.unsetError,
 };

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { familyOperations } from '../family';
 import { globalActions } from '../global';
 import authActions from './authActions';
 
@@ -25,6 +26,7 @@ const register = credentials => (dispatch, getState) => {
     .post('/api/users/sign-up', credentials)
     .then(({ data }) => {
       dispatch(authActions.registerSuccess(data));
+      dispatch(globalActions.toggleVerifyNotif());
     })
     .catch(({ message }) => dispatch(authActions.registerError(message)));
 };
@@ -37,6 +39,7 @@ const login = credentials => dispatch => {
     .then(({ data }) => {
       token.set(data.token);
       dispatch(authActions.loginSuccess(data));
+      data.user.familyId && dispatch(familyOperations.getCurrentFamily());
     })
     .catch(({ message }) => {
       dispatch(authActions.loginError(message));
@@ -68,7 +71,7 @@ const logout = () => dispatch => {
   dispatch(authActions.logoutRequest());
 
   axios
-    .post('/api/users/sign-out')
+    .delete('/api/users/sign-out')
     .then(() => {
       token.unset();
       dispatch(authActions.logoutSuccess());

@@ -1,20 +1,23 @@
-import React from "react";
-import Engine from "./Engine";
-import Display from "./Display";
-import Button from "./Button";
-import styles from "./Calculator.module.css";
+import React from 'react';
+import { connect } from 'react-redux';
+import { familyActions } from '../../redux/family';
+import { globalActions } from '../../redux/global';
+import Engine from './Engine';
+import Display from './Display';
+import Button from './Button';
+import styles from './Calculator.module.css';
 
 class Calculator extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      display: "0",
+      display: '0',
       engine: new Engine(),
     };
 
     this.handleButtonClick = this.handleButtonClick.bind(this);
-    //this.handleEqualClick = this.handleEqualClick.bind(this);
+    this.handleEqualClick = this.handleEqualClick.bind(this);
   }
 
   handleButtonClick(value) {
@@ -24,9 +27,12 @@ class Calculator extends React.Component {
   }
 
   handleEqualClick(value) {
+    this.props.setTransactionAmount(this.state.engine.calculate(value));
+    this.state.engine.allClear();
     this.setState({
-      form: this.state.engine.calculate(value),
+      display: '0',
     });
+    this.props.closeCalculator();
   }
 
   render() {
@@ -34,12 +40,12 @@ class Calculator extends React.Component {
       <div className={styles.calculator}>
         <Display display={this.state.display} />
         <Button
-          value={this.state.engine.clearable ? "C" : "AC"}
+          value={this.state.engine.clearable ? 'C' : 'AC'}
           className={[
             styles.button,
             styles.whiteButton,
             styles.twoSignsButton,
-          ].join(" ")}
+          ].join(' ')}
           onClick={this.handleButtonClick}
         />
         <Button
@@ -48,17 +54,17 @@ class Calculator extends React.Component {
             styles.button,
             styles.whiteButton,
             styles.twoSignsButton,
-          ].join(" ")}
+          ].join(' ')}
           onClick={this.handleButtonClick}
         />
         <Button
           value="%"
-          className={[styles.button, styles.whiteButton].join(" ")}
+          className={[styles.button, styles.whiteButton].join(' ')}
           onClick={this.handleButtonClick}
         />
         <Button
-          value={"\u00F7"}
-          className={[styles.button, styles.orangeButton].join(" ")}
+          value={'\u00F7'}
+          className={[styles.button, styles.orangeButton].join(' ')}
           onClick={this.handleButtonClick}
         />
 
@@ -66,22 +72,22 @@ class Calculator extends React.Component {
 
         <Button
           value="7"
-          className={[styles.button, styles.whiteButton].join(" ")}
+          className={[styles.button, styles.whiteButton].join(' ')}
           onClick={this.handleButtonClick}
         />
         <Button
           value="8"
-          className={[styles.button, styles.whiteButton].join(" ")}
+          className={[styles.button, styles.whiteButton].join(' ')}
           onClick={this.handleButtonClick}
         />
         <Button
           value="9"
-          className={[styles.button, styles.whiteButton].join(" ")}
+          className={[styles.button, styles.whiteButton].join(' ')}
           onClick={this.handleButtonClick}
         />
         <Button
           value="x"
-          className={[styles.button, styles.orangeButton].join(" ")}
+          className={[styles.button, styles.orangeButton].join(' ')}
           onClick={this.handleButtonClick}
         />
 
@@ -89,22 +95,22 @@ class Calculator extends React.Component {
 
         <Button
           value="4"
-          className={[styles.button, styles.whiteButton].join(" ")}
+          className={[styles.button, styles.whiteButton].join(' ')}
           onClick={this.handleButtonClick}
         />
         <Button
           value="5"
-          className={[styles.button, styles.whiteButton].join(" ")}
+          className={[styles.button, styles.whiteButton].join(' ')}
           onClick={this.handleButtonClick}
         />
         <Button
           value="6"
-          className={[styles.button, styles.whiteButton].join(" ")}
+          className={[styles.button, styles.whiteButton].join(' ')}
           onClick={this.handleButtonClick}
         />
         <Button
           value="-"
-          className={[styles.button, styles.orangeButton].join(" ")}
+          className={[styles.button, styles.orangeButton].join(' ')}
           onClick={this.handleButtonClick}
         />
 
@@ -112,22 +118,22 @@ class Calculator extends React.Component {
 
         <Button
           value="1"
-          className={[styles.button, styles.whiteButton].join(" ")}
+          className={[styles.button, styles.whiteButton].join(' ')}
           onClick={this.handleButtonClick}
         />
         <Button
           value="2"
-          className={[styles.button, styles.whiteButton].join(" ")}
+          className={[styles.button, styles.whiteButton].join(' ')}
           onClick={this.handleButtonClick}
         />
         <Button
           value="3"
-          className={[styles.button, styles.whiteButton].join(" ")}
+          className={[styles.button, styles.whiteButton].join(' ')}
           onClick={this.handleButtonClick}
         />
         <Button
           value="+"
-          className={[styles.button, styles.orangeButton].join(" ")}
+          className={[styles.button, styles.orangeButton].join(' ')}
           onClick={this.handleButtonClick}
         />
 
@@ -139,22 +145,27 @@ class Calculator extends React.Component {
             styles.button,
             styles.whiteButton,
             styles.largeButton,
-          ].join(" ")}
+          ].join(' ')}
           onClick={this.handleButtonClick}
         />
         <Button
           value="."
-          className={[styles.button, styles.whiteButton].join(" ")}
+          className={[styles.button, styles.whiteButton].join(' ')}
           onClick={this.handleButtonClick}
         />
         <Button
           value="="
-          className={[styles.button, styles.orangeButton].join(" ")}
-          onClick={this.handleButtonClick} //, this.handleEqualClick)}
+          className={[styles.button, styles.orangeButton].join(' ')}
+          onClick={(this.handleButtonClick, this.handleEqualClick)}
         />
       </div>
     );
   }
 }
 
-export default Calculator;
+const mapDispatchToProps = {
+  setTransactionAmount: familyActions.setTransactionAmount,
+  closeCalculator: globalActions.toggleCalculator,
+};
+
+export default connect(null, mapDispatchToProps)(Calculator);

@@ -12,6 +12,7 @@ const initialState = {
       chartYear: 0,
     },
     isModalOpen: false,
+    isCalculatorOpen: false,
     isLogoutOpen: false,
     isVerifyNotifOpen: false,
     isAuthFormOpen: false,
@@ -28,10 +29,6 @@ const isModalOpen = createReducer(initialState.global.isModalOpen, {
 
 const hasGifts = createReducer(initialState.global.hasGifts, {
   [globalActions.toggleHasGifts]: (state, { payload }) => !state,
-});
-
-const isAuthFormOpen = createReducer(initialState.global.isAuthFormOpen, {
-  [globalActions.toggleAuthForm]: (state, { payload }) => !state,
 });
 
 const isLogoutOpen = createReducer(initialState.global.isLogoutOpen, {
@@ -52,12 +49,20 @@ const showLogin = createReducer(initialState.global.showLogin, {
   },
 });
 
+const isAuthFormOpen = createReducer(initialState.global.isAuthFormOpen, {
+  [globalActions.toggleAuthForm]: (state, { payload }) => !state,
+});
+
 const showNavPage = createReducer(initialState.global.showNavPage, {
   [globalActions.toggleShowNavPage]: state => !state,
 });
 
 const showExpensesPage = createReducer(initialState.global.showExpensesPage, {
   [globalActions.toggleShowExpensesPage]: state => !state,
+});
+
+const isCalculatorOpen = createReducer(initialState.global.isCalculatorOpen, {
+  [globalActions.toggleCalculator]: state => !state,
 });
 
 export default combineReducers({
@@ -69,4 +74,5 @@ export default combineReducers({
   showLogin,
   showNavPage,
   showExpensesPage,
+  isCalculatorOpen,
 });
