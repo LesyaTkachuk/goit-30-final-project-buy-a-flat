@@ -16,6 +16,8 @@ const toggleShowNavPage = createAction('global/toggleShowNavPage');
 
 const toggleShowExpensesPage = createAction('global/toggleShowExpensesPage');
 
+const toggleCalculator = createAction('global/toggleCalculator');
+
 export default {
   toggleModal,
   toggleShowLogin,
@@ -25,4 +27,5 @@ export default {
   toggleShowNavPage,
   toggleAuthForm,
   toggleShowExpensesPage,
+  toggleCalculator,
 };
