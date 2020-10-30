@@ -81,7 +81,7 @@ const getChartData = () => (dispatch, getState) => {
   dispatch(familyActions.getChartDataRequest());
 
   axios
-    .get('/api/transactions/stats/annual', { params: { month, year } })
+    .get(`/api/transactions/stats/annual?${month}&${year}`)
     .then(({ data }) => dispatch(familyActions.getChartDataSuccess(data)))
     .catch(({ message }) => familyActions.getCurrentFamilyError(message));
 };
