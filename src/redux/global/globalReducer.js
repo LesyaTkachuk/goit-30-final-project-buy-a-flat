@@ -12,6 +12,7 @@ const initialState = {
       chartYear: 0,
     },
     isModalOpen: false,
+    isCalculatorOpen: false,
     isLogoutOpen: false,
     isVerifyNotifOpen: false,
     isAuthFormOpen: false,
@@ -60,6 +61,10 @@ const showExpensesPage = createReducer(initialState.global.showExpensesPage, {
   [globalActions.toggleShowExpensesPage]: state => !state,
 });
 
+const isCalculatorOpen = createReducer(initialState.global.isCalculatorOpen, {
+  [globalActions.toggleCalculator]: state => !state,
+});
+
 export default combineReducers({
   isModalOpen,
   isLogoutOpen,
@@ -69,4 +74,5 @@ export default combineReducers({
   showLogin,
   showNavPage,
   showExpensesPage,
+  isCalculatorOpen,
 });

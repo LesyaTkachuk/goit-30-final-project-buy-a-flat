@@ -5,6 +5,7 @@ import {
   familyOperations,
   familySelectors,
 } from '../../redux/family';
+import { globalActions, globalSelectors } from '../../redux/global';
 import Calculator from '../Calculator';
 import styles from './ExpenseForm.module.css';
 
@@ -16,7 +17,6 @@ class ExpensesForm extends Component {
       amount: '',
     },
     balance: '',
-    isClicked: false,
     disabledButton: false,
   };
 
@@ -33,12 +33,6 @@ class ExpensesForm extends Component {
       this.props.getCategories();
     }
   }
-
-  handleClick = () => {
-    this.setState(state => ({
-      isClicked: !state.isClicked,
-    }));
-  };
 
   handleInput = e => {
     const { name, value } = e.target;
@@ -59,9 +53,14 @@ class ExpensesForm extends Component {
   };
 
   render() {
-    const { balance, transaction, isClicked, disabledButton } = this.state;
+    const { balance, transaction, disabledButton } = this.state;
 
-    const { transactionCategories } = this.props;
+    const {
+      transactionCategories,
+      transactionAmount,
+      setCalculatorOpen,
+      isCalculatorOpen,
+    } = this.props;
 
     return (
       <div className={styles.formContainer}>
@@ -124,17 +123,17 @@ class ExpensesForm extends Component {
               name="amount"
               id="amount"
               data-limit="6"
-              value={transaction.amount}
+              value={transactionAmount ? transactionAmount : transaction.amount}
               onChange={this.handleInput}
               placeholder="00.00"
             />
             <span
               className={styles.calculatorBtn}
-              onClick={this.handleClick.bind(this)}
+              onClick={() => setCalculatorOpen()}
             ></span>
           </div>
         </form>
-        {isClicked && (
+        {isCalculatorOpen && (
           <div className={styles.calculator}>
             <Calculator />
           </div>
@@ -154,11 +153,14 @@ class ExpensesForm extends Component {
 const mapStateToProps = state => ({
   familyBalance: familySelectors.getFamilyBalance(state),
   transactionCategories: familySelectors.getTransactionCategories(state),
+  transactionAmount: familySelectors.getTransactionAmount(state),
+  isCalculatorOpen: globalSelectors.getIsCalculatorOpen(state),
 });
 
 const mapDispatchToProps = {
   getCategories: familyOperations.getTransactions,
   setTransaction: familyActions.setTransaction,
+  setCalculatorOpen: globalActions.toggleCalculator,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExpensesForm);
