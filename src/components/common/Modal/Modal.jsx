@@ -38,6 +38,8 @@ class Modal extends Component {
       removeLogout,
       removeGift,
       removeNotif,
+      hasGifts,
+      toggleHasGifts,
     } = this.props;
 
     isAuthFormOpen && removeAuthForm();
@@ -46,6 +48,7 @@ class Modal extends Component {
     isVerifyNotifOpen && removeNotif();
     authError && unsetAuthError();
     familyError && unsetFamilyError();
+    hasGifts && toggleHasGifts();
   };
 
   render() {
@@ -64,6 +67,7 @@ const mapStateToProps = state => ({
   isAuthFormOpen: globalSelectors.getIsAuthFormOpen(state),
   isGiftsNotifOpen: globalSelectors.getHasGifts(state),
   isVerifyNotifOpen: globalSelectors.getIsVerifyNotifOpen(state),
+  hasGifts: globalSelectors.getHasGifts(state),
 });
 
 const mapDispatchToProps = {
@@ -73,6 +77,7 @@ const mapDispatchToProps = {
   removeGift: globalActions.toggleHasGifts,
   removeLogout: globalActions.toggleLogout,
   removeNotif: globalActions.toggleVerifyNotif,
+  toggleHasGifts: globalActions.toggleHasGifts,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Modal);

@@ -81,7 +81,7 @@ const getChartData = () => (dispatch, getState) => {
   dispatch(familyActions.getChartDataRequest());
 
   axios
-    .get(`/api/transactions/stats/annual?${month}&${year}`)
+    .get(`/api/transactions/stats/annual?month=${month}&year=${year}`)
     .then(({ data }) => dispatch(familyActions.getChartDataSuccess(data)))
     .catch(({ message }) => familyActions.getCurrentFamilyError(message));
 };
@@ -102,7 +102,7 @@ const updateGifts = () => dispatch => {
 
   axios
     .put('api/gifts/unpack')
-    .then(({ data }) => dispatch(familyActions.updateGiftsSuccess(data)))
+    .then(({ data }) => dispatch(familyActions.updateGiftsSuccess(data.gifts)))
     .catch(({ message }) => dispatch(familyActions.updateGiftsError(message)));
 };
 
