@@ -10,6 +10,8 @@ const getChartData = state => state.family.chart;
 const getFamilyLoading = state => state.family.isLoading;
 const getGiftsForUnpacking = state => state.family.gifts.giftsForUnpacking;
 const getGiftsUnpacked = state => state.family.gifts.giftsUnpacked;
+const getMonthsLeft = state => state.family.monthsLeft;
+const getYearsLeft = state => state.family.yearsLeft;
 
 export default {
   getFamilyInfo,
@@ -24,4 +26,6 @@ export default {
   getFamilyLoading,
   getGiftsForUnpacking,
   getGiftsUnpacked,
+  getMonthsLeft,
+  getYearsLeft,
 };
