@@ -1,4 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { familyActions } from '../../redux/family';
+import { globalActions } from '../../redux/global';
 import Engine from './Engine';
 import Display from './Display';
 import Button from './Button';
@@ -14,7 +17,7 @@ class Calculator extends React.Component {
     };
 
     this.handleButtonClick = this.handleButtonClick.bind(this);
-    //this.handleEqualClick = this.handleEqualClick.bind(this);
+    this.handleEqualClick = this.handleEqualClick.bind(this);
   }
 
   handleButtonClick(value) {
@@ -24,9 +27,12 @@ class Calculator extends React.Component {
   }
 
   handleEqualClick(value) {
+    this.props.setTransactionAmount(this.state.engine.calculate(value));
+    this.state.engine.allClear();
     this.setState({
-      form: this.state.engine.calculate(value),
+      display: '0',
     });
+    this.props.closeCalculator();
   }
 
   render() {
@@ -150,11 +156,16 @@ class Calculator extends React.Component {
         <Button
           value="="
           className={[styles.button, styles.orangeButton].join(' ')}
-          onClick={this.handleButtonClick} //, this.handleEqualClick)}
+          onClick={(this.handleButtonClick, this.handleEqualClick)}
         />
       </div>
     );
   }
 }
 
-export default Calculator;
+const mapDispatchToProps = {
+  setTransactionAmount: familyActions.setTransactionAmount,
+  closeCalculator: globalActions.toggleCalculator,
+};
+
+export default connect(null, mapDispatchToProps)(Calculator);
