@@ -64,11 +64,11 @@ const info = createReducer(initialState.family.info, {
 });
 
 const monthsLeft = createReducer(initialState.family.monthsLeft, {
-  [familyActions.countMonthsLeft]: (state, { payload }) => payload,
+  [familyActions.countMonthsLeft]: (state, { payload }) => payload.months,
 });
 
 const yearsLeft = createReducer(initialState.family.yearsLeft, {
-  [familyActions.countYearsLeft]: (state, { payload }) => payload,
+  [familyActions.countYearsLeft]: (state, { payload }) => payload.years,
 });
 
 const transactionCategories = createReducer(

@@ -38,6 +38,7 @@ class PrognosisBuy extends Component {
   };
 
   render() {
+    const { yearsLeft, monthsLeft } = this.props;
     return (
       <div className={styles.componentBlock}>
         <div className={styles.contentWrapper}>
@@ -45,11 +46,11 @@ class PrognosisBuy extends Component {
           <div className={styles.innerWrapper}>
             <div className={styles.borderBox}>
               <span className={styles.borderText}>Кол-во лет</span>
-              <span className={styles.valueBox}>0 лет</span>
+              <span className={styles.valueBox}>{yearsLeft}</span>
             </div>
             <div className={styles.borderBox}>
               <span className={styles.borderText}>Кол-во месяцев</span>
-              <span className={styles.valueBox}>0 мес</span>
+              <span className={styles.valueBox}>{monthsLeft}</span>
             </div>
             <button
               className={styles.button}
@@ -68,6 +69,8 @@ class PrognosisBuy extends Component {
 const mapStateToProps = state => ({
   familyId: authSelectors.getFamilyId(state),
   family: familySelectors.getFamilyInfo(state),
+  monthsLeft: familySelectors.getMonthsLeft(state),
+  yearsLeft: familySelectors.getYearsLeft(state),
 });
 
 const mapDispatchToProps = {
