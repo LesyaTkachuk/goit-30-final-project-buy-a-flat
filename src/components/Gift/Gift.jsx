@@ -16,6 +16,12 @@ class Gift extends Component {
     giftsForUnpacking && toggleHasGifts();
   }
 
+  componentDidUpdate(prevProps) {
+    const { giftsForUnpacking, toggleHasGifts, giftsUnpacked } = this.props;
+    if (prevProps.giftsForUnpacking === giftsForUnpacking) return;
+    giftsForUnpacking && !giftsUnpacked && toggleHasGifts();
+  }
+
   render() {
     const {
       hasGifts,
