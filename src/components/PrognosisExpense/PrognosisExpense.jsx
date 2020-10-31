@@ -24,7 +24,6 @@ const PrognosisExpense = ({ transaction, info, createTransaction }) => {
       <div className={styles.inner}>
         <p className={styles.value}>{dailyLimit} &#x20B4;</p>
         <p className={styles.small}>Лимит на день</p>
-<<<<<<< HEAD
       </div>
 
       <div className={styles.inner}>
@@ -32,15 +31,6 @@ const PrognosisExpense = ({ transaction, info, createTransaction }) => {
         <p className={styles.small}>Отклонение от плановой суммы накопления</p>
       </div>
 
-=======
-      </div>
-
-      <div className={styles.inner}>
-        <p className={styles.value}>{monthLimit} &#x20B4;</p>
-        <p className={styles.small}>Отклонение от плановой суммы накопления</p>
-      </div>
-
->>>>>>> e25db2bac09d11ff75faea52346bdf063f609be6
       <button className={styles.btn} onClick={handleClick} type="button">
         Готово
       </button>
