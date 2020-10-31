@@ -53,8 +53,6 @@ const login = credentials => dispatch => {
 };
 
 const getCurrentUser = () => (dispatch, getState) => {
-  console.log(getState());
-
   const {
     auth: { token: persistedToken },
   } = getState();
@@ -70,13 +68,13 @@ const getCurrentUser = () => (dispatch, getState) => {
     .get('/api/users/current')
     .then(({ data }) => {
       dispatch(authActions.getCurrentUserSuccess(data));
-      data.user.familyId && dispatch(familyOperations.getCurrentFamily());
+      data.familyId && dispatch(familyOperations.getCurrentFamily());
     })
     .catch(error => {
       const code = error.message;
       const message = error.response?.data?.message;
       dispatch(authActions.getCurrentUserError({ code, message }));
-      // dispatch(authActions.clearToken());
+      dispatch(authActions.clearToken());
     });
 };
 
