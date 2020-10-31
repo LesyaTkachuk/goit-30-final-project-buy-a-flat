@@ -5,8 +5,15 @@ import confetti1 from '../../assets/images/confetti-1.svg';
 import confetti2 from '../../assets/images/confetti-2.svg';
 import { connect } from 'react-redux';
 import { globalActions } from '../../redux/global';
+import { familyActions } from '../../redux/family';
 
 class GiftNotification extends Component {
+  handleClick() {
+    const { toggleHasGifts, unsetGiftsUnpacked } = this.props;
+    toggleHasGifts();
+    unsetGiftsUnpacked();
+  }
+
   render() {
     return (
       <div className={styles.container}>
@@ -16,7 +23,7 @@ class GiftNotification extends Component {
         <button
           className={styles.close}
           type="button"
-          onClick={this.props.toggleHasGifts}
+          onClick={this.handleClick}
         >
           <svg
             viewBox="0 0 14 14"
@@ -41,6 +48,7 @@ class GiftNotification extends Component {
 
 const mapDispatchToProps = {
   toggleHasGifts: globalActions.toggleHasGifts,
+  unsetGiftsUnpacked: familyActions.unsetGiftsUnpacked,
 };
 
 export default connect(null, mapDispatchToProps)(GiftNotification);
