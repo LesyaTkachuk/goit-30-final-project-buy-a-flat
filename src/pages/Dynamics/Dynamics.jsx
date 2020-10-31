@@ -1,5 +1,7 @@
 import React from 'react';
 import Chart from '../../components/Chart';
+import Gift from '../../components/Gift';
+import MonthlyStatistics from '../../components/MonthlyStatistics';
 import styles from './Dynamics.module.css';
 
 export default function Dynamics() {
@@ -9,8 +11,7 @@ export default function Dynamics() {
         <Chart />
 
         <div className={styles.plan}>
-          {/* Подставить компонент */}
-          {/* 21. MonthlyExecutionPlan */}
+          <MonthlyStatistics />
         </div>
       </div>
 
@@ -28,8 +29,7 @@ export default function Dynamics() {
         </div>
 
         <div className={styles.gift}>
-          {/* Подставить компонент */}
-          {/* 24. GiftСompleting */}
+          <Gift />
         </div>
       </div>
     </div>

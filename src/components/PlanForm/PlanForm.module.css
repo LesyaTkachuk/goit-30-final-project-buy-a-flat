@@ -1,6 +1,7 @@
 .planTable {
   display: flex;
   flex-direction: column;
+  margin-bottom: 30px;
 }
 
 .planTable__item {
@@ -10,7 +11,7 @@
   background: rgba(0, 0, 0, 0.03);
   border-radius: 8px 8px 0px 0px;
   margin-bottom: 35px;
-  height: 55px;
+  min-height: 55px;
   color: rgba(24, 25, 31, 0.54);
 }
 .rightWrapper {
@@ -84,6 +85,26 @@ input:focus-within {
   border-bottom: solid 1px #2196f3;
 }
 
+.planTable__button {
+  display: block;
+  margin: 0 auto;
+  width: 200px;
+  height: 56px;
+  background: #ff6c00;
+  border-radius: 8px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 20px;
+  color: #ffffff;
+}
+
+.planTable__button:disabled {
+  background: rgba(0, 0, 0, 0.1);
+  color: rgba(255, 255, 255, 0.7);
+}
+
 @media screen and (min-width: 768px) and (max-width: 1023px) {
   .planTable {
     display: flex;
@@ -120,4 +141,9 @@ input:focus-within {
   .leftWrapper .planTable__item:last-child {
     margin-bottom: 0px;
   }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  appearance: none;
 }

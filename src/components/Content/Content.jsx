@@ -1,22 +1,37 @@
-import React, { Suspense } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import React, { Suspense, Component } from 'react';
+import { Switch, Redirect } from 'react-router-dom';
+import PrivateRoute from '../PrivateRoute.jsx';
+import PublicRoute from '../PublicRoute.jsx';
 import routes from '../../routes';
 import Spinner from '../common/Spinner';
+import Modal from '../common/Modal';
 import styles from './Content.module.css';
 
-function Content() {
-  return (
-    <div className={styles.container}>
-      <Suspense fallback={<Spinner />}>
-        <Switch>
-          {routes.map(route => (
-            <Route key={route.name} {...route} />
-          ))}
-          <Redirect to="/" />
-        </Switch>
-      </Suspense>
-    </div>
-  );
+class Content extends Component {
+  render() {
+    return (
+      <div className={styles.container}>
+        <Suspense
+          fallback={
+            <Modal>
+              <Spinner />
+            </Modal>
+          }
+        >
+          <Switch>
+            {routes.map(route =>
+              route.private ? (
+                <PrivateRoute key={route.path} {...route} />
+              ) : (
+                <PublicRoute key={route.path} {...route} />
+              ),
+            )}
+            <Redirect to="/" />
+          </Switch>
+        </Suspense>
+      </div>
+    );
+  }
 }
 
 export default Content;
