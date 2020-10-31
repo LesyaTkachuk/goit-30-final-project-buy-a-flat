@@ -87,11 +87,11 @@ class MyChart extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { media } = this.props;
-    // const { media, data, getChartData } = this.props;
+    // const { media } = this.props;
+    const { media, data, getChartData } = this.props;
 
     // if (!data.length) {
-    //   getChartData();
+      getChartData();
     // }
 
     if (prevProps.media !== media) {

@@ -67,21 +67,14 @@ const createTransaction = credentials => dispatch => {
     );
 };
 
-const getChartData = () => (dispatch, getState) => {
-  const {
-    global: {
-      chartDate: { chartMonth, chartYear },
-      currentDate: { currentMonth, currentYear },
-    },
-  } = getState();
-
-  const month = chartMonth || currentMonth;
-  const year = chartYear || currentYear;
+const getChartData = () => (dispatch) => {
+  const month = new Date().getMonth() ;
+  const year = new Date().getFullYear();
 
   dispatch(familyActions.getChartDataRequest());
 
   axios
-    .get(`/api/transactions/stats/annual?${month}&${year}`)
+    .get(`/api/transactions/stats/annual?month=${month}&year=${year}`)
     .then(({ data }) => dispatch(familyActions.getChartDataSuccess(data)))
     .catch(({ message }) => familyActions.getCurrentFamilyError(message));
 };
