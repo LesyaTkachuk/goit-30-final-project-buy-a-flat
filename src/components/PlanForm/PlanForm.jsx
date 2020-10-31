@@ -19,22 +19,30 @@ class PlanForm extends Component {
       incomePercentageToSavings: '',
     },
     disabledButton: false,
+    disabledInput: false,
     timout: null,
   };
 
   componentDidMount() {
     const { familyId, currentFamily } = this.props;
     if (familyId) {
-      this.setState({ family: currentFamily });
+      this.setState({
+        family: currentFamily,
+        disabledButton: true,
+        disabledInput: true,
+      });
     }
   }
 
   componentDidUpdate(prevProps) {
-    const { familyId, currentFamily } = this.props;
+    const { currentFamily } = this.props;
     if (prevProps?.currentFamily?.totalSalary === currentFamily.totalSalary)
       return;
 
-    this.setState({ family: currentFamily });
+    this.setState({
+      family: currentFamily,
+      disabledInput: true,
+    });
   }
 
   handleInput = e => {
@@ -59,16 +67,17 @@ class PlanForm extends Component {
       flatPrice,
       incomePercentageToSavings,
     } = this.state.family;
-    const allIncome = totalSalary + passiveIncome;
-    const percent = (allIncome * incomePercentageToSavings) / 100;
-    const leftToAcc = flatPrice - balance;
+    const allIncome = Number(totalSalary) + Number(passiveIncome);
+    const percent = (allIncome * Number(incomePercentageToSavings)) / 100;
+    const leftToAcc = Number(flatPrice) - Number(balance);
     const monthsLeft = leftToAcc / percent;
     const years = Math.floor(monthsLeft / 12);
     const months = Math.ceil(monthsLeft % 12);
     return { months, years };
   };
 
-  handleSubmit = () => {
+  handleFormSubmit = e => {
+    e.preventDefault();
     const { setFamily, countMonthsLeft, countYearsLeft } = this.props;
     setFamily(this.state.family);
     this.setState({ disabledButton: true });
@@ -78,12 +87,13 @@ class PlanForm extends Component {
 
   render() {
     return (
-      <div>
-        <form className={styles.planTable}>
+      <form onSubmit={this.handleFormSubmit}>
+        <div className={styles.planTable}>
           <div className={styles.leftWrapper}>
             <div className={styles.planTable__item}>
               <label>1. ЗП обоих супругов</label>
               <input
+                required
                 data-limit="6"
                 name="totalSalary"
                 type="number"
@@ -94,6 +104,7 @@ class PlanForm extends Component {
             <div className={styles.planTable__item}>
               <label>2. Пассивные доходы, мес.</label>
               <input
+                required
                 name="passiveIncome"
                 data-limit="6"
                 type="number"
@@ -104,11 +115,13 @@ class PlanForm extends Component {
             <div className={styles.planTable__item}>
               <label>3. Сбережения</label>
               <input
+                required
                 data-limit="9"
                 name="balance"
                 type="number"
                 value={this.state.family.balance}
                 onChange={this.handleInput}
+                disabled={this.state.disabledInput}
               />
             </div>
           </div>
@@ -116,6 +129,7 @@ class PlanForm extends Component {
             <div className={styles.planTable__item}>
               <label>4. Укажите стоимость вашей будущей квартиры</label>
               <input
+                required
                 data-limit="10"
                 name="flatPrice"
                 type="number"
@@ -126,6 +140,7 @@ class PlanForm extends Component {
             <div className={styles.planTable__item}>
               <label>5. Укажите кол-во кв. м. вашей будущей квартиры</label>
               <input
+                required
                 data-limit="4"
                 name="flatSquareMeters"
                 type="number"
@@ -136,6 +151,7 @@ class PlanForm extends Component {
             <div className={styles.planTable__item}>
               <label>6. Накопление, %</label>
               <input
+                required
                 data-limit="2"
                 name="incomePercentageToSavings"
                 type="number"
@@ -148,15 +164,15 @@ class PlanForm extends Component {
               суммы доходов и вы увидите, когда достигните цели
             </p>
           </div>
-        </form>
+        </div>
         <button
+          type="submit"
           disabled={this.state.disabledButton}
           className={styles.planTable__button}
-          onClick={this.handleSubmit}
         >
           Раcсчитать
         </button>
-      </div>
+      </form>
     );
   }
 }
