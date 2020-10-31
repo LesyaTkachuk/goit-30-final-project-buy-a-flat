@@ -49,7 +49,24 @@ const initialState = {
   },
 };
 
-const setFamily = (state, { payload }) => ({ ...state, ...payload.info });
+const setFamily = (state, { payload }) => {
+  const {
+    balance,
+    flatPrice,
+    flatSquareMeters,
+    totalSalary,
+    passiveIncome,
+    incomePercentageToSavings,
+  } = payload.info;
+  return {
+    balance,
+    flatPrice,
+    flatSquareMeters,
+    totalSalary,
+    passiveIncome,
+    incomePercentageToSavings,
+  };
+};
 const setError = (_, { payload }) => payload;
 const unsetError = () => initialState.family.error;
 

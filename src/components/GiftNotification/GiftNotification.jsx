@@ -8,17 +8,17 @@ import { globalActions } from '../../redux/global';
 import { familyActions } from '../../redux/family';
 
 class GiftNotification extends Component {
-  handleClick() {
+  handleClick = () => {
     const { toggleHasGifts, unsetGiftsUnpacked } = this.props;
     toggleHasGifts();
     unsetGiftsUnpacked();
-  }
+  };
 
   render() {
     return (
       <div className={styles.container}>
-        <img className={styles.imgOne} src={confetti1} alt="" />
-        <img className={styles.imgTwo} src={confetti2} alt="" />
+        <img className={styles.imgOne} src={confetti1} alt="confeti" />
+        <img className={styles.imgTwo} src={confetti2} alt="confeti" />
 
         <button
           className={styles.close}
