@@ -44,7 +44,10 @@ const initialState = {
     },
 
     isLoading: false,
-    error: '',
+    error: {
+      code: '',
+      message: '',
+    },
   },
 };
 

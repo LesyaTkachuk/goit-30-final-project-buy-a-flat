@@ -24,19 +24,16 @@ class Gift extends Component {
       onGiftClick,
     } = this.props;
     return (
-      <div className={styles.container} onClick={hasGifts && onGiftClick()}>
+      <div className={styles.container}>
         <div className={styles.textContainer}>
           {hasGifts ? (
             <p className={styles.text}>
-              Поздравляем, за прошлый месяц вы накопили на
+              Поздравляем, за прошлый месяц вы накопили на{' '}
               <span className={styles.colorText}>
-                {giftsForUnpacking - giftsUnpacked} кв.м
-              </span>
-              вашей будущей квартиры! Кликните
-              <span className={styles.colorText}>
-                {giftsForUnpacking - giftsUnpacked}
-              </span>
-              раз.
+                {giftsForUnpacking + giftsUnpacked} кв.м
+              </span>{' '}
+              вашей будущей квартиры! Кликните{' '}
+              <span className={styles.colorText}>{giftsForUnpacking}</span> раз.
             </p>
           ) : (
             <p className={styles.text}>
@@ -51,7 +48,10 @@ class Gift extends Component {
           </div> */}
         </div>
         {hasGifts ? (
-          <div className={styles.activeGiftContainer}>
+          <div
+            className={styles.activeGiftContainer}
+            onClick={() => onGiftClick()}
+          >
             <img
               className={styles.giftImgActive}
               src={gift}
