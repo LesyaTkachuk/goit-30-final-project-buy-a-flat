@@ -65,6 +65,28 @@ const isCalculatorOpen = createReducer(initialState.global.isCalculatorOpen, {
   [globalActions.toggleCalculator]: state => !state,
 });
 
+const currentDate = createReducer(initialState.global.currentDate, {
+  [globalActions.currentYear]: (state, { payload }) => ({
+    ...state,
+    currentYear: payload,
+  }),
+  [globalActions.currentMonth]: (state, { payload }) => ({
+    ...state,
+    currentMonth: payload,
+  }),
+});
+
+const chartDate = createReducer(initialState.global.chartDate, {
+  [globalActions.chartYear]: (state, { payload }) => ({
+    ...state,
+    chartYear: payload,
+  }),
+  [globalActions.chartMonth]: (state, { payload }) => ({
+    ...state,
+    chartMonth: payload,
+  }),
+});
+
 export default combineReducers({
   isModalOpen,
   isLogoutOpen,
@@ -75,4 +97,6 @@ export default combineReducers({
   showNavPage,
   showExpensesPage,
   isCalculatorOpen,
+  currentDate,
+  chartDate,
 });
