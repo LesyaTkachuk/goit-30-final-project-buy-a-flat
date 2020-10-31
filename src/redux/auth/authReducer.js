@@ -10,7 +10,10 @@ const initialState = {
     },
     token: '',
     isLoading: false,
-    error: '',
+    error: {
+      code: '',
+      message: '',
+    },
   },
 };
 

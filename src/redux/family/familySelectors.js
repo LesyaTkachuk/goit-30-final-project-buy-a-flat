@@ -4,7 +4,8 @@ const getTransactionCategories = state => state.family.transactionCategories;
 const getTransaction = state => state.family.transaction;
 const getTransactionAmount = state => state.family.transaction.amount;
 const getFamiltGifts = state => state.family.gifts;
-const getErrorMessage = state => state.family.error;
+const getErrorCode = state => state.family.error.code;
+const getErrorMessage = state => state.family.error.message;
 const getLoading = state => state.family.isLoading;
 const getChartData = state => state.family.chart;
 const getFamilyLoading = state => state.family.isLoading;
@@ -20,6 +21,7 @@ export default {
   getTransaction,
   getTransactionAmount,
   getErrorMessage,
+  getErrorCode,
   getLoading,
   getFamiltGifts,
   getChartData,

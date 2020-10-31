@@ -11,6 +11,7 @@
 
 .closeModal {
   position: absolute;
+  z-index: 10;
   background-image: url(../../../assets/icons/close.svg);
   background-repeat: no-repeat;
   width: 14px;
