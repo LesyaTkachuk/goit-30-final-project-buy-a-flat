@@ -72,19 +72,13 @@ const createTransaction = credentials => dispatch => {
 
 const getChartData = () => (dispatch, getState) => {
   const {
-    global: {
-      chartDate: { chartMonth, chartYear },
-      currentDate: { currentMonth, currentYear },
-    },
+    global: { chartDate },
   } = getState();
-
-  const month = chartMonth || currentMonth;
-  const year = chartYear || currentYear;
 
   dispatch(familyActions.getChartDataRequest());
 
   axios
-    .get(`/api/transactions/stats/annual?month=${month}&year=${year}`)
+    .get('/api/transactions/stats/annual', { params: chartDate })
     .then(({ data }) => dispatch(familyActions.getChartDataSuccess(data)))
     .catch(error => {
       const code = error.message;

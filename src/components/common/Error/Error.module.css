@@ -1,12 +1,13 @@
 .container {
-  width: 400px;
+  width: 17.5rem;
   margin: 0 auto;
-  padding-top: 84px;
+  padding: 5.25rem 0 1.875rem 0;
   position: relative;
   background-color: #fff;
-  box-shadow: 0px 24px 38px rgba(0, 0, 0, 0.14),
-    0px 9px 46px rgba(0, 0, 0, 0.12), 0px 11px 15px rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
+  box-shadow: 0 1.5rem 2.375rem #00000024, 0 0.5625rem 2.875rem #0000001f,
+    0 0.6875rem 0.9375rem #00000033;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
 }
 
 .closeModal {
@@ -14,28 +15,27 @@
   z-index: 10;
   background-image: url(../../../assets/icons/close.svg);
   background-repeat: no-repeat;
-  width: 14px;
-  height: 14px;
+  width: 0.875rem;
+  height: 0.875rem;
   display: block;
   content: '';
-  top: 13px;
-  right: 13px;
+  top: 0.8125rem;
+  right: 0.8125rem;
 }
 
 .errorWrapper {
-  width: 310px;
-  padding-bottom: 30px;
+  width: 15.875rem;
   margin: 0 auto;
 }
 
 .errorWrapper:before {
   position: absolute;
-  top: 30px;
-  left: 177px;
+  top: 1.875rem;
+  left: 7.3125rem;
   display: block;
   content: '';
-  width: 46px;
-  height: 46px;
+  width: 2.875rem;
+  height: 2.875rem;
   background-image: url(../../../assets/icons/error.svg);
   background-repeat: no-repeat;
   background-position: 0;
@@ -43,27 +43,42 @@
 
 .errorTitle {
   font-family: var(--font-gilroy-extrabold);
-  font-size: 20px;
-  line-height: 20px;
+  font-size: 1.25rem;
+  line-height: 1.25rem;
   text-align: center;
   color: var(--orange-color);
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
 }
 
 .errorText {
   font-family: var(--main-font-stack);
-  font-size: 16px;
-  line-height: 19px;
+  font-size: 1rem;
+  line-height: 1.1875rem;
   color: var(--orange-color);
   text-align: center;
-  margin-bottom: 20px;
+}
+
+.errorText:not(:last-child) {
+  margin-bottom: 1.25rem;
 }
 
 .link {
   display: block;
   font-family: var(--main-font-stack);
-  font-size: 16px;
-  line-height: 19px;
+  font-size: 1rem;
+  line-height: 1.1875rem;
   color: #2196f3;
   text-align: center;
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 25rem;
+  }
+  .errorWrapper:before {
+    left: 11.0625rem;
+  }
+  .errorWrapper {
+    width: 19.375rem;
+  }
 }
