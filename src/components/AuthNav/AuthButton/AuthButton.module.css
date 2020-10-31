@@ -1,0 +1,21 @@
+.authButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 40px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: var(----main-font-stack);
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+  color: var(--black-font-color);
+  background-color: var(--blue-button-color);
+}
+.authButton:focus {
+  background-color: var(--orange-color);
+  color: #fff;
+}
