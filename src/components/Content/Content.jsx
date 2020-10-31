@@ -7,8 +7,13 @@ import routes from '../../routes';
 import Spinner from '../common/Spinner';
 import Modal from '../common/Modal';
 import styles from './Content.module.css';
+import { authOperations } from '../../redux/auth/index.js';
 
 class Content extends Component {
+  componentDidMount() {
+    // this.props.getCurrentUser();
+  }
+
   render() {
     return (
       <div className={styles.container}>
@@ -35,4 +40,8 @@ class Content extends Component {
   }
 }
 
-export default connect()(Content);
+const mapDispatchToProps = {
+  getCurrentUser: authOperations.getCurrentUser(),
+};
+
+export default connect(null, mapDispatchToProps)(Content);

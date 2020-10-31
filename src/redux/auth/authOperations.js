@@ -53,6 +53,8 @@ const login = credentials => dispatch => {
 };
 
 const getCurrentUser = () => (dispatch, getState) => {
+  console.log(getState());
+
   const {
     auth: { token: persistedToken },
   } = getState();
@@ -66,7 +68,10 @@ const getCurrentUser = () => (dispatch, getState) => {
 
   axios
     .get('/api/users/current')
-    .then(({ data }) => dispatch(authActions.getCurrentUserSuccess(data)))
+    .then(({ data }) => {
+      dispatch(authActions.getCurrentUserSuccess(data));
+      data.user.familyId && dispatch(familyOperations.getCurrentFamily());
+    })
     .catch(error => {
       const code = error.message;
       const message = error.response?.data?.message;

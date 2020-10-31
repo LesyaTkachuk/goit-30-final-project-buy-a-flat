@@ -10,11 +10,11 @@ import './stylesheet/base.css';
 
 ReactDOM.render(
   <Provider store={store}>
-    {/* <PersistGate loading={<Spinner />} persistor={persistor}> */}
+    <PersistGate loading={<Spinner />} persistor={persistor}>
     <BrowserRouter>
       <App />
     </BrowserRouter>
-    {/* </PersistGate> */}
+    </PersistGate>
   </Provider>,
   document.getElementById('root'),
 );
