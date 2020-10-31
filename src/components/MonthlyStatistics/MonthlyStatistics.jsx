@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { globalActions } from '../../redux/global';
+import { familySelectors } from '../../redux/family';
 import styles from './MonthlyStatistics.module.css';
 
 class MonthlySavings extends React.Component {
@@ -85,6 +86,8 @@ class MonthlySavings extends React.Component {
         this.props.setChartMonth(new Date().getMonth() + 1);
         this.props.setChartYear(new Date().getFullYear());
     }
+
+    console.log(this.props.data);
   }
 
   render() {
@@ -153,6 +156,10 @@ class MonthlySavings extends React.Component {
   }
 }
 
+const mapStateToProps = state => ({
+  data: familySelectors.getChartData(state),
+});
+
 const mapDispatchToProps = {
   setCurrentMonth: globalActions.currentMonth,
   setCurrentYear: globalActions.currentYear,
@@ -160,4 +167,4 @@ const mapDispatchToProps = {
   setChartYear: globalActions.chartYear,
 };
 
-export default connect(null, mapDispatchToProps)(MonthlySavings);
+export default connect(mapStateToProps, mapDispatchToProps)(MonthlySavings);
