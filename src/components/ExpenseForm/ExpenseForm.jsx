@@ -34,15 +34,29 @@ class ExpensesForm extends Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.transactionAmount !== prevProps.transactionAmount) {
+      this.setState(prevState => ({
+        transaction: {
+          ...prevState.transaction,
+          amount: this.props.transactionAmount,
+        },
+      }));
+    }
+  }
+
   handleInput = e => {
     const { name, value } = e.target;
+    const limit = e.target.dataset.limit;
 
-    this.setState(prevState => ({
-      transaction: { ...prevState.transaction, [name]: value },
-    }));
+    if (value.length <= Number(limit)) {
+      this.setState(prevState => ({
+        transaction: { ...prevState.transaction, [name]: value },
+      }));
 
-    if (this.state.disabledButton) {
-      this.setState({ disabledButton: false });
+      if (this.state.disabledButton) {
+        this.setState({ disabledButton: false });
+      }
     }
   };
 
@@ -57,7 +71,6 @@ class ExpensesForm extends Component {
 
     const {
       transactionCategories,
-      transactionAmount,
       setCalculatorOpen,
       isCalculatorOpen,
     } = this.props;
@@ -90,6 +103,7 @@ class ExpensesForm extends Component {
               type="text"
               name="comment"
               id="comment"
+              data-limit="40"
               value={transaction.comment}
               onChange={this.handleInput}
             />
@@ -102,6 +116,7 @@ class ExpensesForm extends Component {
               className={styles.formInput}
               name="category"
               id="category"
+              data-limit="40"
               value={transaction.category}
               onChange={this.handleInput}
             >
@@ -123,18 +138,18 @@ class ExpensesForm extends Component {
               name="amount"
               id="amount"
               data-limit="6"
-              value={transactionAmount ? transactionAmount : transaction.amount}
+              value={transaction.amount}
               onChange={this.handleInput}
               placeholder="00.00"
             />
             <span
-              className={styles.calculatorBtn}
+              className={styles.calculatorIcon}
               onClick={() => setCalculatorOpen()}
             ></span>
           </div>
         </form>
         {isCalculatorOpen && (
-          <div className={styles.calculator}>
+          <div className={styles.calculatorWrapper}>
             <Calculator />
           </div>
         )}
