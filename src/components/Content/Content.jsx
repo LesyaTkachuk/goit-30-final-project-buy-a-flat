@@ -1,5 +1,4 @@
 import React, { Suspense, Component } from 'react';
-import { connect } from 'react-redux';
 import { Switch, Redirect } from 'react-router-dom';
 import PrivateRoute from '../PrivateRoute.jsx';
 import PublicRoute from '../PublicRoute.jsx';
@@ -35,4 +34,4 @@ class Content extends Component {
   }
 }
 
-export default connect()(Content);
+export default Content;
