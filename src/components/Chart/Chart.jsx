@@ -87,16 +87,9 @@ class MyChart extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    // const { media } = this.props;
     const { media, data, getChartData } = this.props;
-
-    // if (!data.length) {
-      getChartData();
-    // }
-
-    if (prevProps.media !== media) {
-      this.createChart();
-    }
+    if (!data) getChartData();
+    if (prevProps.media !== media) this.createChart();
   }
 
   createChart = () => {
