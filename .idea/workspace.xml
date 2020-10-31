@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="cd7fd4a5-10fc-4cd1-9482-147a4edb7bf6" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="dev" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1jBY7M1P6l67FMt0kfApvhcd3Et" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/node_modules/prettier" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components" />
+      <recent name="$PROJECT_DIR$/src/assets/images" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components/common/PrognosisExpense" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="cd7fd4a5-10fc-4cd1-9482-147a4edb7bf6" name="Default Changelist" comment="" />
+      <created>1603278784472</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1603278784472</updated>
+      <workItem from="1603278785564" duration="6282000" />
+      <workItem from="1603363430863" duration="2330000" />
+      <workItem from="1603476581632" duration="437000" />
+      <workItem from="1603477023233" duration="280000" />
+      <workItem from="1603477313088" duration="78000" />
+      <workItem from="1603477393862" duration="313000" />
+      <workItem from="1603477848976" duration="208000" />
+      <workItem from="1603478723859" duration="831000" />
+      <workItem from="1603479559214" duration="1265000" />
+      <workItem from="1603713536618" duration="291000" />
+      <workItem from="1603726992296" duration="608000" />
+      <workItem from="1603727798897" duration="879000" />
+      <workItem from="1603728683846" duration="55000" />
+      <workItem from="1603728741180" duration="173000" />
+      <workItem from="1603728917559" duration="382000" />
+      <workItem from="1603735546119" duration="525000" />
+      <workItem from="1603784669383" duration="1097000" />
+      <workItem from="1603804759944" duration="165000" />
+      <workItem from="1603808795701" duration="238000" />
+      <workItem from="1603873980177" duration="190000" />
+      <workItem from="1603884870672" duration="464000" />
+      <workItem from="1603968855226" duration="760000" />
+      <workItem from="1604146218756" duration="825000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="LAST_COMMIT_MESSAGE" value="" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="361" y="238" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1603283707890">
+      <screen x="0" y="23" width="1440" height="852" />
+    </state>
+    <state x="361" y="238" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1440.852@0.23.1440.852" timestamp="1603283707890" />
+    <state width="1379" height="209" key="GridCell.Tab.0.bottom" timestamp="1604146215471">
+      <screen x="0" y="23" width="1440" height="852" />
+    </state>
+    <state width="1379" height="209" key="GridCell.Tab.0.bottom/0.23.1440.852@0.23.1440.852" timestamp="1604146215471" />
+    <state width="1379" height="209" key="GridCell.Tab.0.center" timestamp="1604146215468">
+      <screen x="0" y="23" width="1440" height="852" />
+    </state>
+    <state width="1379" height="209" key="GridCell.Tab.0.center/0.23.1440.852@0.23.1440.852" timestamp="1604146215468" />
+    <state width="1379" height="209" key="GridCell.Tab.0.left" timestamp="1604146215467">
+      <screen x="0" y="23" width="1440" height="852" />
+    </state>
+    <state width="1379" height="209" key="GridCell.Tab.0.left/0.23.1440.852@0.23.1440.852" timestamp="1604146215467" />
+    <state width="1379" height="209" key="GridCell.Tab.0.right" timestamp="1604146215470">
+      <screen x="0" y="23" width="1440" height="852" />
+    </state>
+    <state width="1379" height="209" key="GridCell.Tab.0.right/0.23.1440.852@0.23.1440.852" timestamp="1604146215470" />
+    <state x="340" y="169" key="Vcs.Push.Dialog.v2" timestamp="1603480083228">
+      <screen x="0" y="23" width="1440" height="852" />
+    </state>
+    <state x="340" y="169" key="Vcs.Push.Dialog.v2/0.23.1440.852@0.23.1440.852" timestamp="1603480083228" />
+    <state x="636" y="415" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1604148765808">
+      <screen x="0" y="23" width="1440" height="852" />
+    </state>
+    <state x="636" y="415" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1440.852@0.23.1440.852" timestamp="1604148765808" />
+  </component>
+</project>
