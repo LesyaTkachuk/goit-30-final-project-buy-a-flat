@@ -98,7 +98,7 @@ const transaction = createReducer(initialState.family.transaction, {
 });
 
 const chart = createReducer(initialState.family.chart, {
-  [familyActions.getChartDataSuccess]: (_, { payload }) => payload,
+  [familyActions.getChartDataSuccess]: (_, { payload }) => payload.transes,
   [authActions.logoutSuccess]: () =>
     initialState.family.chart,
 });
