@@ -1,20 +1,20 @@
 .container {
   margin: 0 auto;
-  min-height: 938px;
-  padding-top: 40px;
+  min-height: 62.125rem;
+  padding-top: 2.5rem;
 }
 
 @media (min-width: 768px) {
   .container {
-    padding-top: 74px;
-    min-height: 952px;
+    padding-top: 4.625rem;
+    min-height: 59.5rem;
   }
 }
 
 @media (min-width: 1240px) {
   .container {
-    padding-top: 64px;
-    min-height: 648px;
-    width: 770px;
+    padding-top: 4rem;
+    min-height: 40.5rem;
+    width: 48.125rem;
   }
 }

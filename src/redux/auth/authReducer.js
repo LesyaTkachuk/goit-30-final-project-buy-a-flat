@@ -11,7 +11,7 @@ const initialState = {
     token: '11',
     isLoading: false,
     error: {
-      status: '',
+      code: '',
       message: '',
     },
   },
@@ -36,7 +36,7 @@ const token = createReducer(initialState.auth.token, {
   [authActions.clearToken]: () => null,
 });
 
-const loading = createReducer(initialState.auth.isLoading, {
+const isLoading = createReducer(initialState.auth.isLoading, {
   [authActions.registerRequest]: () => true,
   [authActions.loginRequest]: () => true,
   [authActions.logoutRequest]: () => true,
@@ -69,5 +69,5 @@ export default combineReducers({
   user,
   token,
   error,
-  loading,
+  isLoading,
 });

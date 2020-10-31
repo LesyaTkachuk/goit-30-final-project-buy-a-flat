@@ -19,13 +19,18 @@ class PlanForm extends Component {
       incomePercentageToSavings: '',
     },
     disabledButton: false,
+    disabledInput: false,
     timout: null,
   };
 
   componentDidMount() {
     const { familyId, currentFamily } = this.props;
     if (familyId) {
-      this.setState({ family: currentFamily });
+      this.setState({
+        family: currentFamily,
+        disabledButton: true,
+        disabledInput: true,
+      });
     }
   }
 
@@ -34,7 +39,10 @@ class PlanForm extends Component {
     if (prevProps?.currentFamily?.totalSalary === currentFamily.totalSalary)
       return;
 
-    this.setState({ family: currentFamily });
+    this.setState({
+      family: currentFamily,
+      disabledInput: true,
+    });
   }
 
   handleInput = e => {
@@ -113,6 +121,7 @@ class PlanForm extends Component {
                 type="number"
                 value={this.state.family.balance}
                 onChange={this.handleInput}
+                disabled={this.state.disabledInput}
               />
             </div>
           </div>

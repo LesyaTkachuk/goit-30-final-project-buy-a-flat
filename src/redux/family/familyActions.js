@@ -22,6 +22,14 @@ const createTransactionRequest = createAction('transactions/createRequest');
 const createTransactionSuccess = createAction('transactions/createSuccess');
 const createTransactionError = createAction('transactions/createError');
 
+const setTransaction = createAction(
+  'family/transactions/setTransactionSuccess',
+);
+
+const setTransactionAmount = createAction(
+  'family/transactions/setAmountSuccess',
+);
+
 const getChartDataRequest = createAction('family/getChartDataRequest');
 const getChartDataSuccess = createAction('family/getChartDataSuccess');
 const getChartDataError = createAction('family/getChartDataError');
@@ -33,6 +41,10 @@ const getFinanceDataError = createAction('family/getFinanceDataError');
 const updateGiftsRequest = createAction('family/updateGiftsRequest');
 const updateGiftsSuccess = createAction('family/updateGiftsSuccess');
 const updateGiftsError = createAction('family/updateGiftsError');
+
+const countMonthsLeft = createAction('family/countMonthsLeft');
+
+const countYearsLeft = createAction('family/countYearsLeft');
 
 const unsetError = createAction('family/unsetError');
 
@@ -53,6 +65,8 @@ export default {
   createTransactionRequest,
   createTransactionSuccess,
   createTransactionError,
+  setTransaction,
+  setTransactionAmount,
   getChartDataRequest,
   getChartDataSuccess,
   getChartDataError,
@@ -63,4 +77,6 @@ export default {
   updateGiftsSuccess,
   updateGiftsError,
   unsetError,
+  countMonthsLeft,
+  countYearsLeft,
 };

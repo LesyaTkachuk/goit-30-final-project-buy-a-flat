@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { globalActions } from '../../../redux/global';
+import { globalActions, globalSelectors } from '../../../redux/global';
 import { authSelectors, authActions } from '../../../redux/auth';
 import { familySelectors, familyActions } from '../../../redux/family';
 import styles from './Modal.module.css';
@@ -14,27 +14,38 @@ class Modal extends Component {
   }
   handleKeyDown = e => {
     if (e.code === 'Escape') {
-      this.checkForError();
+      this.toggleStateData();
     }
   };
 
   handleBackdropClick = e => {
     if (e.target === e.currentTarget) {
-      this.checkForError();
+      this.toggleStateData();
     }
   };
 
-  checkForError = () => {
+  toggleStateData = () => {
     const {
-      toggleModal,
       authError,
       familyError,
       unsetAuthError,
       unsetFamilyError,
+      isAuthFormOpen,
+      isLogoutOpen,
+      isVerifyNotifOpen,
+      removeAuthForm,
+      removeLogout,
+      removeNotif,
+      hasGifts,
+      toggleHasGifts,
     } = this.props;
-    toggleModal();
+
+    isAuthFormOpen && removeAuthForm();
+    isLogoutOpen && removeLogout();
+    isVerifyNotifOpen && removeNotif();
     authError && unsetAuthError();
     familyError && unsetFamilyError();
+    hasGifts && toggleHasGifts();
   };
 
   render() {
@@ -47,14 +58,22 @@ class Modal extends Component {
 }
 
 const mapStateToProps = state => ({
-  authError: authSelectors.getErrorMessage(state),
-  familyError: familySelectors.getErrorMessage(state),
+  authError: authSelectors.getErrorCode(state),
+  familyError: familySelectors.getErrorCode(state),
+  isLogoutOpen: globalSelectors.getIsLogoutOpen(state),
+  isAuthFormOpen: globalSelectors.getIsAuthFormOpen(state),
+  isGiftsNotifOpen: globalSelectors.getHasGifts(state),
+  isVerifyNotifOpen: globalSelectors.getIsVerifyNotifOpen(state),
+  hasGifts: globalSelectors.getHasGifts(state),
 });
 
 const mapDispatchToProps = {
-  toggleModal: globalActions.toggleModal,
   unsetAuthError: authActions.unsetError,
   unsetFamilyError: familyActions.unsetError,
+  removeAuthForm: globalActions.toggleAuthForm,
+  removeLogout: globalActions.toggleLogout,
+  removeNotif: globalActions.toggleVerifyNotif,
+  toggleHasGifts: globalActions.toggleHasGifts,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Modal);

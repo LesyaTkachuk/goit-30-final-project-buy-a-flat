@@ -1,4 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import {
+  familyActions,
+  familyOperations,
+  familySelectors,
+} from '../../redux/family';
 import styles from './PrognosisExpense.module.css';
 
 class PrognosisExpense extends Component {
@@ -17,7 +23,11 @@ class PrognosisExpense extends Component {
           </p>
         </div>
 
-        <button className={styles.btn} type="button">
+        <button
+          className={styles.btn}
+          onClick={() => this.props.createTransaction(this.props.transaction)}
+          type="button"
+        >
           Готово
         </button>
       </div>
@@ -25,4 +35,12 @@ class PrognosisExpense extends Component {
   }
 }
 
-export default PrognosisExpense;
+const mapStateToProps = state => ({
+  transaction: familySelectors.getTransaction(state),
+});
+
+const mapDispatchToProps = {
+  createTransaction: familyOperations.createTransaction,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PrognosisExpense);
