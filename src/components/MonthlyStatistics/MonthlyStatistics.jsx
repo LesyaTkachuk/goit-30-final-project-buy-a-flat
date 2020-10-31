@@ -18,6 +18,7 @@ class MonthlySavings extends React.Component {
     this.props.setCurrentYear(currentYear);
     this.props.setChartMonth(prevMonth);
     this.props.setChartYear(currentYear);
+    console.log(this.props.data);
   }
 
   handleSelectChange() {
