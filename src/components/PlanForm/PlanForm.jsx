@@ -43,7 +43,7 @@ class PlanForm extends Component {
     const value = e.target.value;
     if (value.length <= Number(limit) && Number(value) >= 0) {
       this.setState(prevState => ({
-        family: { ...prevState.family, [name]: Number(value) },
+        family: { ...prevState.family, [name]: value },
       }));
     }
     if (this.state.disabledButton) {

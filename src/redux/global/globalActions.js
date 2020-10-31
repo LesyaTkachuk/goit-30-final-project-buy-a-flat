@@ -18,6 +18,10 @@ const toggleShowExpensesPage = createAction('global/toggleShowExpensesPage');
 
 const toggleCalculator = createAction('global/toggleCalculator');
 
+const currentYear = createAction('global/currentYear');
+const currentMonth = createAction('global/currentMonth');
+const chartYear = createAction('global/chartYear');
+const chartMonth = createAction('global/chartMonth');
 export default {
   toggleModal,
   toggleShowLogin,
@@ -28,4 +32,8 @@ export default {
   toggleAuthForm,
   toggleShowExpensesPage,
   toggleCalculator,
+  currentYear,
+  currentMonth,
+  chartYear,
+  chartMonth,
 };

@@ -66,12 +66,15 @@ const getCurrentUser = () => (dispatch, getState) => {
 
   axios
     .get('/api/users/current')
-    .then(({ data }) => dispatch(authActions.getCurrentUserSuccess(data)))
+    .then(({ data }) => {
+      dispatch(authActions.getCurrentUserSuccess(data));
+      data.familyId && dispatch(familyOperations.getCurrentFamily());
+    })
     .catch(error => {
       const code = error.message;
       const message = error.response?.data?.message;
       dispatch(authActions.getCurrentUserError({ code, message }));
-      // dispatch(authActions.clearToken());
+      dispatch(authActions.clearToken());
     });
 };
 
