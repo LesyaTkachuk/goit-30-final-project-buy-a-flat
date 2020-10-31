@@ -1,16 +1,24 @@
 import React, { Suspense, Component } from 'react';
+import { connect } from 'react-redux';
 import { Switch, Redirect } from 'react-router-dom';
 import PrivateRoute from '../PrivateRoute.jsx';
 import PublicRoute from '../PublicRoute.jsx';
 import routes from '../../routes';
 import Spinner from '../common/Spinner';
+import Modal from '../common/Modal';
 import styles from './Content.module.css';
 
 class Content extends Component {
   render() {
     return (
       <div className={styles.container}>
-        <Suspense fallback={<Spinner />}>
+        <Suspense
+          fallback={
+            <Modal>
+              <Spinner />
+            </Modal>
+          }
+        >
           <Switch>
             {routes.map(route =>
               route.private ? (
@@ -27,4 +35,4 @@ class Content extends Component {
   }
 }
 
-export default Content;
+export default connect()(Content);

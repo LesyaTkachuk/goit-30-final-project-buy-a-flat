@@ -6,20 +6,24 @@ import { authActions, authSelectors } from '../../../redux/auth';
 import styles from './Error.module.css';
 
 class Error extends Component {
-
   handleClick() {
     const {
-      authError,
-      familyError,
+      authErrorCode,
+      familyErrorCode,
       unsetAuthError,
       unsetFamilyError,
     } = this.props;
-    authError && unsetAuthError();
-    familyError && unsetFamilyError();
+    authErrorCode && unsetAuthError();
+    familyErrorCode && unsetFamilyError();
   }
 
   render() {
-    const { authError, familyError } = this.props;
+    const {
+      authErrorCode,
+      authErrorMessage,
+      familyErrorCode,
+      familyErrorMessage,
+    } = this.props;
 
     return (
       <div className={styles.container}>
@@ -29,7 +33,12 @@ class Error extends Component {
         ></button>
         <div className={styles.errorWrapper}>
           <h2 className={styles.errorTitle}>Oops, an error occurred</h2>
-          <p className={styles.errorText}>{authError || familyError}</p>
+          <p className={styles.errorText}>{authErrorCode || familyErrorCode}</p>
+          {(familyErrorMessage || authErrorMessage) && (
+            <p className={styles.errorText}>
+              {authErrorMessage || familyErrorMessage}
+            </p>
+          )}
         </div>
       </div>
     );
@@ -37,8 +46,10 @@ class Error extends Component {
 }
 
 const mapStateToProps = state => ({
-  authError: authSelectors.getErrorMessage(state),
-  familyError: familySelectors.getErrorMessage(state),
+  authErrorMessage: authSelectors.getErrorMessage(state),
+  authErrorCode: authSelectors.getErrorCode(state),
+  familyErrorMessage: familySelectors.getErrorMessage(state),
+  familyErrorCode: familySelectors.getErrorCode(state),
 });
 
 const mapDispatchToProps = {

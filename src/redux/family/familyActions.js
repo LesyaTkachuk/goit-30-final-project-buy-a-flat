@@ -42,6 +42,10 @@ const updateGiftsRequest = createAction('family/updateGiftsRequest');
 const updateGiftsSuccess = createAction('family/updateGiftsSuccess');
 const updateGiftsError = createAction('family/updateGiftsError');
 
+const countMonthsLeft = createAction('family/countMonthsLeft');
+
+const countYearsLeft = createAction('family/countYearsLeft');
+
 const unsetError = createAction('family/unsetError');
 
 export default {
@@ -73,4 +77,6 @@ export default {
   updateGiftsSuccess,
   updateGiftsError,
   unsetError,
+  countMonthsLeft,
+  countYearsLeft,
 };

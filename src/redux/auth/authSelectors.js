@@ -8,7 +8,8 @@ const getFamilyId = state => state.auth.user.familyId;
 
 const getLoader = state => state.auth.loading;
 
-const getErrorMessage = state => state.auth.error;
+const getErrorCode = state => state.auth.error.code;
+const getErrorMessage = state => state.auth.error.message;
 
 const getAuthLoading = state => state.auth.isLoading;
 
@@ -17,6 +18,7 @@ export default {
   getUserName,
   getLoader,
   getErrorMessage,
+  getErrorCode,
   getUserEmail,
   getFamilyId,
   getAuthLoading,

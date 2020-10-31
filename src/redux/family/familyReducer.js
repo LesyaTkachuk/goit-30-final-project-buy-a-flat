@@ -13,6 +13,9 @@ const initialState = {
       incomePercentageToSavings: 0,
     },
 
+    monthsLeft: 0,
+    yearsLeft: 0,
+
     transactionCategories: [],
 
     transaction: {
@@ -41,7 +44,10 @@ const initialState = {
     },
 
     isLoading: false,
-    error: '',
+    error: {
+      code: '',
+      message: '',
+    },
   },
 };
 
@@ -58,6 +64,14 @@ const info = createReducer(initialState.family.info, {
   [familyActions.updateFamilySuccess]: setFamily,
   [familyActions.getCurrentFamilySuccess]: setFamily,
   [authActions.logoutSuccess]: () => initialState.family.info,
+});
+
+const monthsLeft = createReducer(initialState.family.monthsLeft, {
+  [familyActions.countMonthsLeft]: (state, { payload }) => payload.months,
+});
+
+const yearsLeft = createReducer(initialState.family.yearsLeft, {
+  [familyActions.countYearsLeft]: (state, { payload }) => payload.years,
 });
 
 const transactionCategories = createReducer(
@@ -78,7 +92,10 @@ const transaction = createReducer(initialState.family.transaction, {
     ...state,
     amount: payload,
   }),
-  [familyActions.createTransactionSuccess]: (_, { payload }) => payload,
+  [familyActions.createTransactionSuccess]: (state, { payload }) => {
+    const { amount, category, comment } = payload;
+    return { ...state, amount, category, comment };
+  },
   [authActions.logoutSuccess]: () => initialState.family.transaction,
 });
 
@@ -97,6 +114,10 @@ const gifts = createReducer(initialState.family.gifts, {
   [familyActions.updateGiftsSuccess]: (state, { payload }) => ({
     ...state,
     ...payload,
+  }),
+  [familyActions.getCurrentFamilySuccess]: (state, { payload }) => ({
+    ...state,
+    ...payload.gifts,
   }),
   [authActions.logoutSuccess]: () => initialState.family.gifts,
 });
@@ -151,4 +172,6 @@ export default combineReducers({
   gifts,
   isLoading,
   error,
+  monthsLeft,
+  yearsLeft,
 });

@@ -17,7 +17,7 @@ const initialState = {
     isVerifyNotifOpen: false,
     isAuthFormOpen: false,
     hasGifts: false,
-    showLogin: true,
+    showLogin: false,
     showNavPage: false,
     showExpensesPage: false,
   },
