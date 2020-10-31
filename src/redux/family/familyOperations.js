@@ -95,7 +95,7 @@ const updateGifts = () => dispatch => {
 
   axios
     .put('api/gifts/unpack')
-    .then(({ data }) => dispatch(familyActions.updateGiftsSuccess(data)))
+    .then(({ data }) => dispatch(familyActions.updateGiftsSuccess(data.gifts)))
     .catch(({ message }) => dispatch(familyActions.updateGiftsError(message)));
 };
 

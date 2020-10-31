@@ -112,6 +112,10 @@ const gifts = createReducer(initialState.family.gifts, {
     ...state,
     ...payload,
   }),
+  [familyActions.getCurrentFamilySuccess]: (state, { payload }) => ({
+    ...state,
+    ...payload.gifts,
+  }),
   [authActions.logoutSuccess]: () => initialState.family.gifts,
 });
 
