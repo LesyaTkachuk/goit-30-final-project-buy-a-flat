@@ -116,6 +116,7 @@ class ExpensesForm extends Component {
               className={styles.formInput}
               name="category"
               id="category"
+              data-limit="40"
               value={transaction.category}
               onChange={this.handleInput}
             >
