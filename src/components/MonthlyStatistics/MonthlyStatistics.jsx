@@ -11,11 +11,11 @@ class MonthlySavings extends React.Component {
   }
 
   componentDidMount() {
-    const currentMonth = new Date().getMonth() + 1;
+    const prevMonth = new Date().getMonth();
     const currentYear = new Date().getFullYear();
-    this.props.setCurrentMonth(currentMonth);
+    this.props.setCurrentMonth(prevMonth);
     this.props.setCurrentYear(currentYear);
-    this.props.setChartMonth(currentMonth);
+    this.props.setChartMonth(prevMonth);
     this.props.setChartYear(currentYear);
   }
 
