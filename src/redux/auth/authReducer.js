@@ -32,6 +32,7 @@ const user = createReducer(initialState.auth.user, {
 });
 
 const token = createReducer(initialState.auth.token, {
+  [authActions.googleAuthSuccess]: setToken,
   [authActions.loginSuccess]: setToken,
   [authActions.logoutSuccess]: () => null,
   [authActions.clearToken]: () => null,

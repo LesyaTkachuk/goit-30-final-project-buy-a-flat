@@ -120,6 +120,7 @@ const gifts = createReducer(initialState.family.gifts, {
     ...payload.gifts,
   }),
   [authActions.logoutSuccess]: () => initialState.family.gifts,
+  [familyActions.unsetGiftsUnpacked]: state => ({ ...state, giftsUnpacked: 0 }),
 });
 
 const isLoading = createReducer(initialState.family.isLoading, {
