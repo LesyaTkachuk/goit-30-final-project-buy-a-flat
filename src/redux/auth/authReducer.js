@@ -9,7 +9,7 @@ const initialState = {
       email: '',
       familyId: '',
     },
-    token: '11',
+    token: '',
     isLoading: false,
     error: {
       code: '',
