@@ -81,10 +81,7 @@ class MyChart extends Component {
   };
 
   componentDidMount() {
-    const { getChartData, data } = this.props;
-    getChartData();
-
-    if (data) this.createChart();
+    if (this.props.data) this.createChart();
   }
 
   componentDidUpdate(prevProps) {
@@ -141,7 +138,10 @@ class MyChart extends Component {
         tooltips: {
           callbacks: {
             title(e) {
-              return LEGEND[e[0].datasetIndex];
+              return LEGEND[e[0].index];
+            },
+            afterTitle(e) {
+              return data[e[0].index]._id;
             },
             label(e) {
               return ` ${e.value} грн`;
