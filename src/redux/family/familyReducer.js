@@ -24,9 +24,7 @@ const initialState = {
       comment: '',
     },
 
-    chartStatistics: {
-      dataForChart: [],
-    },
+    chart: null,
 
     financeStatistics: {
       savingsPercentage: 0,
@@ -99,10 +97,10 @@ const transaction = createReducer(initialState.family.transaction, {
   [authActions.logoutSuccess]: () => initialState.family.transaction,
 });
 
-const chart = createReducer(initialState.family.chartStatistics.dataForChart, {
-  [familyActions.getChartDataSuccess]: (_, { payload }) => payload,
+const chart = createReducer(initialState.family.chart, {
+  [familyActions.getChartDataSuccess]: (_, { payload }) => payload.transes,
   [authActions.logoutSuccess]: () =>
-    initialState.family.chartStatistics.dataForChart,
+    initialState.family.chart,
 });
 
 const finance = createReducer(initialState.family.financeStatistics, {

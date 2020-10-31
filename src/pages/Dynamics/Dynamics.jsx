@@ -2,6 +2,8 @@ import React from 'react';
 import Chart from '../../components/Chart';
 import Gift from '../../components/Gift';
 import MonthlyStatistics from '../../components/MonthlyStatistics';
+import ProgressInfo from '../../components/ProgressInfo/ProgressInfo';
+import VisualizationApartment from '../../components/VisualizationApartment/VisualizationApartment';
 import styles from './Dynamics.module.css';
 
 export default function Dynamics() {
@@ -17,14 +19,12 @@ export default function Dynamics() {
 
       <div className={styles.part}>
         <div className={styles.flex}>
-          <div className={styles.apartment}>
-            {/* Подставить компонент */}
-            {/* 22. VisualizationApartment */}
+          <div className={styles.progress}>
+            <ProgressInfo />
           </div>
 
-          <div className={styles.progress}>
-            {/* Подставить компонент */}
-            {/* 23. ProgressInfo */}
+          <div className={styles.apartment}>
+            <VisualizationApartment />
           </div>
         </div>
 

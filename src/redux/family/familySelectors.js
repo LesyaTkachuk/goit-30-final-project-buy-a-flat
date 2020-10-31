@@ -13,6 +13,7 @@ const getGiftsForUnpacking = state => state.family.gifts.giftsForUnpacking;
 const getGiftsUnpacked = state => state.family.gifts.giftsUnpacked;
 const getMonthsLeft = state => state.family.monthsLeft;
 const getYearsLeft = state => state.family.yearsLeft;
+const getFinance = state => state.family.finance;
 
 export default {
   getFamilyInfo,
@@ -30,4 +31,5 @@ export default {
   getGiftsUnpacked,
   getMonthsLeft,
   getYearsLeft,
+  getFinance,
 };
