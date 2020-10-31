@@ -39,11 +39,11 @@ const ProgressInfo = () => {
 };
 
 const mapStateToProps = state => ({
-  transaction: familySelectors.getTransaction(state),
+  finance: familySelectors.getFinance(state),
 });
 
 const mapDispatchToProps = {
-  createTransaction: familyOperations.createTransaction,
+  getFinance: familyOperations.getFinanceData,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProgressInfo);
