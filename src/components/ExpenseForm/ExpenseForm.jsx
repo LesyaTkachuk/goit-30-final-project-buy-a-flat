@@ -120,6 +120,7 @@ class ExpensesForm extends Component {
               value={transaction.category}
               onChange={this.handleInput}
             >
+              <option value="select">Выберите категорию...</option>
               {transactionCategories &&
                 transactionCategories.map(category => (
                   <option key={category} value={category}>
