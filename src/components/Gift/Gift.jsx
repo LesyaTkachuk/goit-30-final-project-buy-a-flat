@@ -1,29 +1,39 @@
 import React, { Component } from 'react';
+import GiftNotification from '../GiftNotification';
+import Modal from '../common/Modal';
 import { connect } from 'react-redux';
 import styles from './Gift.module.css';
 import localCurrency from '../../assets/icons/local_currency.svg';
 import gift from '../../assets/images/gift.svg';
 import click from '../../assets/images/click.svg';
-import { globalSelectors } from '../../redux/global';
+import { globalActions, globalSelectors } from '../../redux/global';
 import familySelectors from '../../redux/family/familySelectors';
+import { familyOperations } from '../../redux/family';
 
 class Gift extends Component {
+  componentDidMount() {
+    const { giftsForUnpacking, toggleHasGifts } = this.props;
+    giftsForUnpacking && toggleHasGifts();
+  }
+
   render() {
-    const { hasGifts, giftsForUnpacking, giftsUnpacked } = this.props;
+    const {
+      hasGifts,
+      giftsForUnpacking,
+      giftsUnpacked,
+      onGiftClick,
+    } = this.props;
     return (
       <div className={styles.container}>
         <div className={styles.textContainer}>
           {hasGifts ? (
             <p className={styles.text}>
-              Поздравляем, за прошлый месяц вы накопили денег на
+              Поздравляем, за прошлый месяц вы накопили на{' '}
               <span className={styles.colorText}>
-                {giftsForUnpacking - giftsUnpacked} кв.м
+                {giftsForUnpacking + giftsUnpacked} кв.м
               </span>{' '}
-              на вашу будущюю квартиру! Кликните на ваш виртуальный подарок{' '}
-              <span className={styles.colorText}>
-                {giftsForUnpacking - giftsUnpacked} кв.м
-              </span>{' '}
-              раз.
+              вашей будущей квартиры! Кликните{' '}
+              <span className={styles.colorText}>{giftsForUnpacking}</span> раз.
             </p>
           ) : (
             <p className={styles.text}>
@@ -31,14 +41,17 @@ class Gift extends Component {
               вы накопили на вашу будущую квартиру.
             </p>
           )}
-
+          {/* 
           <div className={styles.sumContainer}>
             <p className={styles.sum}>14000</p>
             <img src={localCurrency} alt="local currency" width="20" />
-          </div>
+          </div> */}
         </div>
         {hasGifts ? (
-          <div className={styles.activeGiftContainer}>
+          <div
+            className={styles.activeGiftContainer}
+            onClick={() => onGiftClick()}
+          >
             <img
               className={styles.giftImgActive}
               src={gift}
@@ -55,6 +68,11 @@ class Gift extends Component {
             alt="gift-inactive"
           />
         )}
+        {hasGifts && !giftsForUnpacking && (
+          <Modal>
+            <GiftNotification />
+          </Modal>
+        )}
       </div>
     );
   }
@@ -66,6 +84,9 @@ const mapStateToProps = state => ({
   giftsUnpacked: familySelectors.getGiftsUnpacked(state),
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  onGiftClick: familyOperations.updateGifts,
+  toggleHasGifts: globalActions.toggleHasGifts,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Gift);

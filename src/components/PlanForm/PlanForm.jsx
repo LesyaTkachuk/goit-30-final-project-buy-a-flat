@@ -29,13 +29,21 @@ class PlanForm extends Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    const { familyId, currentFamily } = this.props;
+    if (prevProps?.currentFamily?.totalSalary === currentFamily.totalSalary)
+      return;
+
+    this.setState({ family: currentFamily });
+  }
+
   handleInput = e => {
     const name = e.target.name;
     const limit = e.target.dataset.limit;
     const value = e.target.value;
     if (value.length <= Number(limit) && Number(value) >= 0) {
       this.setState(prevState => ({
-        family: { ...prevState.family, [name]: value },
+        family: { ...prevState.family, [name]: Number(value) },
       }));
     }
     if (this.state.disabledButton) {
@@ -43,9 +51,29 @@ class PlanForm extends Component {
     }
   };
 
+  leftYearMonth = () => {
+    const {
+      totalSalary,
+      passiveIncome,
+      balance,
+      flatPrice,
+      incomePercentageToSavings,
+    } = this.state.family;
+    const allIncome = totalSalary + passiveIncome;
+    const percent = (allIncome * incomePercentageToSavings) / 100;
+    const leftToAcc = flatPrice - balance;
+    const monthsLeft = leftToAcc / percent;
+    const years = Math.floor(monthsLeft / 12);
+    const months = Math.ceil(monthsLeft % 12);
+    return { months, years };
+  };
+
   handleSubmit = () => {
-    this.props.setFamily(this.state.family);
+    const { setFamily, countMonthsLeft, countYearsLeft } = this.props;
+    setFamily(this.state.family);
     this.setState({ disabledButton: true });
+    countMonthsLeft(this.leftYearMonth());
+    countYearsLeft(this.leftYearMonth());
   };
 
   render() {
@@ -141,6 +169,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   getFamily: familyOperations.getCurrentFamily,
   setFamily: familyActions.updateOrSetFamily,
+  countMonthsLeft: familyActions.countMonthsLeft,
+  countYearsLeft: familyActions.countYearsLeft,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlanForm);
