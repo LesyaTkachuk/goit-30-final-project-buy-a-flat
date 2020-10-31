@@ -3,12 +3,9 @@ import Media from 'react-media';
 import Chart from 'chart.js';
 import styles from './Chart.module.css';
 
-//: TEMP
-const labels = [
-  'Oct',
-  'Nov',
-  'Dec',
+const MONTHS = [
   'Jan',
+  'Feb',
   'Mar',
   'Apr',
   'May',
@@ -16,15 +13,17 @@ const labels = [
   'Jul',
   'Aug',
   'Sep',
+  'Oct',
+  'Nov',
+  'Dec',
 ];
-
 const COLORS = ['#7C9AF2', '#FF6C00', '#D7D8DD'];
 const LEGEND = ['Доходы', 'Расходы', 'Накоплено'];
 const TYPE = {
   desctop: 'bar',
   mobile: 'horizontalBar',
 };
-const SCALES = {
+const SCALES = labels => ({
   desctop: {
     xAxes: [
       {
@@ -72,7 +71,7 @@ const SCALES = {
       },
     ],
   },
-};
+});
 
 class MyChart extends Component {
   chartRef = createRef(null);
@@ -82,27 +81,27 @@ class MyChart extends Component {
   };
 
   componentDidMount() {
-    if (!this.chartRef.current) return;
-    this.createChart();
+    if (this.props.data) this.createChart();
   }
 
   componentDidUpdate(prevProps) {
-    const { media } = this.props;
-    // const { media, data, getChartData } = this.props;
+    const { media, data } = this.props;
 
-    // if (!data.length) {
-    //   getChartData();
-    // }
-
-    if (prevProps.media !== media) {
+    if (JSON.stringify(prevProps.data) !== JSON.stringify(data))
       this.createChart();
-    }
+    if (prevProps.media !== media) this.createChart();
   }
 
   createChart = () => {
+    if (!this.chartRef.current) return;
     const ctx = this.chartRef.current.getContext('2d');
     if (this.state.instance) this.state.instance.destroy();
-    const { media } = this.props;
+    const { media, data } = this.props;
+
+    const incomeAmount = data?.map(item => item.incomeAmount);
+    const expenses = data?.map(item => item.expenses);
+    const savings = data?.map(item => item.savings);
+    const labels = data?.map(item => MONTHS[item.month - 1]);
 
     const instance = new Chart(ctx, {
       type: TYPE[media],
@@ -113,21 +112,21 @@ class MyChart extends Component {
             maxBarThickness: 5,
             barPercentage: 1,
             categoryPercentage: 0.6,
-            data: [50, 80, 60, 47, 50, 34, 54, 34, 23, 34, 53, 22, 56],
+            data: incomeAmount,
           },
           {
             backgroundColor: COLORS[1],
             maxBarThickness: 5,
             barPercentage: 1,
             categoryPercentage: 0.6,
-            data: [64, 75, 60, 61, 34, 63, 74, 40, 50, 60, 53, 56, 55],
+            data: expenses,
           },
           {
             backgroundColor: COLORS[2],
             maxBarThickness: 5,
             barPercentage: 1,
             categoryPercentage: 0.6,
-            data: [70, 34, 76, 56, 53, 62, 56, 75, 55, 45, 40, 50, 60],
+            data: savings,
           },
         ],
       },
@@ -139,14 +138,17 @@ class MyChart extends Component {
         tooltips: {
           callbacks: {
             title(e) {
-              return LEGEND[e[0].datasetIndex];
+              return LEGEND[e[0].index];
+            },
+            afterTitle(e) {
+              return data[e[0].index]._id;
             },
             label(e) {
               return ` ${e.value} грн`;
             },
           },
         },
-        scales: SCALES[media],
+        scales: SCALES(labels)[media],
       },
     });
 
