@@ -29,6 +29,14 @@ class PlanForm extends Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    const { familyId, currentFamily } = this.props;
+    if (prevProps?.currentFamily?.totalSalary === currentFamily.totalSalary)
+      return;
+
+    this.setState({ family: currentFamily });
+  }
+
   handleInput = e => {
     const name = e.target.name;
     const limit = e.target.dataset.limit;
@@ -43,12 +51,29 @@ class PlanForm extends Component {
     }
   };
 
+  leftYearMonth = () => {
+    const {
+      totalSalary,
+      passiveIncome,
+      balance,
+      flatPrice,
+      incomePercentageToSavings,
+    } = this.state.family;
+    const allIncome = totalSalary + passiveIncome;
+    const percent = (allIncome * incomePercentageToSavings) / 100;
+    const leftToAcc = flatPrice - balance;
+    const monthsLeft = leftToAcc / percent;
+    const years = Math.floor(monthsLeft / 12);
+    const months = Math.ceil(monthsLeft % 12);
+    return { months, years };
+  };
+
   handleSubmit = () => {
     const { setFamily, countMonthsLeft, countYearsLeft } = this.props;
     setFamily(this.state.family);
     this.setState({ disabledButton: true });
-    countMonthsLeft(); //внутрь результат твоих подсчетов
-    countYearsLeft(); //внутрь результат твоих подсчетов)
+    countMonthsLeft(this.leftYearMonth());
+    countYearsLeft(this.leftYearMonth());
   };
 
   render() {

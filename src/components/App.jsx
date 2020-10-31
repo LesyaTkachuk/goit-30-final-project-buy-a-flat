@@ -6,12 +6,16 @@ import Content from './Content';
 import Error from './common/Error';
 import Modal from './common/Modal';
 import Logout from '../components/Logout';
-import { authSelectors } from '../redux/auth';
+import { authSelectors, authOperations } from '../redux/auth';
 import { familySelectors } from '../redux/family';
 import Spinner from './common/Spinner';
 import { globalSelectors } from '../redux/global';
 
 class App extends Component {
+  componentDidMount() {
+    this.props.getCurrentUser();
+  }
+
   render() {
     const {
       familyError,
@@ -52,5 +56,7 @@ const mapStateToProps = state => ({
   isFamilyLoading: familySelectors.getFamilyLoading(state),
   isAuthLoading: authSelectors.getAuthLoading(state),
 });
-
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = {
+  getCurrentUser: authOperations.getCurrentUser,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(App);
