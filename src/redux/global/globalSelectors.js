@@ -16,6 +16,8 @@ const getShowExpensesPage = state => state.global.showExpensesPage;
 
 const getIsCalculatorOpen = state => state.global.isCalculatorOpen;
 
+const getChartDate = state => state.global.chartDate;
+
 export default {
   getIsLogoutOpen,
   getIsVerifyNotifOpen,
@@ -26,4 +28,5 @@ export default {
   getIsModalOpen,
   getShowLoginForm,
   getIsCalculatorOpen,
+  getChartDate,
 };

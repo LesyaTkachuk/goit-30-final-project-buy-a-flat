@@ -70,14 +70,15 @@ const createTransaction = credentials => dispatch => {
     });
 };
 
-const getChartData = () => dispatch => {
-  const month = new Date().getMonth();
-  const year = new Date().getFullYear();
+const getChartData = () => (dispatch, getState) => {
+  const {
+    global: { chartDate },
+  } = getState();
 
   dispatch(familyActions.getChartDataRequest());
 
   axios
-    .get('/api/transactions/stats/annual', { params: { month, year } })
+    .get('/api/transactions/stats/annual', { params: chartDate })
     .then(({ data }) => dispatch(familyActions.getChartDataSuccess(data)))
     .catch(error => {
       const code = error.message;
