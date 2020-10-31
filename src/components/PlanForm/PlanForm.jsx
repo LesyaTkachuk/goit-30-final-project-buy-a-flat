@@ -19,14 +19,22 @@ class PlanForm extends Component {
       incomePercentageToSavings: '',
     },
     disabledButton: false,
+    timout: null,
   };
 
   componentDidMount() {
     const { familyId, currentFamily } = this.props;
     if (familyId) {
-      // тут еще операция
       this.setState({ family: currentFamily });
     }
+  }
+
+  componentDidUpdate(prevProps) {
+    const { familyId, currentFamily } = this.props;
+    if (prevProps?.currentFamily?.totalSalary === currentFamily.totalSalary)
+      return;
+
+    this.setState({ family: currentFamily });
   }
 
   handleInput = e => {
@@ -43,9 +51,29 @@ class PlanForm extends Component {
     }
   };
 
+  leftYearMonth = () => {
+    const {
+      totalSalary,
+      passiveIncome,
+      balance,
+      flatPrice,
+      incomePercentageToSavings,
+    } = this.state.family;
+    const allIncome = totalSalary + passiveIncome;
+    const percent = (allIncome * incomePercentageToSavings) / 100;
+    const leftToAcc = flatPrice - balance;
+    const monthsLeft = leftToAcc / percent;
+    const years = Math.floor(monthsLeft / 12);
+    const months = Math.ceil(monthsLeft % 12);
+    return { months, years };
+  };
+
   handleSubmit = () => {
-    this.props.setFamily(this.state.family);
+    const { setFamily, countMonthsLeft, countYearsLeft } = this.props;
+    setFamily(this.state.family);
     this.setState({ disabledButton: true });
+    countMonthsLeft(this.leftYearMonth());
+    countYearsLeft(this.leftYearMonth());
   };
 
   render() {
@@ -141,6 +169,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   getFamily: familyOperations.getCurrentFamily,
   setFamily: familyActions.updateOrSetFamily,
+  countMonthsLeft: familyActions.countMonthsLeft,
+  countYearsLeft: familyActions.countYearsLeft,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlanForm);

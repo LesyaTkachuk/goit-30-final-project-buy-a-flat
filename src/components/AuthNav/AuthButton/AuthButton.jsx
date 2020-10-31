@@ -8,10 +8,12 @@ function AuthButton({
   className: classForBtn,
   showModal,
   toggleShowLogin,
+  toggleAuthForm,
 }) {
   function handleClick() {
     showModal();
     toggleShowLogin();
+    toggleAuthForm();
   }
   return (
     <button
@@ -27,6 +29,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   showModal: () => dispatch(globalActions.toggleModal()),
   toggleShowLogin: () =>
     dispatch(globalActions.toggleShowLogin(ownProps.label)),
+  toggleAuthForm: () => dispatch(globalActions.toggleAuthForm(ownProps.label)),
 });
 
 export default connect(null, mapDispatchToProps)(AuthButton);

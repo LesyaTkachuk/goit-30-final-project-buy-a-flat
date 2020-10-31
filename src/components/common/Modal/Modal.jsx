@@ -26,27 +26,26 @@ class Modal extends Component {
 
   toggleStateData = () => {
     const {
-      toggleModal,
       authError,
       familyError,
       unsetAuthError,
       unsetFamilyError,
       isAuthFormOpen,
-      isGiftsNotifOpen,
       isLogoutOpen,
       isVerifyNotifOpen,
       removeAuthForm,
       removeLogout,
-      removeGift,
       removeNotif,
+      hasGifts,
+      toggleHasGifts,
     } = this.props;
-    toggleModal();
+
     isAuthFormOpen && removeAuthForm();
     isLogoutOpen && removeLogout();
-    isGiftsNotifOpen && removeGift();
     isVerifyNotifOpen && removeNotif();
     authError && unsetAuthError();
     familyError && unsetFamilyError();
+    hasGifts && toggleHasGifts();
   };
 
   render() {
@@ -59,22 +58,22 @@ class Modal extends Component {
 }
 
 const mapStateToProps = state => ({
-  authError: authSelectors.getErrorMessage(state),
-  familyError: familySelectors.getErrorMessage(state),
+  authError: authSelectors.getErrorCode(state),
+  familyError: familySelectors.getErrorCode(state),
   isLogoutOpen: globalSelectors.getIsLogoutOpen(state),
   isAuthFormOpen: globalSelectors.getIsAuthFormOpen(state),
   isGiftsNotifOpen: globalSelectors.getHasGifts(state),
   isVerifyNotifOpen: globalSelectors.getIsVerifyNotifOpen(state),
+  hasGifts: globalSelectors.getHasGifts(state),
 });
 
 const mapDispatchToProps = {
-  toggleModal: globalActions.toggleModal,
   unsetAuthError: authActions.unsetError,
   unsetFamilyError: familyActions.unsetError,
   removeAuthForm: globalActions.toggleAuthForm,
-  removeGift: globalActions.toggleHasGifts,
   removeLogout: globalActions.toggleLogout,
-  removeNotif: globalActions.toggletVerifyNotif,
+  removeNotif: globalActions.toggleVerifyNotif,
+  toggleHasGifts: globalActions.toggleHasGifts,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Modal);

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { familyOperations } from '../family';
 import { globalActions } from '../global';
 import authActions from './authActions';
 
@@ -25,8 +26,13 @@ const register = credentials => (dispatch, getState) => {
     .post('/api/users/sign-up', credentials)
     .then(({ data }) => {
       dispatch(authActions.registerSuccess(data));
+      dispatch(globalActions.toggleVerifyNotif());
     })
-    .catch(({ message }) => dispatch(authActions.registerError(message)));
+    .catch(error => {
+      const code = error.message;
+      const message = error.response?.data?.message;
+      dispatch(authActions.registerError({ code, message }));
+    });
 };
 
 const login = credentials => dispatch => {
@@ -37,9 +43,12 @@ const login = credentials => dispatch => {
     .then(({ data }) => {
       token.set(data.token);
       dispatch(authActions.loginSuccess(data));
+      data.user.familyId && dispatch(familyOperations.getCurrentFamily());
     })
-    .catch(({ message }) => {
-      dispatch(authActions.loginError(message));
+    .catch(error => {
+      const code = error.message;
+      const message = error.response?.data?.message;
+      dispatch(authActions.loginError({ code, message }));
     });
 };
 
@@ -57,10 +66,15 @@ const getCurrentUser = () => (dispatch, getState) => {
 
   axios
     .get('/api/users/current')
-    .then(({ data }) => dispatch(authActions.getCurrentUserSuccess(data)))
-    .catch(({ message }) => {
-      dispatch(authActions.getCurrentUserError(message));
-      // dispatch(authActions.clearToken());
+    .then(({ data }) => {
+      dispatch(authActions.getCurrentUserSuccess(data));
+      data.familyId && dispatch(familyOperations.getCurrentFamily());
+    })
+    .catch(error => {
+      const code = error.message;
+      const message = error.response?.data?.message;
+      dispatch(authActions.getCurrentUserError({ code, message }));
+      dispatch(authActions.clearToken());
     });
 };
 
@@ -68,12 +82,16 @@ const logout = () => dispatch => {
   dispatch(authActions.logoutRequest());
 
   axios
-    .post('/api/users/sign-out')
+    .delete('/api/users/sign-out')
     .then(() => {
       token.unset();
       dispatch(authActions.logoutSuccess());
     })
-    .catch(({ message }) => dispatch(authActions.logoutError(message)));
+    .catch(error => {
+      const code = error.message;
+      const message = error.response?.data?.message;
+      dispatch(authActions.logoutError({ code, message }));
+    });
 };
 
 export default {
