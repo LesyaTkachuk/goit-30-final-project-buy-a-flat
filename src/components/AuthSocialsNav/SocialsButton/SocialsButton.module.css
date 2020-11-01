@@ -1,9 +1,9 @@
 .buttonAuth {
   display: flex;
   align-items: center;
-  width: 220px;
-  height: 62px;
-  border-radius: 8px;
+  width: 13.75rem;
+  height: 3.875rem;
+  border-radius: 0.5rem;
   cursor: pointer;
 }
 
@@ -11,15 +11,15 @@
   font-family: var(--main-font-stack);
   font-style: normal;
   font-weight: bold;
-  font-size: 14px;
-  line-height: 30px;
+  font-size: 0.875rem;
+  line-height: 1.875rem;
   text-align: center;
   color: var(--black-font-color);
 }
 
 .buttonAuthIcon {
   display: inline-block;
-  width: 32px;
-  height: 32px;
-  margin: 0 16px;
+  width: 2rem;
+  height: 2rem;
+  margin: 0 1rem;
 }

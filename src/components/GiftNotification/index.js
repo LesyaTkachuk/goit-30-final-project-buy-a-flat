@@ -1,1 +1,1 @@
-export { default } from './GiftNotification.jsx';
+export { default } from './GiftNotificationContainer';

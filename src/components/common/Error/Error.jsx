@@ -1,8 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { globalActions } from '../../../redux/global';
-import { familyActions, familySelectors } from '../../../redux/family';
-import { authActions, authSelectors } from '../../../redux/auth';
 import styles from './Error.module.css';
 
 class Error extends Component {
@@ -45,16 +41,4 @@ class Error extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  authErrorMessage: authSelectors.getErrorMessage(state),
-  authErrorCode: authSelectors.getErrorCode(state),
-  familyErrorMessage: familySelectors.getErrorMessage(state),
-  familyErrorCode: familySelectors.getErrorCode(state),
-});
-
-const mapDispatchToProps = {
-  unsetAuthError: authActions.unsetError,
-  unsetFamilyError: familyActions.unsetError,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Error);
+export default Error;

@@ -1,5 +1,5 @@
 import React from 'react';
-import AuthButton from './AuthButton/AuthButton';
+import AuthButton from './AuthButton';
 import styles from './AuthNav.module.css';
 
 function AuthButtonsWrapper() {

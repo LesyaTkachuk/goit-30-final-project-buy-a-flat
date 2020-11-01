@@ -1,1 +1,1 @@
-export { default } from './Error.jsx';
+export { default } from './ErrorContainer';

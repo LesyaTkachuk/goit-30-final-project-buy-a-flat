@@ -14,6 +14,10 @@ const getCurrentFamilyRequest = createAction('family/getCurrentRequest');
 const getCurrentFamilySuccess = createAction('family/getCurrentSuccess');
 const getCurrentFamilyError = createAction('family/getCurrentError');
 
+const getMonthsBalanceRequest = createAction('family/getMonthsBalanceRequest');
+const getMonthsBalanceSuccess = createAction('family/getMonthsBalanceSuccess');
+const getMonthsBalanceError = createAction('family/getMonthsBalanceError');
+
 const getCategoriesRequest = createAction('transactions/getCategoriesRequest');
 const getCategoriesSuccess = createAction('transactions/getCategoriesSuccess');
 const getCategoriesError = createAction('transactions/getCategoriesError');
@@ -68,6 +72,9 @@ export default {
   getCategoriesRequest,
   getCategoriesSuccess,
   getCategoriesError,
+  getMonthsBalanceRequest,
+  getMonthsBalanceSuccess,
+  getMonthsBalanceError,
   createTransactionRequest,
   createTransactionSuccess,
   createTransactionError,

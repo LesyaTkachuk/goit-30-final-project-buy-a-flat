@@ -9,20 +9,27 @@ class ExpensesForm extends Component {
       category: '',
       amount: '',
     },
-    balance: '',
   };
 
   componentDidMount() {
-    const { familyBalance, transactionCategories } = this.props;
+    const {
+      monthBalance,
+      transactionCategories,
+      getCategories,
+      getMonthBalance,
+    } = this.props;
 
-    if (familyBalance) {
-      this.setState({
-        balance: familyBalance,
-      });
+    // if (familyBalance) {
+    //   this.setState({
+    //     balance: familyBalance,
+    //   });
+    // }
+    if (!monthBalance) {
+      getMonthBalance();
     }
 
     if (transactionCategories.length === 0) {
-      this.props.getCategories();
+      getCategories();
     }
   }
 
@@ -60,28 +67,29 @@ class ExpensesForm extends Component {
   };
 
   render() {
-    const { balance, transaction } = this.state;
+    const { transaction } = this.state;
 
     const {
       transactionCategories,
       setCalculatorOpen,
       isCalculatorOpen,
       isExpenseBtnActive,
+      monthBalance,
     } = this.props;
 
     return (
       <div className={styles.formContainer}>
         <form className={styles.form}>
           <div className={styles.formItem}>
-            <label className={styles.formLabel} htmlFor="balance">
+            <label className={styles.formLabel} htmlFor="monthBalance">
               Сумма на счету
             </label>
             <input
               className={styles.formInput}
               type="number"
-              name="balance"
-              id="balance"
-              value={balance}
+              name="monthBalance"
+              id="monthBalance"
+              value={monthBalance}
               readOnly
             />
             {/* <label className={styles.formLabel} htmlFor="account">
