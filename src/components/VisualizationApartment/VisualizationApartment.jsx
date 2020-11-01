@@ -24,6 +24,8 @@ const VisualizationApartment = ({ finance }) => {
   const end = new Date(
     date.setMonth(date.getMonth() + finance.monthsLeftToSaveForFlat),
   );
+  const width =
+    (finance?.savingsInSquareMeters / finance?.totalSquareMeters) * 100;
 
   return (
     <>
@@ -31,7 +33,7 @@ const VisualizationApartment = ({ finance }) => {
         {MONTHS[end.getMonth()]} {end.getFullYear()}
       </p>
       <div className={styles.wrp}>
-        <div className={styles.progress} style={{ width: '60%' }} />
+        <div className={styles.progress} style={{ width: width + '%' }} />
         <img className={styles.img} src={flat} alt="" />
       </div>
     </>
