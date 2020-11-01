@@ -91,6 +91,7 @@ const logout = () => dispatch => {
       const code = error.message;
       const message = error.response?.data?.message;
       dispatch(authActions.logoutError({ code, message }));
+      dispatch(authActions.clearToken());
     });
 };
 

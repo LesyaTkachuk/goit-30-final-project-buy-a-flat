@@ -8,8 +8,8 @@ const initialState = {
       currentYear: 0,
     },
     chartDate: {
-      chartMonth: 0,
-      chartYear: 0,
+      month: new Date().getMonth() + 1,
+      year: new Date().getFullYear(),
     },
     isModalOpen: false,
     isCalculatorOpen: false,
@@ -87,11 +87,11 @@ const currentDate = createReducer(initialState.global.currentDate, {
 const chartDate = createReducer(initialState.global.chartDate, {
   [globalActions.chartYear]: (state, { payload }) => ({
     ...state,
-    chartYear: payload,
+    year: payload,
   }),
   [globalActions.chartMonth]: (state, { payload }) => ({
     ...state,
-    chartMonth: payload,
+    month: payload,
   }),
 });
 

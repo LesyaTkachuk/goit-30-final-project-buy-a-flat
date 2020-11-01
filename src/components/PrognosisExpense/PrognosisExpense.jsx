@@ -13,7 +13,7 @@ const PrognosisExpense = ({
   isExpenseBtnActive,
 }) => {
   const daysToMonthEnd = moment().daysInMonth() - new Date().getDate() + 1;
-  const alreadySpent = 40000; //: TEMP
+  const alreadySpent = 0; //: TEMP
 
   const income = info.totalSalary + info.passiveIncome;
   const available =

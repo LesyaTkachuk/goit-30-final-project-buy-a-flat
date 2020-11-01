@@ -1,4 +1,5 @@
 import { createReducer, combineReducers } from '@reduxjs/toolkit';
+import { familyActions } from '../family';
 import authActions from './authActions';
 
 const initialState = {
@@ -28,6 +29,10 @@ const user = createReducer(initialState.auth.user, {
   [authActions.registerSuccess]: setUser,
   [authActions.loginSuccess]: setUser,
   [authActions.getCurrentUserSuccess]: setCurrentUser,
+  [familyActions.addFamilySuccess]: (state, { payload }) => ({
+    ...state,
+    familyId: payload.info._id,
+  }),
   [authActions.logoutSuccess]: () => initialState.auth.user,
 });
 

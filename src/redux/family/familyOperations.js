@@ -72,24 +72,34 @@ const createTransaction = credentials => dispatch => {
 
 const getChartData = () => (dispatch, getState) => {
   const {
-    global: {
-      chartDate: { chartMonth, chartYear },
-      currentDate: { currentMonth, currentYear },
-    },
+    global: { chartDate },
   } = getState();
-
-  const month = chartMonth || currentMonth;
-  const year = chartYear || currentYear;
 
   dispatch(familyActions.getChartDataRequest());
 
   axios
-    .get(`/api/transactions/stats/annual?month=${month}&year=${year}`)
+    .get('/api/transactions/stats/annual', { params: chartDate })
     .then(({ data }) => dispatch(familyActions.getChartDataSuccess(data)))
     .catch(error => {
       const code = error.message;
       const message = error.response?.data?.message;
       dispatch(familyActions.getChartDataError({ code, message }));
+    });
+};
+
+const getMonthsList = () => dispatch => {
+  const month = new Date().getMonth() + 1;
+  const year = new Date().getFullYear();
+
+  dispatch(familyActions.getMonthsListRequest());
+
+  axios
+    .get('/api/transactions/stats/annual', { params: { month, year } })
+    .then(({ data }) => dispatch(familyActions.getMonthsListSuccess(data)))
+    .catch(error => {
+      const code = error.message;
+      const message = error.response?.data?.message;
+      dispatch(familyActions.getMonthsListError({ code, message }));
     });
 };
 
@@ -124,6 +134,7 @@ export default {
   getTransactions,
   createTransaction,
   getChartData,
+  getMonthsList,
   getFinanceData,
   updateGifts,
 };
