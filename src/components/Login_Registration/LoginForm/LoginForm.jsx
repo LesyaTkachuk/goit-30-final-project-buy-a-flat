@@ -35,7 +35,6 @@ class LoginForm extends Component {
   };
 
   render() {
-    const { email, password } = this.state;
 
     return (
       <div className={styles.modal__login}>
@@ -61,14 +60,13 @@ class LoginForm extends Component {
                 <input
                   type="email"
                   name="email"
-                  value={email}
                   placeholder="Your@e-mail.com"
                   className={
                     (errors.email &&
-                      touched.email &&
-                      styles.loginRegist__input_error +
+                      touched.email) ?
+                      (styles.loginRegist__input_error +
                         ' ' +
-                        styles.loginRegist__input) ||
+                        styles.loginRegist__input) :
                     styles.loginRegist__input
                   }
                   onChange={handleChange}
@@ -84,14 +82,13 @@ class LoginForm extends Component {
                 <input
                   type="password"
                   name="password"
-                  value={password}
                   placeholder="Введите пароль"
                   className={
                     (errors.password &&
-                      touched.password &&
-                      styles.loginRegist__input_error +
+                      touched.password) ?
+                      (styles.loginRegist__input_error +
                         ' ' +
-                        styles.loginRegist__input) ||
+                        styles.loginRegist__input) :
                     styles.loginRegist__input
                   }
                   // onChange={this.handleChange}
