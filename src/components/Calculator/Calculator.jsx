@@ -1,13 +1,10 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { familyActions } from '../../redux/family';
-import { globalActions } from '../../redux/global';
 import Engine from './Engine';
 import Display from './Display';
 import Button from './Button';
 import styles from './Calculator.module.css';
 
-class Calculator extends React.Component {
+export default class Calculator extends React.Component {
   constructor(props) {
     super(props);
 
@@ -162,10 +159,3 @@ class Calculator extends React.Component {
     );
   }
 }
-
-const mapDispatchToProps = {
-  setTransactionAmount: familyActions.setTransactionAmount,
-  closeCalculator: globalActions.toggleCalculator,
-};
-
-export default connect(null, mapDispatchToProps)(Calculator);
