@@ -21,7 +21,10 @@ const MONTHS = [
 
 class MonthlySavings extends Component {
   componentDidMount() {
-    this.props.getChartData();
+    const { getMonthsList, getChartData } = this.props;
+
+    getMonthsList();
+    getChartData();
   }
 
   componentDidUpdate(prevProps) {
@@ -35,13 +38,13 @@ class MonthlySavings extends Component {
   }
 
   handleSelectChange = e => {
-    const { setChartMonth, setChartYear, data } = this.props;
-    setChartMonth(data[e.target.value].month);
-    setChartYear(data[e.target.value].year);
+    const { setChartMonth, setChartYear, monthlyStat } = this.props;
+    setChartMonth(monthlyStat[e.target.value]?.month || 1);
+    setChartYear(monthlyStat[e.target.value]?.year || 2020);
   };
 
   render() {
-    const { data } = this.props;
+    const { data, monthlyStat } = this.props;
     return (
       <div className={styles.container}>
         <label className={styles.monthSelectLabel} htmlFor="month">
@@ -53,7 +56,7 @@ class MonthlySavings extends Component {
           name="month"
           id="month"
         >
-          {data?.map((item, index) => (
+          {monthlyStat?.map((item, index) => (
             <option key={item._id} value={index}>
               {`${MONTHS[item.month - 1]} ${item.year}`}
             </option>
@@ -93,11 +96,13 @@ class MonthlySavings extends Component {
 
 const mapStateToProps = state => ({
   data: familySelectors.getChartData(state),
+  monthlyStat: familySelectors.getMonthsList(state),
   chartDate: globalSelectors.getChartDate(state),
 });
 
 const mapDispatchToProps = {
   getChartData: familyOperations.getChartData,
+  getMonthsList: familyOperations.getMonthsList,
   setChartMonth: globalActions.chartMonth,
   setChartYear: globalActions.chartYear,
 };

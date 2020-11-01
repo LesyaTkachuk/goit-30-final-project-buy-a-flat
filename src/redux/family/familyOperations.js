@@ -87,6 +87,22 @@ const getChartData = () => (dispatch, getState) => {
     });
 };
 
+const getMonthsList = () => dispatch => {
+  const month = new Date().getMonth() + 1;
+  const year = new Date().getFullYear();
+
+  dispatch(familyActions.getMonthsListRequest());
+
+  axios
+    .get('/api/transactions/stats/annual', { params: { month, year } })
+    .then(({ data }) => dispatch(familyActions.getMonthsListSuccess(data)))
+    .catch(error => {
+      const code = error.message;
+      const message = error.response?.data?.message;
+      dispatch(familyActions.getMonthsListError({ code, message }));
+    });
+};
+
 const getFinanceData = () => dispatch => {
   dispatch(familyActions.getFinanceDataRequest());
 
@@ -120,6 +136,7 @@ export default {
   getTransactions,
   createTransaction,
   getChartData,
+  getMonthsList,
   getFinanceData,
   updateGifts,
 };
