@@ -3,8 +3,15 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import { familyOperations, familySelectors } from '../../redux/family';
 import styles from './PrognosisExpense.module.css';
+import { globalActions, globalSelectors } from '../../redux/global';
 
-const PrognosisExpense = ({ transaction, info, createTransaction }) => {
+const PrognosisExpense = ({
+  transaction,
+  info,
+  createTransaction,
+  setExpenseBtnActive,
+  isExpenseBtnActive,
+}) => {
   const daysToMonthEnd = moment().daysInMonth() - new Date().getDate() + 1;
   const alreadySpent = 40000; //: TEMP
 
@@ -18,6 +25,7 @@ const PrognosisExpense = ({ transaction, info, createTransaction }) => {
 
   const handleClick = () => {
     createTransaction(transaction);
+    setExpenseBtnActive();
   };
   return (
     <div className={styles.wrp}>
@@ -31,7 +39,12 @@ const PrognosisExpense = ({ transaction, info, createTransaction }) => {
         <p className={styles.small}>Отклонение от плановой суммы накопления</p>
       </div>
 
-      <button className={styles.btn} onClick={handleClick} type="button">
+      <button
+        disabled={!isExpenseBtnActive}
+        className={styles.btn}
+        onClick={handleClick}
+        type="button"
+      >
         Готово
       </button>
     </div>
@@ -41,12 +54,12 @@ const PrognosisExpense = ({ transaction, info, createTransaction }) => {
 const mapStateToProps = state => ({
   transaction: familySelectors.getTransaction(state),
   info: familySelectors.getFamilyInfo(state),
+  isExpenseBtnActive: globalSelectors.getIsExpenseBtnActive(state),
 });
 
 const mapDispatchToProps = {
   createTransaction: familyOperations.createTransaction,
+  setExpenseBtnActive: globalActions.toggleExpenseBtnActive,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PrognosisExpense);
-
-

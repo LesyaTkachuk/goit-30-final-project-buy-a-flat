@@ -16,6 +16,8 @@ const getShowExpensesPage = state => state.global.showExpensesPage;
 
 const getIsCalculatorOpen = state => state.global.isCalculatorOpen;
 
+const getIsExpenseBtnActive = state => state.global.isExpenseBtnActive;
+
 export default {
   getIsLogoutOpen,
   getIsVerifyNotifOpen,
@@ -26,4 +28,5 @@ export default {
   getIsModalOpen,
   getShowLoginForm,
   getIsCalculatorOpen,
+  getIsExpenseBtnActive,
 };
