@@ -73,20 +73,24 @@ class MonthlySavings extends Component {
           <li className={styles.statParamItem}>
             <p className={styles.statParamName}>Расходы, &#8372;</p>
             <p className={styles.statParamValue}>
-              {!!data && data[0].incomeAmount}
+              {!!data && data[0].expenses}
             </p>
           </li>
           <li className={styles.statParamItem}>
             <p className={styles.statParamName}>Накоплено, &#8372;</p>
-            <p className={styles.statParamValue}>40000</p>
+            <p className={styles.statParamValue}>{!!data && data[0].savings}</p>
           </li>
           <li className={styles.statParamItem}>
             <p className={styles.statParamName}>План, &#8372;</p>
-            <p className={styles.statParamValue}>50000</p>
+            <p className={styles.statParamValue}>
+              {!!data && data[0].expectedSavings}
+            </p>
           </li>
           <li className={styles.statParamItem}>
             <p className={styles.statParamName}>План, %</p>
-            <p className={styles.statParamValue}>80</p>
+            <p className={styles.statParamValue}>
+              {!!data && data[0].percentAmount}
+            </p>
           </li>
         </ul>
       </div>
