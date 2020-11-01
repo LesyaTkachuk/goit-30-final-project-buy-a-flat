@@ -41,6 +41,7 @@ const token = createReducer(initialState.auth.token, {
   [authActions.loginSuccess]: setToken,
   [authActions.logoutSuccess]: () => null,
   [authActions.clearToken]: () => null,
+  [authActions.setToken]: (_, { payload }) => payload,
 });
 
 const isLoading = createReducer(initialState.auth.isLoading, {
