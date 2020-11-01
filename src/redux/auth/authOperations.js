@@ -99,7 +99,8 @@ const googleAuth = () => dispatch => {
   dispatch(authActions.googleAuthRequest());
 
   axios.get('/auth/google').then(({ data }) => {
-    dispatch(authActions.googleAuthSuccess(data));
+    dispatch(authActions.googleAuthSuccess());
+
     token.set(data.token);
     dispatch(getCurrentUser());
   });
