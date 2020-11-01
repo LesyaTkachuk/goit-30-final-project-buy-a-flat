@@ -1,4 +1,5 @@
 import React from 'react';
+import Media from 'react-media';
 import { Route, Redirect } from 'react-router-dom';
 import withAuth from './hoc/withAuth';
 
@@ -11,6 +12,7 @@ function PrivateRoute({
     <Route
       {...routeProps}
       render={props =>
+        // isAuthenticated ? <Component {...props} /> : <Redirect to="/" />
         isAuthenticated ? <Component {...props} /> : <Redirect to="/" />
       }
     />

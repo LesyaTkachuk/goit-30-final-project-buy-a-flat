@@ -6,12 +6,14 @@ import styles from './AuthButton.module.css';
 function AuthButton({
   label,
   className: classForBtn,
-  onToggleModal,
-  ontoggleShowLogin,
+  showModal,
+  toggleShowLogin,
+  toggleAuthForm,
 }) {
   function handleClick() {
-    onToggleModal();
-    ontoggleShowLogin();
+    showModal();
+    toggleShowLogin();
+    toggleAuthForm();
   }
   return (
     <button
@@ -24,9 +26,10 @@ function AuthButton({
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  onToggleModal: () => dispatch(globalActions.toggleModal()),
-  ontoggleShowLogin: () =>
+  showModal: () => dispatch(globalActions.toggleModal()),
+  toggleShowLogin: () =>
     dispatch(globalActions.toggleShowLogin(ownProps.label)),
+  toggleAuthForm: () => dispatch(globalActions.toggleAuthForm(ownProps.label)),
 });
 
 export default connect(null, mapDispatchToProps)(AuthButton);

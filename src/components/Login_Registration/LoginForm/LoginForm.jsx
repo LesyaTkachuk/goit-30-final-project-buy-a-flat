@@ -25,13 +25,14 @@ class LoginForm extends Component {
   };
 
   handleSubmit = async (values, { setSubmitting }) => {
+    const { toggleAuthForm, onLogin, isAuthFormOpen } = this.props;
+
     this.state.email = values.email;
     this.state.password = values.password;
 
-    this.props.showModal && this.props.onToggleModal();
-    this.setState({ name: '', email: '', password: '' });
-    // this.props.onLogin({ ...this.state });
-    // setSubmitting(false);
+    isAuthFormOpen && toggleAuthForm();
+    onLogin({ ...this.state });
+    // this.setState(this.initialValues);
   };
 
   render() {
@@ -118,12 +119,12 @@ class LoginForm extends Component {
 }
 
 const mapStateToProps = state => ({
-  showModal: globalSelectors.getIsModalOpen(state),
+  isAuthFormOpen: globalSelectors.getIsAuthFormOpen(state),
 });
 
 const mapDispatchToProps = {
-  onToggleModal: globalActions.toggleModal,
   onLogin: authOperations.login,
+  toggleAuthForm: globalActions.toggleAuthForm,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

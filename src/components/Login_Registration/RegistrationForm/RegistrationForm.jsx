@@ -38,13 +38,20 @@ class RegistrationForm extends Component {
   };
 
   handleSubmit = async values => {
+    const {
+      onToggleToLogin,
+      onRegister,
+      toggleAuthForm,
+      isAuthFormOpen,
+    } = this.props;
+
     this.state.name = values.name;
     this.state.email = values.email;
     this.state.password = values.password;
 
-    this.props.showModal && this.props.onToggleModal();
-    this.props.onToggleToLogin();
-    // this.props.onRegister({ ...this.state });
+    isAuthFormOpen && toggleAuthForm();
+    onToggleToLogin();
+    onRegister({ ...this.state });
   };
 
   render() {
@@ -132,7 +139,6 @@ class RegistrationForm extends Component {
                         styles.loginRegist__input) :
                     styles.loginRegist__input
                   }
-                  // onChange={this.handleChange}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.password}
@@ -161,11 +167,12 @@ class RegistrationForm extends Component {
 }
 
 const mapStateToProps = state => ({
-  showModal: globalSelectors.getIsModalOpen(state),
+  isAuthFormOpen: globalSelectors.getIsAuthFormOpen(state),
 });
 
 const mapDispatchToProps = {
-  onToggleModal: globalActions.toggleModal,
+  toggleAuthForm: globalActions.toggleAuthForm,
+  onToggleToLogin: globalActions.toggleShowLogin,
   onRegister: authOperations.register,
 };
 

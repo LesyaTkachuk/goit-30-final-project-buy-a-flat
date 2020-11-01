@@ -1,16 +1,21 @@
 import { createReducer, combineReducers } from '@reduxjs/toolkit';
+import { familyActions } from '../family';
 import authActions from './authActions';
 
 const initialState = {
   auth: {
     user: {
-      name: '',
+      id: '',
+      username: '',
       email: '',
       familyId: '',
     },
     token: '',
     isLoading: false,
-    error: '',
+    error: {
+      code: '',
+      message: '',
+    },
   },
 };
 
@@ -18,22 +23,27 @@ const setUser = (state, { payload }) => ({ ...state, ...payload.user });
 const setCurrentUser = (_, { payload }) => payload;
 const setToken = (_, { payload }) => payload.token;
 const setError = (_, { payload }) => payload;
-const unsetError = () => null;
+const unsetError = () => initialState.auth.error;
 
 const user = createReducer(initialState.auth.user, {
   [authActions.registerSuccess]: setUser,
   [authActions.loginSuccess]: setUser,
   [authActions.getCurrentUserSuccess]: setCurrentUser,
+  [familyActions.addFamilySuccess]: (state, { payload }) => ({
+    ...state,
+    familyId: payload.info._id,
+  }),
   [authActions.logoutSuccess]: () => initialState.auth.user,
 });
 
 const token = createReducer(initialState.auth.token, {
+  [authActions.googleAuthSuccess]: setToken,
   [authActions.loginSuccess]: setToken,
   [authActions.logoutSuccess]: () => null,
   [authActions.clearToken]: () => null,
 });
 
-const loading = createReducer(initialState.auth.isLoading, {
+const isLoading = createReducer(initialState.auth.isLoading, {
   [authActions.registerRequest]: () => true,
   [authActions.loginRequest]: () => true,
   [authActions.logoutRequest]: () => true,
@@ -66,5 +76,5 @@ export default combineReducers({
   user,
   token,
   error,
-  loading,
+  isLoading,
 });

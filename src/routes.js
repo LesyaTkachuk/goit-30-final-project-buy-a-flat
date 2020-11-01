@@ -10,13 +10,13 @@ export default [
       import('./pages/Home' /* webpackChunkName: "home-page" */),
     ),
     private: false,
-    restricted: false,
+    restricted: true,
   },
   {
     name: 'Planning',
     path: '/planning',
     exact: true,
-    showInMenu: true,
+    showInMenu: 'Персональный план',
     component: lazy(() =>
       import('./pages/Planning' /* webpackChunkName: "planning-page" */),
     ),
@@ -27,7 +27,7 @@ export default [
     name: 'Expenses',
     path: '/expenses',
     exact: true,
-    showInMenu: true,
+    showInMenu: 'Расходы',
     component: lazy(() =>
       import('./pages/Expenses' /* webpackChunkName: "expenses-page" */),
     ),
@@ -37,7 +37,7 @@ export default [
   {
     name: 'Dynamics',
     path: '/dynamics',
-    showInMenu: true,
+    showInMenu: 'Динамика',
     exact: true,
     component: lazy(() =>
       import('./pages/Dynamics' /* webpackChunkName: "dynamics-page" */),

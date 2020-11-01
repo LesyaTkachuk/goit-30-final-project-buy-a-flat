@@ -10,8 +10,11 @@ const initialState = {
       flatSquareMeters: 0,
       totalSalary: 0,
       passiveIncome: 0,
-      incomePercentagetoSavings: 0,
+      incomePercentageToSavings: 0,
     },
+
+    monthsLeft: 0,
+    yearsLeft: 0,
 
     transactionCategories: [],
 
@@ -21,9 +24,7 @@ const initialState = {
       comment: '',
     },
 
-    chartStatistics: {
-      dataForChart: [],
-    },
+    chart: null,
 
     financeStatistics: {
       savingsPercentage: 0,
@@ -41,19 +42,51 @@ const initialState = {
     },
 
     isLoading: false,
-    error: '',
+    error: {
+      code: '',
+      message: '',
+    },
   },
 };
 
-const setFamily = (state, { payload }) => ({ ...state, ...payload });
+const setFamily = (state, { payload }) => {
+  const {
+    balance,
+    flatPrice,
+    flatSquareMeters,
+    totalSalary,
+    passiveIncome,
+    incomePercentageToSavings,
+  } = payload.info;
+  return {
+    balance,
+    flatPrice,
+    flatSquareMeters,
+    totalSalary,
+    passiveIncome,
+    incomePercentageToSavings,
+  };
+};
 const setError = (_, { payload }) => payload;
-const unsetError = () => null;
+const unsetError = () => initialState.family.error;
 
 const info = createReducer(initialState.family.info, {
+  [familyActions.updateOrSetFamily]: (state, { payload }) => ({
+    ...state,
+    ...payload,
+  }),
   [familyActions.addFamilySuccess]: setFamily,
   [familyActions.updateFamilySuccess]: setFamily,
   [familyActions.getCurrentFamilySuccess]: setFamily,
   [authActions.logoutSuccess]: () => initialState.family.info,
+});
+
+const monthsLeft = createReducer(initialState.family.monthsLeft, {
+  [familyActions.countMonthsLeft]: (state, { payload }) => payload.months,
+});
+
+const yearsLeft = createReducer(initialState.family.yearsLeft, {
+  [familyActions.countYearsLeft]: (state, { payload }) => payload.years,
 });
 
 const transactionCategories = createReducer(
@@ -66,14 +99,25 @@ const transactionCategories = createReducer(
 );
 
 const transaction = createReducer(initialState.family.transaction, {
-  [familyActions.createTransactionSuccess]: (_, { payload }) => payload,
+  [familyActions.setTransaction]: (state, { payload }) => ({
+    ...state,
+    ...payload,
+  }),
+  [familyActions.setTransactionAmount]: (state, { payload }) => ({
+    ...state,
+    amount: payload,
+  }),
+  [familyActions.createTransactionSuccess]: (state, { payload }) => {
+    const { amount, category, comment } = payload;
+    return { ...state, amount, category, comment };
+  },
   [authActions.logoutSuccess]: () => initialState.family.transaction,
 });
 
-const chart = createReducer(initialState.family.chartStatistics.dataForChart, {
-  [familyActions.getChartDataSuccess]: (_, { payload }) => payload,
+const chart = createReducer(initialState.family.chart, {
+  [familyActions.getChartDataSuccess]: (_, { payload }) => payload.transes,
   [authActions.logoutSuccess]: () =>
-    initialState.family.chartStatistics.dataForChart,
+    initialState.family.chart,
 });
 
 const finance = createReducer(initialState.family.financeStatistics, {
@@ -86,10 +130,15 @@ const gifts = createReducer(initialState.family.gifts, {
     ...state,
     ...payload,
   }),
+  [familyActions.getCurrentFamilySuccess]: (state, { payload }) => ({
+    ...state,
+    ...payload.gifts,
+  }),
   [authActions.logoutSuccess]: () => initialState.family.gifts,
+  [familyActions.unsetGiftsUnpacked]: state => ({ ...state, giftsUnpacked: 0 }),
 });
 
-const loading = createReducer(initialState.family.isLoading, {
+const isLoading = createReducer(initialState.family.isLoading, {
   [familyActions.addFamilyRequest]: () => true,
   [familyActions.addFamilySuccess]: () => false,
   [familyActions.addFamilyError]: () => false,
@@ -137,6 +186,8 @@ export default combineReducers({
   chart,
   finance,
   gifts,
-  loading,
+  isLoading,
   error,
+  monthsLeft,
+  yearsLeft,
 });

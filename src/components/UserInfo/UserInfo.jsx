@@ -8,7 +8,8 @@ import styles from './UserInfo.module.css';
 import { globalSelectors } from '../../redux/global';
 import { Link } from 'react-router-dom';
 
-function UserInfo({ showNavPage }) {
+function UserInfo({ showNavPage, username, email }) {
+  const cropEmail = email.split('@')[0];
   return (
     <div className={styles.wrapper}>
       <img src={avatar} alt="user icon" className={styles.avatar} />
@@ -28,7 +29,9 @@ function UserInfo({ showNavPage }) {
       />
       <Media
         query="(min-width: 1240px)"
-        render={() => <p className={styles.userName}>UserName</p>}
+        render={() => (
+          <p className={styles.userName}>{username ? username : cropEmail}</p>
+        )}
       />
       <Media query="(min-width: 1240px)" render={() => <LogoutButton />} />
     </div>
@@ -37,6 +40,8 @@ function UserInfo({ showNavPage }) {
 
 const mapStateToprops = state => ({
   showNavPage: globalSelectors.getShowNavPage(state),
+  username: state.auth.user.username,
+  email: state.auth.user.email,
 });
 
 export default connect(mapStateToprops)(UserInfo);

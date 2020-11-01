@@ -1,8 +1,9 @@
 import axios from 'axios';
+import { familyOperations } from '../family';
 import { globalActions } from '../global';
 import authActions from './authActions';
 
-axios.defaults.baseURL = 'https://';
+axios.defaults.baseURL = 'https://flat-finance.herokuapp.com';
 
 const token = {
   set(token) {
@@ -25,10 +26,13 @@ const register = credentials => (dispatch, getState) => {
     .post('/api/users/sign-up', credentials)
     .then(({ data }) => {
       dispatch(authActions.registerSuccess(data));
+      dispatch(globalActions.toggleVerifyNotif());
     })
-    .catch(({ message, status }) =>
-      dispatch(authActions.registerError({ message, status })),
-    );
+    .catch(error => {
+      const code = error.message;
+      const message = error.response?.data?.message;
+      dispatch(authActions.registerError({ code, message }));
+    });
 };
 
 const login = credentials => dispatch => {
@@ -39,10 +43,13 @@ const login = credentials => dispatch => {
     .then(({ data }) => {
       token.set(data.token);
       dispatch(authActions.loginSuccess(data));
+      data.user.familyId && dispatch(familyOperations.getCurrentFamily());
     })
-    .catch(({ message, status }) =>
-      dispatch(authActions.loginError({ message, status })),
-    );
+    .catch(error => {
+      const code = error.message;
+      const message = error.response?.data?.message;
+      dispatch(authActions.loginError({ code, message }));
+    });
 };
 
 const getCurrentUser = () => (dispatch, getState) => {
@@ -59,10 +66,15 @@ const getCurrentUser = () => (dispatch, getState) => {
 
   axios
     .get('/api/users/current')
-    .then(({ data }) => dispatch(authActions.getCurrentUserSuccess(data)))
-    .catch(({ message, status }) => {
-      dispatch(authActions.getCurrentUserError({ message, status }));
-      // dispatch(authActions.clearToken());
+    .then(({ data }) => {
+      dispatch(authActions.getCurrentUserSuccess(data));
+      data.familyId && dispatch(familyOperations.getCurrentFamily());
+    })
+    .catch(error => {
+      const code = error.message;
+      const message = error.response?.data?.message;
+      dispatch(authActions.getCurrentUserError({ code, message }));
+      dispatch(authActions.clearToken());
     });
 };
 
@@ -70,14 +82,27 @@ const logout = () => dispatch => {
   dispatch(authActions.logoutRequest());
 
   axios
-    .post('/api/users/sign-out')
+    .delete('/api/users/sign-out')
     .then(() => {
       token.unset();
       dispatch(authActions.logoutSuccess());
     })
-    .catch(({ message, status }) =>
-      dispatch(authActions.logoutError({ message, status })),
-    );
+    .catch(error => {
+      const code = error.message;
+      const message = error.response?.data?.message;
+      dispatch(authActions.logoutError({ code, message }));
+      dispatch(authActions.clearToken());
+    });
+};
+
+const googleAuth = () => dispatch => {
+  dispatch(authActions.googleAuthRequest());
+
+  axios.get('/auth/google').then(({ data }) => {
+    dispatch(authActions.googleAuthSuccess(data));
+    token.set(data.token);
+    dispatch(getCurrentUser());
+  });
 };
 
 export default {
@@ -85,4 +110,5 @@ export default {
   login,
   logout,
   getCurrentUser,
+  googleAuth,
 };

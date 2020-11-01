@@ -4,13 +4,36 @@ const toggleModal = createAction('global/toggleModal');
 
 const toggleShowLogin = createAction('global/toggleShowLogin');
 
+const toggleAuthForm = createAction('global/toggleAuthForm');
+
+const toggleHasGifts = createAction('global/toggleHasGifts');
+
+const toggleLogout = createAction('global/toggleLogout');
+
+const toggleVerifyNotif = createAction('global/toggleVerifyNotif');
+
 const toggleShowNavPage = createAction('global/toggleShowNavPage');
 
 const toggleShowExpensesPage = createAction('global/toggleShowExpensesPage');
 
+const toggleCalculator = createAction('global/toggleCalculator');
+
+const currentYear = createAction('global/currentYear');
+const currentMonth = createAction('global/currentMonth');
+const chartYear = createAction('global/chartYear');
+const chartMonth = createAction('global/chartMonth');
 export default {
   toggleModal,
   toggleShowLogin,
+  toggleHasGifts,
+  toggleLogout,
+  toggleVerifyNotif,
   toggleShowNavPage,
+  toggleAuthForm,
   toggleShowExpensesPage,
+  toggleCalculator,
+  currentYear,
+  currentMonth,
+  chartYear,
+  chartMonth,
 };

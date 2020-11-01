@@ -8,7 +8,7 @@
 }
 
 .buttonAuthTitle {
-  font-family: var(----main-font-stack);
+  font-family: var(--main-font-stack);
   font-style: normal;
   font-weight: bold;
   font-size: 14px;
@@ -23,4 +23,3 @@
   height: 32px;
   margin: 0 16px;
 }
-
