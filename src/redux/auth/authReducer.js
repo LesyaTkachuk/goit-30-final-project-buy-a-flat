@@ -1,14 +1,16 @@
 import { createReducer, combineReducers } from '@reduxjs/toolkit';
+import { familyActions } from '../family';
 import authActions from './authActions';
 
 const initialState = {
   auth: {
     user: {
+      id: '',
       username: '',
       email: '',
       familyId: '',
     },
-    token: '11',
+    token: '',
     isLoading: false,
     error: {
       code: '',
@@ -27,10 +29,15 @@ const user = createReducer(initialState.auth.user, {
   [authActions.registerSuccess]: setUser,
   [authActions.loginSuccess]: setUser,
   [authActions.getCurrentUserSuccess]: setCurrentUser,
+  [familyActions.addFamilySuccess]: (state, { payload }) => ({
+    ...state,
+    familyId: payload.info._id,
+  }),
   [authActions.logoutSuccess]: () => initialState.auth.user,
 });
 
 const token = createReducer(initialState.auth.token, {
+  [authActions.googleAuthSuccess]: setToken,
   [authActions.loginSuccess]: setToken,
   [authActions.logoutSuccess]: () => null,
   [authActions.clearToken]: () => null,

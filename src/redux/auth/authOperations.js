@@ -91,7 +91,18 @@ const logout = () => dispatch => {
       const code = error.message;
       const message = error.response?.data?.message;
       dispatch(authActions.logoutError({ code, message }));
+      dispatch(authActions.clearToken());
     });
+};
+
+const googleAuth = () => dispatch => {
+  dispatch(authActions.googleAuthRequest());
+
+  axios.get('/auth/google').then(({ data }) => {
+    dispatch(authActions.googleAuthSuccess(data));
+    token.set(data.token);
+    dispatch(getCurrentUser());
+  });
 };
 
 export default {
@@ -99,4 +110,5 @@ export default {
   login,
   logout,
   getCurrentUser,
+  googleAuth,
 };

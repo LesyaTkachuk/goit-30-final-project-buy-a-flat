@@ -117,8 +117,6 @@ const getFinanceData = () => dispatch => {
 };
 
 const updateGifts = () => dispatch => {
-  dispatch(familyActions.updateGiftsRequest());
-
   axios
     .put('api/gifts/unpack')
     .then(({ data }) => dispatch(familyActions.updateGiftsSuccess(data.gifts)))

@@ -55,7 +55,7 @@ class RegistrationForm extends Component {
   };
 
   render() {
-    const { name, email, password } = this.state;
+
     return (
       <div className={styles.modal__Registration}>
         <Formik
@@ -81,14 +81,13 @@ class RegistrationForm extends Component {
                 <input
                   type="text"
                   name="name"
-                  value={name}
                   placeholder="Введите ваше имя"
                   className={
                     (errors.name &&
-                      touched.name &&
-                      styles.loginRegist__input_error +
+                      touched.name) ?
+                      (styles.loginRegist__input_error +
                         ' ' +
-                        styles.loginRegist__input) ||
+                        styles.loginRegist__input) :
                     styles.loginRegist__input
                   }
                   onChange={handleChange}
@@ -107,14 +106,13 @@ class RegistrationForm extends Component {
                 <input
                   type="email"
                   name="email"
-                  value={email}
                   placeholder="Your@e-mail.com"
                   className={
                     (errors.email &&
-                      touched.email &&
-                      styles.loginRegist__input_error +
+                      touched.email) ?
+                      (styles.loginRegist__input_error +
                         ' ' +
-                        styles.loginRegist__input) ||
+                        styles.loginRegist__input) :
                     styles.loginRegist__input
                   }
                   onChange={handleChange}
@@ -132,14 +130,13 @@ class RegistrationForm extends Component {
                 <input
                   type="password"
                   name="password"
-                  value={password}
                   placeholder="Введите пароль"
                   className={
                     (errors.password &&
-                      touched.password &&
-                      styles.loginRegist__input_error +
+                      touched.password) ?
+                      (styles.loginRegist__input_error +
                         ' ' +
-                        styles.loginRegist__input) ||
+                        styles.loginRegist__input) :
                     styles.loginRegist__input
                   }
                   onChange={handleChange}

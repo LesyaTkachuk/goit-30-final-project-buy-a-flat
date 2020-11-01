@@ -34,7 +34,6 @@ class PrognosisBuy extends Component {
     } else {
       if (totalSalary) {
         addFamily(family);
-        getCurrentUser();
       }
     }
   };

@@ -50,7 +50,24 @@ const initialState = {
   },
 };
 
-const setFamily = (state, { payload }) => ({ ...state, ...payload.info });
+const setFamily = (state, { payload }) => {
+  const {
+    balance,
+    flatPrice,
+    flatSquareMeters,
+    totalSalary,
+    passiveIncome,
+    incomePercentageToSavings,
+  } = payload.info;
+  return {
+    balance,
+    flatPrice,
+    flatSquareMeters,
+    totalSalary,
+    passiveIncome,
+    incomePercentageToSavings,
+  };
+};
 const setError = (_, { payload }) => payload;
 const unsetError = () => initialState.family.error;
 
@@ -123,6 +140,7 @@ const gifts = createReducer(initialState.family.gifts, {
     ...payload.gifts,
   }),
   [authActions.logoutSuccess]: () => initialState.family.gifts,
+  [familyActions.unsetGiftsUnpacked]: state => ({ ...state, giftsUnpacked: 0 }),
 });
 
 const isLoading = createReducer(initialState.family.isLoading, {
