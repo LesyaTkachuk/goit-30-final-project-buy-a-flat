@@ -1,11 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import {
-  familyActions,
-  familyOperations,
-  familySelectors,
-} from '../../redux/family';
-import { globalActions, globalSelectors } from '../../redux/global';
 import Calculator from '../Calculator';
 import styles from './ExpenseForm.module.css';
 
@@ -17,7 +10,6 @@ class ExpensesForm extends Component {
       amount: '',
     },
     balance: '',
-    disabledButton: false,
   };
 
   componentDidMount() {
@@ -34,14 +26,15 @@ class ExpensesForm extends Component {
     }
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.transactionAmount !== prevProps.transactionAmount) {
-      this.setState(prevState => ({
+  componentDidUpdate(prevProps, prevState) {
+    const { transactionAmount } = this.props;
+    if (transactionAmount !== prevProps.transactionAmount) {
+      this.setState({
         transaction: {
           ...prevState.transaction,
-          amount: this.props.transactionAmount,
+          amount: transactionAmount,
         },
-      }));
+      });
     }
   }
 
@@ -53,26 +46,27 @@ class ExpensesForm extends Component {
       this.setState(prevState => ({
         transaction: { ...prevState.transaction, [name]: value },
       }));
+    }
 
-      if (this.state.disabledButton) {
-        this.setState({ disabledButton: false });
-      }
+    if (this.props.isExpenseBtnActive) {
+      this.props.setExpenseBtnActive();
     }
   };
 
   handleSubmit = e => {
     e.preventDefault();
     this.props.setTransaction(this.state.transaction);
-    this.setState({ disabledButton: true });
+    this.props.setExpenseBtnActive();
   };
 
   render() {
-    const { balance, transaction, disabledButton } = this.state;
+    const { balance, transaction } = this.state;
 
     const {
       transactionCategories,
       setCalculatorOpen,
       isCalculatorOpen,
+      isExpenseBtnActive,
     } = this.props;
 
     return (
@@ -155,7 +149,8 @@ class ExpensesForm extends Component {
           </div>
         )}
         <button
-          disabled={disabledButton}
+          type="submit"
+          disabled={isExpenseBtnActive}
           className={styles.formButton}
           onClick={this.handleSubmit}
         >
@@ -166,17 +161,4 @@ class ExpensesForm extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  familyBalance: familySelectors.getFamilyBalance(state),
-  transactionCategories: familySelectors.getTransactionCategories(state),
-  transactionAmount: familySelectors.getTransactionAmount(state),
-  isCalculatorOpen: globalSelectors.getIsCalculatorOpen(state),
-});
-
-const mapDispatchToProps = {
-  getCategories: familyOperations.getTransactions,
-  setTransaction: familyActions.setTransaction,
-  setCalculatorOpen: globalActions.toggleCalculator,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ExpensesForm);
+export default ExpensesForm;

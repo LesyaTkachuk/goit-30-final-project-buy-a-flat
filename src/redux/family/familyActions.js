@@ -34,6 +34,10 @@ const getChartDataRequest = createAction('family/getChartDataRequest');
 const getChartDataSuccess = createAction('family/getChartDataSuccess');
 const getChartDataError = createAction('family/getChartDataError');
 
+const getMonthsListRequest = createAction('family/getMonthsListRequest');
+const getMonthsListSuccess = createAction('family/getMonthsListSuccess');
+const getMonthsListError = createAction('family/getMonthsListError');
+
 const getFinanceDataRequest = createAction('family/getFinanceDataRequest');
 const getFinanceDataSuccess = createAction('family/getFinanceDataSuccess');
 const getFinanceDataError = createAction('family/getFinanceDataError');
@@ -75,6 +79,9 @@ export default {
   getFinanceDataRequest,
   getFinanceDataSuccess,
   getFinanceDataError,
+  getMonthsListRequest,
+  getMonthsListSuccess,
+  getMonthsListError,
   updateGiftsRequest,
   updateGiftsSuccess,
   updateGiftsError,

@@ -25,6 +25,7 @@ const initialState = {
     },
 
     chart: null,
+    monthlyStat: null,
 
     financeStatistics: {
       savingsPercentage: 0,
@@ -116,8 +117,12 @@ const transaction = createReducer(initialState.family.transaction, {
 
 const chart = createReducer(initialState.family.chart, {
   [familyActions.getChartDataSuccess]: (_, { payload }) => payload.transes,
-  [authActions.logoutSuccess]: () =>
-    initialState.family.chart,
+  [authActions.logoutSuccess]: () => initialState.family.chart,
+});
+
+const monthlyStat = createReducer(initialState.family.monthlyStat, {
+  [familyActions.getMonthsListSuccess]: (_, { payload }) => payload.transes,
+  [authActions.logoutSuccess]: () => initialState.family.monthlyStat,
 });
 
 const finance = createReducer(initialState.family.financeStatistics, {
@@ -159,6 +164,10 @@ const isLoading = createReducer(initialState.family.isLoading, {
   [familyActions.getChartDataSuccess]: () => false,
   [familyActions.getChartDataError]: () => false,
 
+  [familyActions.getMonthsListRequest]: () => true,
+  [familyActions.getMonthsListSuccess]: () => false,
+  [familyActions.getMonthsListError]: () => false,
+
   [familyActions.getFinanceDataRequest]: () => true,
   [familyActions.getFinanceDataSuccess]: () => false,
   [familyActions.getFinanceDataError]: () => false,
@@ -175,6 +184,7 @@ const error = createReducer(initialState.family.error, {
   [familyActions.createTransactionError]: setError,
   [familyActions.updateGiftsError]: setError,
   [familyActions.getChartDataError]: setError,
+  [familyActions.getMonthsListError]: setError,
   [familyActions.getFinanceDataError]: setError,
   [familyActions.unsetError]: unsetError,
 });
@@ -184,6 +194,7 @@ export default combineReducers({
   transactionCategories,
   transaction,
   chart,
+  monthlyStat,
   finance,
   gifts,
   isLoading,

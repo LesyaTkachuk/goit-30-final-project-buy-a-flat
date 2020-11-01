@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { globalActions, globalSelectors } from '../../redux/global';
-import { familySelectors, familyOperations } from '../../redux/family';
 import styles from './MonthlyStatistics.module.css';
 
 const MONTHS = [
@@ -19,9 +16,12 @@ const MONTHS = [
   'Декабрь',
 ];
 
-class MonthlySavings extends Component {
+export default class MonthlySavings extends Component {
   componentDidMount() {
-    this.props.getChartData();
+    const { getMonthsList, getChartData } = this.props;
+
+    getMonthsList();
+    getChartData();
   }
 
   componentDidUpdate(prevProps) {
@@ -35,13 +35,13 @@ class MonthlySavings extends Component {
   }
 
   handleSelectChange = e => {
-    const { setChartMonth, setChartYear, data } = this.props;
-    setChartMonth(data[e.target.value].month);
-    setChartYear(data[e.target.value].year);
+    const { setChartMonth, setChartYear, monthlyStat } = this.props;
+    setChartMonth(monthlyStat[e.target.value]?.month || 1);
+    setChartYear(monthlyStat[e.target.value]?.year || 2020);
   };
 
   render() {
-    const { data } = this.props;
+    const { data, monthlyStat } = this.props;
     return (
       <div className={styles.container}>
         <label className={styles.monthSelectLabel} htmlFor="month">
@@ -53,7 +53,7 @@ class MonthlySavings extends Component {
           name="month"
           id="month"
         >
-          {data?.map((item, index) => (
+          {monthlyStat?.map((item, index) => (
             <option key={item._id} value={index}>
               {`${MONTHS[item.month - 1]} ${item.year}`}
             </option>
@@ -70,36 +70,27 @@ class MonthlySavings extends Component {
           <li className={styles.statParamItem}>
             <p className={styles.statParamName}>Расходы, &#8372;</p>
             <p className={styles.statParamValue}>
-              {!!data && data[0].incomeAmount}
+              {!!data && data[0].expenses}
             </p>
           </li>
           <li className={styles.statParamItem}>
             <p className={styles.statParamName}>Накоплено, &#8372;</p>
-            <p className={styles.statParamValue}>40000</p>
+            <p className={styles.statParamValue}>{!!data && data[0].savings}</p>
           </li>
           <li className={styles.statParamItem}>
             <p className={styles.statParamName}>План, &#8372;</p>
-            <p className={styles.statParamValue}>50000</p>
+            <p className={styles.statParamValue}>
+              {!!data && data[0].expectedSavings}
+            </p>
           </li>
           <li className={styles.statParamItem}>
             <p className={styles.statParamName}>План, %</p>
-            <p className={styles.statParamValue}>80</p>
+            <p className={styles.statParamValue}>
+              {!!data && data[0].percentAmount}
+            </p>
           </li>
         </ul>
       </div>
     );
   }
 }
-
-const mapStateToProps = state => ({
-  data: familySelectors.getChartData(state),
-  chartDate: globalSelectors.getChartDate(state),
-});
-
-const mapDispatchToProps = {
-  getChartData: familyOperations.getChartData,
-  setChartMonth: globalActions.chartMonth,
-  setChartYear: globalActions.chartYear,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(MonthlySavings);
