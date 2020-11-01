@@ -11,13 +11,13 @@ const PrognosisExpense = ({
   createTransaction,
   setExpenseBtnActive,
   isExpenseBtnActive,
+  monthBalance,
 }) => {
   const daysToMonthEnd = moment().daysInMonth() - new Date().getDate() + 1;
-  const alreadySpent = 0; //: TEMP
 
-  const income = info.totalSalary + info.passiveIncome;
+  // const income = info.totalSalary + info.passiveIncome;
   const available =
-    ((income - alreadySpent) * (100 - info.incomePercentageToSavings)) / 100;
+    (monthBalance * (100 - info.incomePercentageToSavings)) / 100;
   const dailySum = available / daysToMonthEnd;
 
   const dailyLimit = (dailySum - Number(transaction.amount)).toFixed(2);
@@ -52,6 +52,7 @@ const PrognosisExpense = ({
 };
 
 const mapStateToProps = state => ({
+  monthBalance: familySelectors.getMonthBalance(state),
   transaction: familySelectors.getTransaction(state),
   info: familySelectors.getFamilyInfo(state),
   isExpenseBtnActive: globalSelectors.getIsExpenseBtnActive(state),

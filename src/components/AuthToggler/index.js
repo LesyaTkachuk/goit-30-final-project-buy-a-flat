@@ -1,1 +1,1 @@
-export { default } from './AuthToggler';
+export { default } from './AuthTogglerContainer';

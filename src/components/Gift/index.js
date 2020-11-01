@@ -1,1 +1,1 @@
-export { default } from './Gift';
+export { default } from './GiftContainer';

@@ -1,6 +1,6 @@
 .buttons__wrapper {
-  width: 220px;
-  min-height: 140px;
+  width: 13.75rem;
+  min-height: 8.75rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -14,8 +14,8 @@
   background-color: var(--blue-button-color);
 }
 
-@media (min-width: 1240px) {
+@media (min-width: 77.5rem) {
   .buttons__wrapper {
-    margin: 0 auto 0 106px;
+    margin: 0 auto 0 6.625rem;
   }
 }

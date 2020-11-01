@@ -43,7 +43,7 @@ const getCurrentFamily = () => dispatch => {
 };
 
 const getTransactions = () => dispatch => {
-  familyActions.getCategoriesRequest();
+  // familyActions.getCategoriesRequest();
 
   axios
     .get('/api/transactions/categories')
@@ -54,6 +54,19 @@ const getTransactions = () => dispatch => {
       const code = error.message;
       const message = error.response?.data?.message;
       dispatch(familyActions.getCategoriesError({ code, message }));
+    });
+};
+
+const getMonthBalance = () => dispatch => {
+  axios
+    .get('/api/transactions/month/current')
+    .then(({ data }) =>
+      dispatch(familyActions.getMonthsBalanceSuccess(data.monthBalance)),
+    )
+    .catch(error => {
+      const code = error.message;
+      const message = error.response?.data?.message;
+      dispatch(familyActions.getMonthsBalanceError({ code, message }));
     });
 };
 
@@ -131,6 +144,7 @@ export default {
   addFamily,
   updateFamily,
   getCurrentFamily,
+  getMonthBalance,
   getTransactions,
   createTransaction,
   getChartData,

@@ -1,19 +1,19 @@
 .container {
-  max-width: 280px;
+  max-width: 17.5rem;
   margin: 0 auto;
-  min-height: calc(100vh - 60px);
+  min-height: calc(100vh - 3.75rem);
 }
 
-@media (min-width: 768px) {
+@media (min-width: 48rem) {
   .container {
-    max-width: 690px;
-    min-height: calc(100vh - 72px);
+    max-width: 43.125rem;
+    min-height: calc(100vh - 4.5rem);
   }
 }
 
-@media (min-width: 1240px) {
+@media (min-width: 77.5rem) {
   .container {
-    max-width: 1180px;
-    min-height: calc(100vh - 72px);
+    max-width: 73.75rem;
+    min-height: calc(100vh - 4.5rem);
   }
 }
