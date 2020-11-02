@@ -1,19 +1,47 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { authOperations, authSelectors } from '../../redux/auth';
-import { familyOperations, familySelectors } from '../../redux/family';
-import { globalSelectors } from '../../redux/global';
+import {
+  familyOperations,
+  familySelectors,
+  familyActions,
+} from '../../redux/family';
+import { globalActions, globalSelectors } from '../../redux/global';
 import styles from './PrognosisBuy.module.css';
+import { Link } from 'react-router-dom';
 
 class PrognosisBuy extends Component {
-  handleClick = () => {
+  componentDidMount() {}
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.family === this.props.family) {
+      return;
+    }
+
+    const { countMonthsLeft, countYearsLeft } = this.props;
+    countMonthsLeft(this.leftYearMonth());
+    countYearsLeft(this.leftYearMonth());
+  }
+
+  leftYearMonth = () => {
     const {
-      addFamily,
-      updateFamily,
-      familyId,
-      family,
-      getCurrentUser,
-    } = this.props;
+      totalSalary,
+      passiveIncome,
+      balance,
+      flatPrice,
+      incomePercentageToSavings,
+    } = this.props.family;
+    const allIncome = Number(totalSalary) + Number(passiveIncome);
+    const percent = (allIncome * Number(incomePercentageToSavings)) / 100;
+    const leftToAcc = Number(flatPrice) - Number(balance);
+    const monthsLeft = leftToAcc / percent;
+    const years = Math.floor(monthsLeft / 12);
+    const months = Math.ceil(monthsLeft % 12);
+    return { months, years };
+  };
+
+  handleClick = () => {
+    const { addFamily, updateFamily, familyId, family } = this.props;
 
     const {
       flatPrice,
@@ -39,7 +67,7 @@ class PrognosisBuy extends Component {
   };
 
   render() {
-    const { yearsLeft, monthsLeft } = this.props;
+    const { yearsLeft, monthsLeft, isPlanButtonActive } = this.props;
     return (
       <div className={styles.componentBlock}>
         <div className={styles.contentWrapper}>
@@ -53,13 +81,18 @@ class PrognosisBuy extends Component {
               <span className={styles.borderText}>Кол-во месяцев</span>
               <span className={styles.valueBox}>{monthsLeft}</span>
             </div>
-            <button
-              className={styles.button}
+            <Link
+              to="/expenses"
+              className={
+                !isPlanButtonActive
+                  ? `${styles.button} ${styles.disabled}`
+                  : `${styles.button}`
+              }
               type="button"
               onClick={this.handleClick}
             >
               Подходит
-            </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -72,12 +105,16 @@ const mapStateToProps = state => ({
   family: familySelectors.getFamilyInfo(state),
   monthsLeft: familySelectors.getMonthsLeft(state),
   yearsLeft: familySelectors.getYearsLeft(state),
+  isPlanButtonActive: globalSelectors.getIsPlanBtnActive(state),
 });
 
 const mapDispatchToProps = {
   addFamily: familyOperations.addFamily,
   updateFamily: familyOperations.updateFamily,
   getCurrentUser: authOperations.getCurrentUser,
+  countMonthsLeft: familyActions.countMonthsLeft,
+  countYearsLeft: familyActions.countYearsLeft,
+  togglePlanBtnActive: globalActions.togglePlanBtnActive,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PrognosisBuy);

@@ -1,4 +1,13 @@
 import React, { Component } from 'react';
+
+import { connect } from 'react-redux';
+import { authSelectors } from '../../redux/auth';
+import {
+  familyActions,
+  familyOperations,
+  familySelectors,
+} from '../../redux/family';
+import { globalActions, globalSelectors } from '../../redux/global';
 import styles from './PlanForm.module.css';
 
 class PlanForm extends Component {
@@ -17,13 +26,14 @@ class PlanForm extends Component {
   };
 
   componentDidMount() {
-    const { familyId, currentFamily } = this.props;
+    const { familyId, currentFamily, togglePlanBtnActive } = this.props;
     if (familyId) {
       this.setState({
         family: currentFamily,
-        disabledButton: true,
+
         disabledInput: true,
       });
+      togglePlanBtnActive();
     }
   }
 
@@ -39,6 +49,7 @@ class PlanForm extends Component {
   }
 
   handleInput = e => {
+    const { togglePlanBtnActive, isPlanButtonActive } = this.props;
     const name = e.target.name;
     const limit = e.target.dataset.limit;
     const value = e.target.value;
@@ -47,38 +58,20 @@ class PlanForm extends Component {
         family: { ...prevState.family, [name]: value },
       }));
     }
-    if (this.state.disabledButton) {
-      this.setState({ disabledButton: false });
+    if (isPlanButtonActive) {
+      togglePlanBtnActive();
     }
-  };
-
-  leftYearMonth = () => {
-    const {
-      totalSalary,
-      passiveIncome,
-      balance,
-      flatPrice,
-      incomePercentageToSavings,
-    } = this.state.family;
-    const allIncome = Number(totalSalary) + Number(passiveIncome);
-    const percent = (allIncome * Number(incomePercentageToSavings)) / 100;
-    const leftToAcc = Number(flatPrice) - Number(balance);
-    const monthsLeft = leftToAcc / percent;
-    const years = Math.floor(monthsLeft / 12);
-    const months = Math.ceil(monthsLeft % 12);
-    return { months, years };
   };
 
   handleFormSubmit = e => {
     e.preventDefault();
-    const { setFamily, countMonthsLeft, countYearsLeft } = this.props;
+    const { setFamily, togglePlanBtnActive } = this.props;
     setFamily(this.state.family);
-    this.setState({ disabledButton: true });
-    countMonthsLeft(this.leftYearMonth());
-    countYearsLeft(this.leftYearMonth());
+    togglePlanBtnActive();
   };
 
   render() {
+    const { isPlanButtonActive } = this.props;
     return (
       <form onSubmit={this.handleFormSubmit}>
         <div className={styles.planTable}>
@@ -160,7 +153,7 @@ class PlanForm extends Component {
         </div>
         <button
           type="submit"
-          disabled={this.state.disabledButton}
+          disabled={isPlanButtonActive}
           className={styles.planTable__button}
         >
           Раcсчитать
@@ -170,4 +163,16 @@ class PlanForm extends Component {
   }
 }
 
-export default PlanForm;
+const mapStateToProps = state => ({
+  familyId: authSelectors.getFamilyId(state),
+  currentFamily: familySelectors.getFamilyInfo(state),
+  isPlanButtonActive: globalSelectors.getIsPlanBtnActive(state),
+});
+
+const mapDispatchToProps = {
+  getFamily: familyOperations.getCurrentFamily,
+  setFamily: familyActions.updateOrSetFamily,
+  togglePlanBtnActive: globalActions.togglePlanBtnActive,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PlanForm);

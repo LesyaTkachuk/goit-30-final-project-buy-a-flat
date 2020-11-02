@@ -22,6 +22,7 @@ const initialState = {
     showNavPage: false,
     showExpensesPage: false,
     isExpenseBtnActive: false,
+    isPlanBtnActive: false,
   },
 };
 
@@ -73,6 +74,9 @@ const isExpenseBtnActive = createReducer(
     [globalActions.toggleExpenseBtnActive]: state => !state,
   },
 );
+const isPlanBtnActive = createReducer(initialState.global.isPlanBtnActive, {
+  [globalActions.togglePlanBtnActive]: state => !state,
+});
 
 const currentDate = createReducer(initialState.global.currentDate, {
   [globalActions.currentYear]: (state, { payload }) => ({
@@ -109,6 +113,7 @@ export default combineReducers({
   showExpensesPage,
   isCalculatorOpen,
   isExpenseBtnActive,
+  isPlanBtnActive,
   currentDate,
   chartDate,
 });
