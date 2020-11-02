@@ -10,6 +10,18 @@ import { globalActions, globalSelectors } from '../../redux/global';
 import styles from './PrognosisBuy.module.css';
 import { Link } from 'react-router-dom';
 
+const declOfNum = (number, titles) => {
+  const cases = [2, 0, 1, 1, 1, 2];
+  return titles[
+    number % 100 > 4 && number % 100 < 20
+      ? 2
+      : cases[number % 10 < 5 ? number % 10 : 5]
+  ];
+};
+
+const YEARS_TITLE = ['год', 'года', 'лет'];
+const MONTHS_TITLE = ['месяц', 'месяца', 'месяцев'];
+
 class PrognosisBuy extends Component {
   componentDidUpdate(prevProps) {
     if (prevProps.family === this.props.family) {
@@ -73,36 +85,44 @@ class PrognosisBuy extends Component {
           <div className={styles.innerWrapper}>
             <div className={styles.borderBox}>
               <span className={styles.borderText}>Кол-во лет</span>
-              <span className={styles.valueBox}>{yearsLeft}</span>
+              <span className={styles.valueBox}>{`${yearsLeft}  ${declOfNum(
+                yearsLeft,
+                YEARS_TITLE,
+              )}`}</span>
             </div>
             <div className={styles.borderBox}>
               <span className={styles.borderText}>Кол-во месяцев</span>
-              <span className={styles.valueBox}>{monthsLeft}</span>
+              <span className={styles.valueBox}>{`${monthsLeft} ${declOfNum(
+                monthsLeft,
+                MONTHS_TITLE,
+              )}`}</span>
             </div>
-            {familyId ? (
-              <Link
-                to="/expenses"
-                className={
-                  !isPlanButtonActive
-                    ? `${styles.button} ${styles.disabled}`
-                    : `${styles.button}`
-                }
-                onClick={this.handleClick}
-              >
-                Подходит
-              </Link>
-            ) : (
-              <button
-                className={
-                  !isPlanButtonActive
-                    ? `${styles.button} ${styles.disabled}`
-                    : `${styles.button}`
-                }
-                onClick={this.handleClick}
-              >
-                Подходит
-              </button>
-            )}
+            <div>
+              {familyId ? (
+                <Link
+                  to="/expenses"
+                  className={
+                    !isPlanButtonActive
+                      ? `${styles.button} ${styles.disabled}`
+                      : `${styles.button}`
+                  }
+                  onClick={this.handleClick}
+                >
+                  Подходит
+                </Link>
+              ) : (
+                <button
+                  className={
+                    !isPlanButtonActive
+                      ? `${styles.button} ${styles.disabled}`
+                      : `${styles.button}`
+                  }
+                  onClick={this.handleClick}
+                >
+                  Подходит
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </div>
