@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Media from 'react-media';
 import LogoutButton from '../LogoutButton';
-import avatar from '../../assets/icons/avatar.svg';
+import avatar from '../../assets/icons/avatar3.svg';
 import styles from './UserInfo.module.css';
 import { globalSelectors } from '../../redux/global';
 import { Link } from 'react-router-dom';
