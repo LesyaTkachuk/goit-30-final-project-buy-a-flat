@@ -8,6 +8,7 @@ function WithAuth(WrappedComponent) {
   }
   const mapStateToProps = state => ({
     isAuthenticated: authSelectors.isAuthenticated(state),
+    familyId: authSelectors.getFamilyId(state),
   });
 
   return connect(mapStateToProps)(withAuth);

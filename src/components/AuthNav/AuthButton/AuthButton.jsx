@@ -1,35 +1,24 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import globalActions from '../../../redux/global/globalActions';
+import React, { Component } from 'react';
 import styles from './AuthButton.module.css';
 
-function AuthButton({
-  label,
-  className: classForBtn,
-  showModal,
-  toggleShowLogin,
-  toggleAuthForm,
-}) {
-  function handleClick() {
+class AuthButton extends Component {
+  handleClick = () => {
+    const { showModal, toggleShowLogin, toggleAuthForm } = this.props;
     showModal();
     toggleShowLogin();
     toggleAuthForm();
+  };
+  render() {
+    const { label, className: classForBtn } = this.props;
+    return (
+      <button
+        className={`${styles.authButton} ${classForBtn}`}
+        onClick={this.handleClick}
+      >
+        {label}
+      </button>
+    );
   }
-  return (
-    <button
-      className={`${styles.authButton} ${classForBtn}`}
-      onClick={handleClick}
-    >
-      {label}
-    </button>
-  );
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  showModal: () => dispatch(globalActions.toggleModal()),
-  toggleShowLogin: () =>
-    dispatch(globalActions.toggleShowLogin(ownProps.label)),
-  toggleAuthForm: () => dispatch(globalActions.toggleAuthForm(ownProps.label)),
-});
-
-export default connect(null, mapDispatchToProps)(AuthButton);
+export default AuthButton;

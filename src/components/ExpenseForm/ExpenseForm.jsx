@@ -1,11 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import {
-  familyActions,
-  familyOperations,
-  familySelectors,
-} from '../../redux/family';
-import { globalActions, globalSelectors } from '../../redux/global';
 import Calculator from '../Calculator';
 import styles from './ExpenseForm.module.css';
 
@@ -16,32 +9,39 @@ class ExpensesForm extends Component {
       category: '',
       amount: '',
     },
-    balance: '',
-    disabledButton: false,
   };
 
   componentDidMount() {
-    const { familyBalance, transactionCategories } = this.props;
+    const {
+      monthBalance,
+      transactionCategories,
+      getCategories,
+      getMonthBalance,
+    } = this.props;
 
-    if (familyBalance) {
-      this.setState({
-        balance: familyBalance,
-      });
+    // if (familyBalance) {
+    //   this.setState({
+    //     balance: familyBalance,
+    //   });
+    // }
+    if (!monthBalance) {
+      getMonthBalance();
     }
 
     if (transactionCategories.length === 0) {
-      this.props.getCategories();
+      getCategories();
     }
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.transactionAmount !== prevProps.transactionAmount) {
-      this.setState(prevState => ({
+  componentDidUpdate(prevProps, prevState) {
+    const { transactionAmount } = this.props;
+    if (transactionAmount !== prevProps.transactionAmount) {
+      this.setState({
         transaction: {
           ...prevState.transaction,
-          amount: this.props.transactionAmount,
+          amount: transactionAmount,
         },
-      }));
+      });
     }
   }
 
@@ -53,41 +53,43 @@ class ExpensesForm extends Component {
       this.setState(prevState => ({
         transaction: { ...prevState.transaction, [name]: value },
       }));
+    }
 
-      if (this.state.disabledButton) {
-        this.setState({ disabledButton: false });
-      }
+    if (this.props.isExpenseBtnActive) {
+      this.props.setExpenseBtnActive();
     }
   };
 
   handleSubmit = e => {
     e.preventDefault();
     this.props.setTransaction(this.state.transaction);
-    this.setState({ disabledButton: true });
+    this.props.setExpenseBtnActive();
   };
 
   render() {
-    const { balance, transaction, disabledButton } = this.state;
+    const { transaction } = this.state;
 
     const {
       transactionCategories,
       setCalculatorOpen,
       isCalculatorOpen,
+      isExpenseBtnActive,
+      monthBalance,
     } = this.props;
 
     return (
       <div className={styles.formContainer}>
         <form className={styles.form}>
           <div className={styles.formItem}>
-            <label className={styles.formLabel} htmlFor="balance">
+            <label className={styles.formLabel} htmlFor="monthBalance">
               Сумма на счету
             </label>
             <input
               className={styles.formInput}
               type="number"
-              name="balance"
-              id="balance"
-              value={balance}
+              name="monthBalance"
+              id="monthBalance"
+              value={monthBalance}
               readOnly
             />
             {/* <label className={styles.formLabel} htmlFor="account">
@@ -155,7 +157,8 @@ class ExpensesForm extends Component {
           </div>
         )}
         <button
-          disabled={disabledButton}
+          type="submit"
+          disabled={isExpenseBtnActive}
           className={styles.formButton}
           onClick={this.handleSubmit}
         >
@@ -166,17 +169,4 @@ class ExpensesForm extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  familyBalance: familySelectors.getFamilyBalance(state),
-  transactionCategories: familySelectors.getTransactionCategories(state),
-  transactionAmount: familySelectors.getTransactionAmount(state),
-  isCalculatorOpen: globalSelectors.getIsCalculatorOpen(state),
-});
-
-const mapDispatchToProps = {
-  getCategories: familyOperations.getTransactions,
-  setTransaction: familyActions.setTransaction,
-  setCalculatorOpen: globalActions.toggleCalculator,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ExpensesForm);
+export default ExpensesForm;

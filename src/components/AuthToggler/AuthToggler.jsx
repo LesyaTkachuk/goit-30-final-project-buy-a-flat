@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { globalActions, globalSelectors } from '../../redux/global';
 import styles from './AuthToggler.module.css';
 
 class AuthToggler extends Component {
@@ -19,11 +17,4 @@ class AuthToggler extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  showLogin: globalSelectors.getShowLoginForm(state),
-});
-
-const mapDispatchToProps = {
-  toggleShowLogin: globalActions.toggleShowLogin,
-};
-export default connect(mapStateToProps, mapDispatchToProps)(AuthToggler);
+export default AuthToggler;

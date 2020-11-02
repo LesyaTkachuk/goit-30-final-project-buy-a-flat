@@ -32,6 +32,11 @@
   color: inherit;
 }
 
+.btn:disabled {
+  background: rgba(170, 171, 182, 0.54);
+  color: rgba(255, 255, 255, 0.7);
+}
+
 @media (min-width: 768px) {
   .wrp {
     display: flex;

@@ -15,10 +15,12 @@ const getGiftsUnpacked = state => state.family.gifts.giftsUnpacked;
 const getMonthsLeft = state => state.family.monthsLeft;
 const getYearsLeft = state => state.family.yearsLeft;
 const getFinance = state => state.family.finance;
+const getMonthBalance = state => state.family.monthBalance;
 
 export default {
   getFamilyInfo,
   getFamilyBalance,
+  getMonthBalance,
   getTransactionCategories,
   getTransaction,
   getTransactionAmount,

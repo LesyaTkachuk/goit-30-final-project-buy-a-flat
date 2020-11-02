@@ -1,18 +1,18 @@
 .headerContentWrapper {
-  width: 280px;
+  width: 17.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 48rem) {
   .headerContentWrapper {
     width: 690px;
   }
 }
 
-@media (min-width: 1240px) {
+@media (min-width: 77.5rem) {
   .headerContentWrapper {
-    width: 1180px;
+    width: 73.75rem;
   }
 }

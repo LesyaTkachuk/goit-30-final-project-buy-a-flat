@@ -3,9 +3,6 @@ import styles from './GiftNotification.module.css';
 
 import confetti1 from '../../assets/images/confetti-1.svg';
 import confetti2 from '../../assets/images/confetti-2.svg';
-import { connect } from 'react-redux';
-import { globalActions } from '../../redux/global';
-import { familyActions } from '../../redux/family';
 
 class GiftNotification extends Component {
   handleClick = () => {
@@ -46,9 +43,4 @@ class GiftNotification extends Component {
   }
 }
 
-const mapDispatchToProps = {
-  toggleHasGifts: globalActions.toggleHasGifts,
-  unsetGiftsUnpacked: familyActions.unsetGiftsUnpacked,
-};
-
-export default connect(null, mapDispatchToProps)(GiftNotification);
+export default GiftNotification;

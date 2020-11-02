@@ -1,26 +1,26 @@
 .container {
   position: relative;
-  max-width: 400px;
-  padding: 42px 34px;
+  max-width: 25rem;
+  padding: 2.625rem 2.125rem;
   background: #ffffff;
   box-shadow: 0px 24px 38px rgba(0, 0, 0, 0.14),
     0px 9px 46px rgba(0, 0, 0, 0.12), 0px 11px 15px rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
+  border-radius: 0.5rem;
   text-align: center;
 }
 
 .title {
-  margin-bottom: 30px;
+  margin-bottom: 1.875rem;
   font-weight: 800;
-  font-size: 20px;
+  font-size: 1.25rem;
   line-height: 1;
   color: var(--chart-blue);
 }
 
 .text {
-  margin: 20px 0 0;
-  font-size: 16px;
-  line-height: 19px;
+  margin: 1.25rem 0 0;
+  font-size: 1rem;
+  line-height: 1.1875rem;
   color: rgba(24, 25, 31, 0.87);
 }
 
@@ -29,7 +29,7 @@
   top: 0;
   right: 0;
   width: 34px;
-  padding: 10px 11px;
+  padding: 0.625rem 0.6875rem;
   background: none;
 }
 
@@ -45,8 +45,8 @@
   right: 0;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 48rem) {
   .container {
-    padding: 42px 45px;
+    padding: 2.625rem 2.8125rem;
   }
 }

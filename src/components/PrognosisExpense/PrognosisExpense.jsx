@@ -3,14 +3,21 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import { familyOperations, familySelectors } from '../../redux/family';
 import styles from './PrognosisExpense.module.css';
+import { globalActions, globalSelectors } from '../../redux/global';
 
-const PrognosisExpense = ({ transaction, info, createTransaction }) => {
+const PrognosisExpense = ({
+  transaction,
+  info,
+  createTransaction,
+  setExpenseBtnActive,
+  isExpenseBtnActive,
+  monthBalance,
+}) => {
   const daysToMonthEnd = moment().daysInMonth() - new Date().getDate() + 1;
-  const alreadySpent = 0; //: TEMP
 
-  const income = info.totalSalary + info.passiveIncome;
+  // const income = info.totalSalary + info.passiveIncome;
   const available =
-    ((income - alreadySpent) * (100 - info.incomePercentageToSavings)) / 100;
+    (monthBalance * (100 - info.incomePercentageToSavings)) / 100;
   const dailySum = available / daysToMonthEnd;
 
   const dailyLimit = (dailySum - Number(transaction.amount)).toFixed(2);
@@ -18,6 +25,7 @@ const PrognosisExpense = ({ transaction, info, createTransaction }) => {
 
   const handleClick = () => {
     createTransaction(transaction);
+    setExpenseBtnActive();
   };
   return (
     <div className={styles.wrp}>
@@ -31,7 +39,12 @@ const PrognosisExpense = ({ transaction, info, createTransaction }) => {
         <p className={styles.small}>Отклонение от плановой суммы накопления</p>
       </div>
 
-      <button className={styles.btn} onClick={handleClick} type="button">
+      <button
+        disabled={!isExpenseBtnActive}
+        className={styles.btn}
+        onClick={handleClick}
+        type="button"
+      >
         Готово
       </button>
     </div>
@@ -39,14 +52,15 @@ const PrognosisExpense = ({ transaction, info, createTransaction }) => {
 };
 
 const mapStateToProps = state => ({
+  monthBalance: familySelectors.getMonthBalance(state),
   transaction: familySelectors.getTransaction(state),
   info: familySelectors.getFamilyInfo(state),
+  isExpenseBtnActive: globalSelectors.getIsExpenseBtnActive(state),
 });
 
 const mapDispatchToProps = {
   createTransaction: familyOperations.createTransaction,
+  setExpenseBtnActive: globalActions.toggleExpenseBtnActive,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PrognosisExpense);
-
-

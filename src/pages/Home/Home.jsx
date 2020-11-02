@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-expressions */
 import React, { Component } from 'react';
+import queryString from 'query-string';
 import Media from 'react-media';
 import AuthSocialsNav from '../../components/AuthSocialsNav';
 import AuthToggler from '../../components/AuthToggler';
@@ -8,6 +9,20 @@ import RegistrationForm from '../../components/Login_Registration/RegistrationFo
 import styles from './Home.module.css';
 
 class Home extends Component {
+  componentDidMount() {
+    const getToken = props => queryString.parse(props.location.search).token;
+
+    const currentToken = getToken(this.props);
+    console.log(currentToken);
+
+    if (currentToken) {
+      const { setToken, getCurrentUser } = this.props;
+      console.log(currentToken);
+      setToken(currentToken);
+      getCurrentUser();
+    }
+  }
+
   render() {
     return (
       <div className={styles.wrapper}>

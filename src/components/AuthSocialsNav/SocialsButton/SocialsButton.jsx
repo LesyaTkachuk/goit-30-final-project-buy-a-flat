@@ -1,12 +1,27 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styles from './SocialsButton.module.css';
 
-function Button({ label, className: classForBtn, image }) {
-  return (
-    <div className={`${styles.buttonAuth} ${classForBtn}`}>
-      <img className={styles.buttonAuthIcon} src={image} alt={label} />
-      <p className={styles.buttonAuthTitle}>{label}</p>
-    </div>
-  );
+class SocialsButton extends Component {
+  handleClick = () => {
+    const { googleAuth, label } = this.props;
+    label === 'Sign up with Google' && googleAuth();
+  };
+
+  render() {
+    const { label, className: classForBtn } = this.props;
+    return (
+      <a
+        href={
+          label === 'Sign up with Google'
+            ? 'https://flat-finance.herokuapp.com/auth/google'
+            : '/'
+        }
+        className={`${styles.buttonAuth} ${classForBtn}`}
+      >
+        {label}
+      </a>
+    );
+  }
 }
-export default Button;
+
+export default SocialsButton;

@@ -1,1 +1,1 @@
-export {default} from "./HeaderContent.jsx";
+export { default } from './HeaderContentContainer';

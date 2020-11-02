@@ -22,6 +22,8 @@ const googleAuthError = createAction('auth/googleAuthError');
 
 const clearToken = createAction('auth/clearToken');
 
+const setToken = createAction('auth/setToken');
+
 const unsetError = createAction('auth/unsetError');
 
 export default {
@@ -42,4 +44,5 @@ export default {
   googleAuthSuccess,
   googleAuthError,
   unsetError,
+  setToken,
 };

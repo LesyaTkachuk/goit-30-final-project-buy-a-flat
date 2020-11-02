@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import styles from './Expenses.module.css';
 import ExpenseForm from '../../components/ExpenseForm';
 import PrognosisExpense from '../../components/PrognosisExpense';
-import { globalActions } from '../../redux/global';
 
 class ExpensesPage extends Component {
   componentDidMount() {
@@ -23,8 +21,4 @@ class ExpensesPage extends Component {
   }
 }
 
-const mapDispatchToProps = {
-  toggleShowExpensesPage: globalActions.toggleShowExpensesPage,
-};
-
-export default connect(null, mapDispatchToProps)(ExpensesPage);
+export default ExpensesPage;
