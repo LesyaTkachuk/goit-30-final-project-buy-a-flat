@@ -7,11 +7,15 @@
   margin: 0 auto;
 }
 .google_btn {
-  background: rgba(255, 108, 0, 0.1);
+  background: url('../../assets/icons/google.svg') no-repeat 20px 16px,
+    rgba(255, 108, 0, 0.1);
+  /* background: rgba(255, 108, 0, 0.1); */
 }
 
 .facebook_btn {
-  background-color: var(--blue-button-color);
+  background: url('../../assets/icons/facebook.svg') no-repeat 20px 16px,
+    var(--blue-button-color);
+  /* background: var(--blue-button-color); */
 }
 
 @media (min-width: 77.5rem) {
