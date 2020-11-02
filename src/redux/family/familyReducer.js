@@ -85,15 +85,19 @@ const info = createReducer(initialState.family.info, {
 
 const monthsLeft = createReducer(initialState.family.monthsLeft, {
   [familyActions.countMonthsLeft]: (state, { payload }) => payload.months,
+  [authActions.logoutSuccess]: () => initialState.family.monthsLeft,
 });
 
 const yearsLeft = createReducer(initialState.family.yearsLeft, {
   [familyActions.countYearsLeft]: (state, { payload }) => payload.years,
+  [authActions.logoutSuccess]: () => initialState.family.yearsLeft,
 });
 
 const monthBalance = createReducer(initialState.family.monthBalance, {
   [familyActions.getMonthsBalanceSuccess]: (_, { payload }) => payload,
-  [familyActions.createTransactionSuccess]: (_, { payload }) =>payload.monthBalance,
+  [familyActions.createTransactionSuccess]: (_, { payload }) =>
+    payload.monthBalance,
+  [authActions.logoutSuccess]: () => initialState.family.monthBalance,
 });
 
 const transactionCategories = createReducer(

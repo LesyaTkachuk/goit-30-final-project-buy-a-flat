@@ -13,11 +13,9 @@ class Home extends Component {
     const getToken = props => queryString.parse(props.location.search).token;
 
     const currentToken = getToken(this.props);
-    console.log(currentToken);
 
     if (currentToken) {
       const { setToken, getCurrentUser } = this.props;
-      console.log(currentToken);
       setToken(currentToken);
       getCurrentUser();
     }

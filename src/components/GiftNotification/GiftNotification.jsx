@@ -36,8 +36,10 @@ class GiftNotification extends Component {
         </button>
 
         <h2 className={styles.title}>Ура! Поздравляем!</h2>
-        <p className={styles.text}> Так держать!!!</p>
-        <p className={styles.text}>Вы почти у цели</p>
+        <p className={styles.text}> Вы еще ближе к цели!</p>
+        <p className={styles.text}>
+          Порадуйте друг друга приятными подарками!{' '}
+        </p>
       </div>
     );
   }

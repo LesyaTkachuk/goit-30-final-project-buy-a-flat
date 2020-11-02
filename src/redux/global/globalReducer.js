@@ -1,4 +1,5 @@
 import { createReducer, combineReducers } from '@reduxjs/toolkit';
+import { authActions } from '../auth';
 import globalActions from './globalActions';
 
 const initialState = {
@@ -25,19 +26,19 @@ const initialState = {
 };
 
 const isModalOpen = createReducer(initialState.global.isModalOpen, {
-  [globalActions.toggleModal]: (state, { payload }) => !state,
+  [globalActions.toggleModal]: state => !state,
 });
 
 const hasGifts = createReducer(initialState.global.hasGifts, {
-  [globalActions.toggleHasGifts]: (state, { payload }) => !state,
+  [globalActions.toggleHasGifts]: state => !state,
 });
 
 const isLogoutOpen = createReducer(initialState.global.isLogoutOpen, {
-  [globalActions.toggleLogout]: (state, { payload }) => !state,
+  [globalActions.toggleLogout]: state => !state,
 });
 
 const isVerifyNotifOpen = createReducer(initialState.global.isVerifyNotifOpen, {
-  [globalActions.toggleVerifyNotif]: (state, { payload }) => !state,
+  [globalActions.toggleVerifyNotif]: state => !state,
 });
 
 const showLogin = createReducer(initialState.global.showLogin, {
@@ -51,7 +52,7 @@ const showLogin = createReducer(initialState.global.showLogin, {
 });
 
 const isAuthFormOpen = createReducer(initialState.global.isAuthFormOpen, {
-  [globalActions.toggleAuthForm]: (state, { payload }) => !state,
+  [globalActions.toggleAuthForm]: state => !state,
 });
 
 const showNavPage = createReducer(initialState.global.showNavPage, {
@@ -82,6 +83,7 @@ const currentDate = createReducer(initialState.global.currentDate, {
     ...state,
     currentMonth: payload,
   }),
+  [authActions.logoutSuccess]: () => initialState.global.currentDate,
 });
 
 const chartDate = createReducer(initialState.global.chartDate, {
@@ -93,6 +95,7 @@ const chartDate = createReducer(initialState.global.chartDate, {
     ...state,
     month: payload,
   }),
+  [authActions.logoutSuccess]: () => initialState.global.chartDate,
 });
 
 export default combineReducers({
