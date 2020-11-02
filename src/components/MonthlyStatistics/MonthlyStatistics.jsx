@@ -31,6 +31,7 @@ export default class MonthlySavings extends Component {
       prevProps.chartDate.year !== chartDate.year
     ) {
       getChartData();
+      console.log(chartDate.month, chartDate.year);
     }
   }
 
