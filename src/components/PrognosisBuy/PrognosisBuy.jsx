@@ -11,8 +11,6 @@ import styles from './PrognosisBuy.module.css';
 import { Link } from 'react-router-dom';
 
 class PrognosisBuy extends Component {
-  componentDidMount() {}
-
   componentDidUpdate(prevProps) {
     if (prevProps.family === this.props.family) {
       return;
@@ -67,7 +65,7 @@ class PrognosisBuy extends Component {
   };
 
   render() {
-    const { yearsLeft, monthsLeft, isPlanButtonActive } = this.props;
+    const { yearsLeft, monthsLeft, isPlanButtonActive, familyId } = this.props;
     return (
       <div className={styles.componentBlock}>
         <div className={styles.contentWrapper}>
@@ -81,18 +79,30 @@ class PrognosisBuy extends Component {
               <span className={styles.borderText}>Кол-во месяцев</span>
               <span className={styles.valueBox}>{monthsLeft}</span>
             </div>
-            <Link
-              to="/expenses"
-              className={
-                !isPlanButtonActive
-                  ? `${styles.button} ${styles.disabled}`
-                  : `${styles.button}`
-              }
-              type="button"
-              onClick={this.handleClick}
-            >
-              Подходит
-            </Link>
+            {familyId ? (
+              <Link
+                to="/expenses"
+                className={
+                  !isPlanButtonActive
+                    ? `${styles.button} ${styles.disabled}`
+                    : `${styles.button}`
+                }
+                onClick={this.handleClick}
+              >
+                Подходит
+              </Link>
+            ) : (
+              <button
+                className={
+                  !isPlanButtonActive
+                    ? `${styles.button} ${styles.disabled}`
+                    : `${styles.button}`
+                }
+                onClick={this.handleClick}
+              >
+                Подходит
+              </button>
+            )}
           </div>
         </div>
       </div>

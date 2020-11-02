@@ -106,7 +106,7 @@ input:focus-within {
   color: rgba(255, 255, 255, 0.7);
 }
 
-@media screen and (min-width: 768px) and (max-width: 1023px) {
+@media screen and (min-width: 768px) and (max-width: 1239px) {
   .planTable {
     display: flex;
     flex-direction: row;

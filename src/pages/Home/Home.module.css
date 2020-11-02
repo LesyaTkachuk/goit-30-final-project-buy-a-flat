@@ -23,7 +23,7 @@
   color: var(--orange-color);
 }
 
-@media (min-width: 48rem) {
+@media (min-width: 768px) {
   .wrapper {
     background: url('../../assets/images/first-page-tablet.svg') no-repeat
       center bottom;
@@ -39,7 +39,7 @@
   }
 }
 
-@media (min-width: 77.5rem) {
+@media (min-width: 1240px) {
   .wrapper {
     background: url('../../assets/images/first-page-desctop.svg') no-repeat
       right bottom;

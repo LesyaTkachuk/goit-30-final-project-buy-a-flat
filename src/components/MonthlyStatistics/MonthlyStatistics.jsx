@@ -31,7 +31,6 @@ export default class MonthlySavings extends Component {
       prevProps.chartDate.year !== chartDate.year
     ) {
       getChartData();
-      console.log(chartDate.month, chartDate.year);
     }
   }
 
@@ -65,29 +64,31 @@ export default class MonthlySavings extends Component {
           <li className={styles.statParamItem}>
             <p className={styles.statParamName}>Доходы, &#8372;</p>
             <p className={styles.statParamValue}>
-              {!!data && data[0].incomeAmount}
+              {!!data && data[0]?.incomeAmount}
             </p>
           </li>
           <li className={styles.statParamItem}>
             <p className={styles.statParamName}>Расходы, &#8372;</p>
             <p className={styles.statParamValue}>
-              {!!data && data[0].expenses}
+              {!!data && data[0]?.expenses}
             </p>
           </li>
           <li className={styles.statParamItem}>
             <p className={styles.statParamName}>Накоплено, &#8372;</p>
-            <p className={styles.statParamValue}>{!!data && data[0].savings}</p>
+            <p className={styles.statParamValue}>
+              {!!data && data[0]?.savings}
+            </p>
           </li>
           <li className={styles.statParamItem}>
             <p className={styles.statParamName}>План, &#8372;</p>
             <p className={styles.statParamValue}>
-              {!!data && data[0].expectedSavings}
+              {!!data && data[0]?.expectedSavings}
             </p>
           </li>
           <li className={styles.statParamItem}>
             <p className={styles.statParamName}>План, %</p>
             <p className={styles.statParamValue}>
-              {!!data && data[0].percentAmount}
+              {!!data && data[0]?.percentAmount}
             </p>
           </li>
         </ul>

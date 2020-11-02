@@ -4,14 +4,14 @@
   min-height: calc(100vh - 3.75rem);
 }
 
-@media (min-width: 48rem) {
+@media (min-width: 768px) {
   .container {
     max-width: 43.125rem;
     min-height: calc(100vh - 4.5rem);
   }
 }
 
-@media (min-width: 77.5rem) {
+@media (min-width: 1240px) {
   .container {
     max-width: 73.75rem;
     min-height: calc(100vh - 4.5rem);

@@ -9,7 +9,7 @@ const initialState = {
       currentYear: 0,
     },
     chartDate: {
-      month: new Date().getMonth(),
+      month: new Date().getMonth() + 1,
       year: new Date().getFullYear(),
     },
     isModalOpen: false,

@@ -65,7 +65,7 @@
   color: rgba(255, 255, 255, 0.7);
 }
 
-@media (min-width: 48rem) {
+@media (min-width: 768px) {
   .componentBlock {
     width: 43.125rem;
     padding: 0 1.5rem;
@@ -92,7 +92,7 @@
   }
 }
 
-@media (min-width: 77.5rem) {
+@media (min-width: 1240px) {
   .componentBlock {
     width: 48.125rem;
     margin: 0 auto;

@@ -59,7 +59,7 @@
   margin: 0 auto;
 }
 
-@media (min-width: 48rem) {
+@media (min-width: 768px) {
   .container {
     display: flex;
     justify-content: space-between;
@@ -71,7 +71,7 @@
   }
 }
 
-@media (min-width: 77.5rem) {
+@media (min-width: 1240px) {
   .container {
     padding: 3.3125rem;
   }

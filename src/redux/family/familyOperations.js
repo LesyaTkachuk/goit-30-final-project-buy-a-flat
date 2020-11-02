@@ -101,7 +101,7 @@ const getChartData = () => (dispatch, getState) => {
 };
 
 const getMonthsList = () => dispatch => {
-  const month = new Date().getMonth();
+  const month = new Date().getMonth() + 1;
   const year = new Date().getFullYear();
 
   dispatch(familyActions.getMonthsListRequest());
