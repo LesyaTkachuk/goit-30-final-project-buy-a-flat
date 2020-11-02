@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+<<<<<<< HEAD
 import { connect } from 'react-redux';
 import { authSelectors } from '../../redux/auth';
 import {
@@ -7,6 +8,8 @@ import {
   familySelectors,
 } from '../../redux/family';
 import { globalActions, globalSelectors } from '../../redux/global';
+=======
+>>>>>>> dev
 import styles from './PlanForm.module.css';
 
 class PlanForm extends Component {
@@ -167,6 +170,7 @@ class PlanForm extends Component {
   }
 }
 
+<<<<<<< HEAD
 const mapStateToProps = state => ({
   familyId: authSelectors.getFamilyId(state),
   currentFamily: familySelectors.getFamilyInfo(state),
@@ -180,3 +184,6 @@ const mapDispatchToProps = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlanForm);
+=======
+export default PlanForm;
+>>>>>>> dev

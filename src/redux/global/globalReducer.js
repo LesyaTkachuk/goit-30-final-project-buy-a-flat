@@ -8,7 +8,7 @@ const initialState = {
       currentYear: 0,
     },
     chartDate: {
-      month: new Date().getMonth() + 1,
+      month: new Date().getMonth(),
       year: new Date().getFullYear(),
     },
     isModalOpen: false,
