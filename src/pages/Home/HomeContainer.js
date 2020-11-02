@@ -12,4 +12,4 @@ const mapDispatchToProps = {
   getCurrentUser: authOperations.getCurrentUser,
 };
 
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

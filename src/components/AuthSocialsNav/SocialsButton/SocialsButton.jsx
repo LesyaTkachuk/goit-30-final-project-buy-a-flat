@@ -8,14 +8,17 @@ class SocialsButton extends Component {
   };
 
   render() {
-    const { label, className: classForBtn, image } = this.props;
+    const { label, className: classForBtn } = this.props;
     return (
       <a
-        href="https://flat-finance.herokuapp.com/auth/google"
-        classForBtn={`${styles.buttonAuth} ${classForBtn}`}
+        href={
+          label === 'Sign up with Google'
+            ? 'https://flat-finance.herokuapp.com/auth/google'
+            : '/'
+        }
+        className={`${styles.buttonAuth} ${classForBtn}`}
       >
-        <img className={styles.buttonAuthIcon} src={image} alt={label} />
-        <p className={styles.buttonAuthTitle}>{label}</p>
+        {label}
       </a>
     );
   }
