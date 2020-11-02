@@ -57,6 +57,12 @@
   border: none;
   margin-bottom: 2.125rem;
   width: 12.5rem;
+  text-align: center;
+}
+
+.disabled {
+  background: rgba(0, 0, 0, 0.1);
+  color: rgba(255, 255, 255, 0.7);
 }
 
 @media (min-width: 48rem) {

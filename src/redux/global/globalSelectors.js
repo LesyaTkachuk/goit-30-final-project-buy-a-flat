@@ -17,6 +17,9 @@ const getShowExpensesPage = state => state.global.showExpensesPage;
 const getIsCalculatorOpen = state => state.global.isCalculatorOpen;
 
 const getIsExpenseBtnActive = state => state.global.isExpenseBtnActive;
+
+const getIsPlanBtnActive = state => state.global.isPlanBtnActive;
+
 const getChartDate = state => state.global.chartDate;
 
 export default {
@@ -30,5 +33,6 @@ export default {
   getShowLoginForm,
   getIsCalculatorOpen,
   getIsExpenseBtnActive,
+  getIsPlanBtnActive,
   getChartDate,
 };
