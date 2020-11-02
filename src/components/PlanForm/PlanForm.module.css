@@ -35,18 +35,18 @@
 }
 
 label {
-  font-family: Roboto;
+  font-family: var(--main-font-stack);
   font-style: normal;
   font-weight: normal;
-  font-size: 12px;
-  line-height: 14px;
+  font-size: 0.75rem;
+  line-height: 0.875rem;
 }
 
 input {
   width: 100%;
   border: none;
   background: transparent;
-  font-family: Roboto;
+  font-family: var(--main-font-stack);
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -58,7 +58,7 @@ input {
 
 .planTable__text {
   width: 90%;
-  font-family: Roboto;
+  font-family: var(--main-font-stack);
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
@@ -76,13 +76,13 @@ input:focus-within {
 }
 
 .planTable__item:hover {
-  color: #2196f3;
-  border-bottom: solid 1px #2196f3;
+  color: var(--blue-planform-color);
+  border-bottom: solid 1px var(--blue-planform-color);
 }
 
 .planTable__item:focus-within {
-  color: #2196f3;
-  border-bottom: solid 1px #2196f3;
+  color: var(--blue-planform-color);
+  border-bottom: solid 1px var(--blue-planform-color);
 }
 
 .planTable__button {
@@ -90,9 +90,9 @@ input:focus-within {
   margin: 0 auto;
   width: 200px;
   height: 56px;
-  background: #ff6c00;
+  background: var(--orange-color);
   border-radius: 8px;
-  font-family: Roboto;
+  font-family: var(--main-font-stack);
   font-style: normal;
   font-weight: bold;
   font-size: 14px;
