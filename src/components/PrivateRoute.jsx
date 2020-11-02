@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import Planning from '../pages/Planning';
 import withAuth from './hoc/withAuth';
 
 function PrivateRoute({
@@ -24,7 +25,7 @@ function PrivateRoute({
   //         familyId ? (
   //           <Component {...props} />
   //         ) : (
-  //           <Redirect to="/planning" />
+  //           <Planning {...props} />
   //         )
   //       ) : (
   //         <Redirect to="/" />
