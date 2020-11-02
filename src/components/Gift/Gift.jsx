@@ -38,15 +38,10 @@ class Gift extends Component {
             </p>
           ) : (
             <p className={styles.text}>
-              Дождитесь окончания месяца чтобы узнать сколько квадратных метров
-              вы накопили на вашу будущую квартиру.
+              В конце месяца вы узнаете сколько кв.м. вы накопили на вашу
+              будущую квартиру.
             </p>
           )}
-          {/* 
-          <div className={styles.sumContainer}>
-            <p className={styles.sum}>14000</p>
-            <img src={localCurrency} alt="local currency" width="20" />
-          </div> */}
         </div>
         {hasGifts ? (
           <div

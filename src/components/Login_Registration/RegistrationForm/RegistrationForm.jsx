@@ -17,8 +17,6 @@ class RegistrationForm extends Component {
   validate = values => {
     const errors = {};
 
-    console.log('validate');
-
     if (!values.name) {
       errors.name = 'Не указано имя пользователя';
     }
@@ -55,7 +53,6 @@ class RegistrationForm extends Component {
   };
 
   render() {
-
     return (
       <div className={styles.modal__Registration}>
         <Formik
@@ -83,12 +80,11 @@ class RegistrationForm extends Component {
                   name="name"
                   placeholder="Введите ваше имя"
                   className={
-                    (errors.name &&
-                      touched.name) ?
-                      (styles.loginRegist__input_error +
+                    errors.name && touched.name
+                      ? styles.loginRegist__input_error +
                         ' ' +
-                        styles.loginRegist__input) :
-                    styles.loginRegist__input
+                        styles.loginRegist__input
+                      : styles.loginRegist__input
                   }
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -108,12 +104,11 @@ class RegistrationForm extends Component {
                   name="email"
                   placeholder="Your@e-mail.com"
                   className={
-                    (errors.email &&
-                      touched.email) ?
-                      (styles.loginRegist__input_error +
+                    errors.email && touched.email
+                      ? styles.loginRegist__input_error +
                         ' ' +
-                        styles.loginRegist__input) :
-                    styles.loginRegist__input
+                        styles.loginRegist__input
+                      : styles.loginRegist__input
                   }
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -132,12 +127,11 @@ class RegistrationForm extends Component {
                   name="password"
                   placeholder="Введите пароль"
                   className={
-                    (errors.password &&
-                      touched.password) ?
-                      (styles.loginRegist__input_error +
+                    errors.password && touched.password
+                      ? styles.loginRegist__input_error +
                         ' ' +
-                        styles.loginRegist__input) :
-                    styles.loginRegist__input
+                        styles.loginRegist__input
+                      : styles.loginRegist__input
                   }
                   onChange={handleChange}
                   onBlur={handleBlur}
