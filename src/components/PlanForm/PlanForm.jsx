@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-<<<<<<< HEAD
+
 import { connect } from 'react-redux';
 import { authSelectors } from '../../redux/auth';
 import {
@@ -8,8 +8,6 @@ import {
   familySelectors,
 } from '../../redux/family';
 import { globalActions, globalSelectors } from '../../redux/global';
-=======
->>>>>>> dev
 import styles from './PlanForm.module.css';
 
 class PlanForm extends Component {
@@ -32,7 +30,7 @@ class PlanForm extends Component {
     if (familyId) {
       this.setState({
         family: currentFamily,
-        // disabledButton: true,
+
         disabledInput: true,
       });
       togglePlanBtnActive();
@@ -63,9 +61,6 @@ class PlanForm extends Component {
     if (isPlanButtonActive) {
       togglePlanBtnActive();
     }
-    // if (this.state.disabledButton) {
-    //   this.setState({ disabledButton: false });
-    // }
   };
 
   handleFormSubmit = e => {
@@ -73,7 +68,6 @@ class PlanForm extends Component {
     const { setFamily, togglePlanBtnActive } = this.props;
     setFamily(this.state.family);
     togglePlanBtnActive();
-    // this.setState({ disabledButton: true });
   };
 
   render() {
@@ -159,7 +153,6 @@ class PlanForm extends Component {
         </div>
         <button
           type="submit"
-          // disabled={this.state.disabledButton}
           disabled={isPlanButtonActive}
           className={styles.planTable__button}
         >
@@ -170,7 +163,6 @@ class PlanForm extends Component {
   }
 }
 
-<<<<<<< HEAD
 const mapStateToProps = state => ({
   familyId: authSelectors.getFamilyId(state),
   currentFamily: familySelectors.getFamilyInfo(state),
@@ -184,6 +176,3 @@ const mapDispatchToProps = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlanForm);
-=======
-export default PlanForm;
->>>>>>> dev
