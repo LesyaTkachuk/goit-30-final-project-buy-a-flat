@@ -29,7 +29,7 @@ class Error extends Component {
         ></button>
         <div className={styles.errorWrapper}>
           <h2 className={styles.errorTitle}>Oops, an error occurred</h2>
-          <p className={styles.errorText}>{authErrorCode || familyErrorCode}</p>
+          {/* <p className={styles.errorText}>{authErrorCode || familyErrorCode}</p> */}
           {(familyErrorMessage || authErrorMessage) && (
             <p className={styles.errorText}>
               {authErrorMessage || familyErrorMessage}
