@@ -32,8 +32,11 @@ class HeaderContent extends Component {
           <Media query="(min-width: 768px)" render={() => <AuthNav />} />
         )}
 
-        {isAuthFormOpen && (
+        {/* {isAuthFormOpen && (
           <Modal>{showLogin ? <LoginForm /> : <RegistrationForm />}</Modal>
+        )} */}
+        {isAuthFormOpen && (
+          <Media query="(min-width: 768px)" render={() => <Modal>{showLogin ? <LoginForm /> : <RegistrationForm />}</Modal>} />
         )}
         {showVerifyNotif && (
           <Modal>

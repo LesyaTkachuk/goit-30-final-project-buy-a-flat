@@ -7,8 +7,15 @@
   height: 100%;
   width: auto;
 
+  display: -webkit-box;
+
+  display: -ms-flexbox;
+
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .loginRegist__heading {
@@ -40,8 +47,12 @@
   font-weight: normal;
   font-size: 12px;
   line-height: 14px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 
   color: rgba(24, 25, 31, 0.54);
   z-index: 4;
@@ -55,7 +66,8 @@
   top: 7px;
 
   border: 1px solid rgba(0, 0, 0, 0.36);
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   border-radius: 4px;
   z-index: 3;
 }
@@ -84,8 +96,12 @@
   font-weight: normal;
   font-size: 12px;
   line-height: 14px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 
   color: #ff2e00;
 }
@@ -96,6 +112,13 @@
   height: 65px;
   margin: 0 auto;
   margin-top: 7px;
+  margin-bottom: 20px;
+}
+/* .loginRegist__inputform:nth-child(4) {
+  margin-bottom: 0px;
+} */
+.loginRegist__input_bottom_null {
+  margin-bottom: 0px
 }
 
 .login__Bth {
@@ -120,7 +143,8 @@
   line-height: 20px;
 
   margin: 0 auto;
-  font-feature-settings: 'liga' off;
+  -webkit-font-feature-settings: 'liga' off;
+          font-feature-settings: 'liga' off;
 
   color: #ffffff;
 }
@@ -129,7 +153,7 @@
   width: 170px;
   height: 40px;
   margin: 0 auto;
-  margin-top: 20px;
+  margin-top: 36px;
 
   background: var(--orange-color);
   border-radius: 8px;
@@ -146,7 +170,8 @@
   line-height: 20px;
 
   margin: 0 auto;
-  font-feature-settings: 'liga' off;
+  -webkit-font-feature-settings: 'liga' off;
+          font-feature-settings: 'liga' off;
 
   color: #ffffff;
 }
@@ -158,7 +183,9 @@
     position: relative;
 
     background: #ffffff;
-    box-shadow: 0px 24px 38px rgba(0, 0, 0, 0.14),
+    -webkit-box-shadow: 0px 24px 38px rgba(0, 0, 0, 0.14),
+      0px 9px 46px rgba(0, 0, 0, 0.12), 0px 11px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0px 24px 38px rgba(0, 0, 0, 0.14),
       0px 9px 46px rgba(0, 0, 0, 0.12), 0px 11px 15px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
   }
@@ -169,7 +196,9 @@
     position: relative;
 
     background: #ffffff;
-    box-shadow: 0px 24px 38px rgba(0, 0, 0, 0.14),
+    -webkit-box-shadow: 0px 24px 38px rgba(0, 0, 0, 0.14),
+      0px 9px 46px rgba(0, 0, 0, 0.12), 0px 11px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0px 24px 38px rgba(0, 0, 0, 0.14),
       0px 9px 46px rgba(0, 0, 0, 0.12), 0px 11px 15px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
   }
@@ -178,7 +207,14 @@
     position: relative;
     width: 316px;
 
+    display: -webkit-box;
+
+    display: -ms-flexbox;
+
     display: flex;
-    flex-direction: column;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
   }
 }

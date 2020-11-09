@@ -16,6 +16,12 @@ class LoginForm extends Component {
   validate = values => {
     const errors = {};
 
+    if (!values.email) {
+      errors.email = 'Не указан E-mail';
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+      errors.email = 'Неправильный E-mail';
+    }
+
     if (!values.password) {
       errors.password = 'Не указан пароль';
     } else if (values.password.length < 3 || values.password.length > 8) {
@@ -75,10 +81,12 @@ class LoginForm extends Component {
                   value={values.email}
                   autoFocus
                 />
+                <div className={styles.loginRegist__invalid}>
+                  {errors.email && touched.email && errors.email}
+                </div>
               </label>
 
-              <br />
-              <label className={styles.loginRegist__inputform}>
+              <label className={(styles.loginRegist__inputform + ' ' + styles.loginRegist__input_bottom_null)}>
                 <label className={styles.loginRegist__input_text}>Пароль</label>
                 <input
                   type="password"
@@ -102,7 +110,6 @@ class LoginForm extends Component {
                 </div>
               </label>
 
-              <br />
               <button
                 type="submit"
                 className={styles.loginRegist__Bth}

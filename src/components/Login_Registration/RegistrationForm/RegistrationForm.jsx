@@ -96,7 +96,6 @@ class RegistrationForm extends Component {
                 </div>
               </label>
 
-              <br />
               <label className={styles.loginRegist__inputform}>
                 <label className={styles.loginRegist__input_text}>E-mail</label>
                 <input
@@ -119,8 +118,7 @@ class RegistrationForm extends Component {
                 </div>
               </label>
 
-              <br />
-              <label className={styles.loginRegist__inputform}>
+              <label className={(styles.loginRegist__inputform + ' ' + styles.loginRegist__input_bottom_null)}>
                 <label className={styles.loginRegist__input_text}>Пароль</label>
                 <input
                   type="password"
@@ -142,7 +140,6 @@ class RegistrationForm extends Component {
                 </div>
               </label>
 
-              <br />
               <button
                 type="submit"
                 className={styles.loginRegist__Bth}
