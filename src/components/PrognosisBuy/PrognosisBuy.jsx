@@ -42,11 +42,15 @@ class PrognosisBuy extends Component {
       incomePercentageToSavings,
     } = this.props.family;
     const allIncome = Number(totalSalary) + Number(passiveIncome);
-    const percent = (allIncome * Number(incomePercentageToSavings)) / 100;
+    const incomForMonth = (allIncome * Number(incomePercentageToSavings)) / 100;
     const leftToAcc = Number(flatPrice) - Number(balance);
-    const monthsLeft = leftToAcc / percent;
-    const years = Math.floor(monthsLeft / 12);
-    const months = Math.ceil(monthsLeft % 12);
+    const monthsLeft = leftToAcc / incomForMonth;
+    let years = Math.floor(monthsLeft / 12);
+    let months = Math.ceil(monthsLeft % 12);
+    if (months === 12) {
+      years += 1;
+      months = 0;
+    }
     return { months, years };
   };
 
