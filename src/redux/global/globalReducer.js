@@ -18,7 +18,7 @@ const initialState = {
     isVerifyNotifOpen: false,
     isAuthFormOpen: false,
     hasGifts: false,
-    showLogin: false,
+    showLogin: true,
     showNavPage: false,
     showExpensesPage: false,
     isExpenseBtnActive: false,

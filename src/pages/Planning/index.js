@@ -1,1 +1,1 @@
-export { default } from './Planning.jsx';
+export { default } from './PlanningContainer';

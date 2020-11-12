@@ -4,6 +4,14 @@ import PrognosisBuy from '../../components/PrognosisBuy';
 import PlanForm from '../../components/PlanForm';
 
 class Planning extends Component {
+  componentDidUpdate(prevProps) {
+    if (prevProps.familyId === this.props.familyId) {
+      return;
+    } else {
+      this.props.history.push('/expenses');
+    }
+  }
+
   render() {
     return (
       <div className={styles.planningPage}>

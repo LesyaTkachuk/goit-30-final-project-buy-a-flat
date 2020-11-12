@@ -14,9 +14,8 @@ class VerifyNotif extends Component {
         <div className={styles.notifWrapper}>
           <h2 className={styles.notifTitle}>Pay attention!</h2>
           <p className={styles.notifText}>
-            На указанный вами при регистрации адресс электронной почты был
-            выслан верификационный email. Пройдите верификацию и выполните вход
-            в приложение.
+            Для завершения регистрации, пройдите по ссылке, отправленной на
+            указанный вами email и выполните вход в приложение.
           </p>
         </div>
       </div>

@@ -26,11 +26,11 @@ class PrognosisBuy extends Component {
   componentDidUpdate(prevProps) {
     if (prevProps.family === this.props.family) {
       return;
+    } else {
+      const { countMonthsLeft, countYearsLeft } = this.props;
+      countMonthsLeft(this.leftYearMonth());
+      countYearsLeft(this.leftYearMonth());
     }
-
-    const { countMonthsLeft, countYearsLeft } = this.props;
-    countMonthsLeft(this.leftYearMonth());
-    countYearsLeft(this.leftYearMonth());
   }
 
   leftYearMonth = () => {
