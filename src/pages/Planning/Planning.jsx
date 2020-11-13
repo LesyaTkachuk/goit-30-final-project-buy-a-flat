@@ -5,7 +5,7 @@ import PlanForm from '../../components/PlanForm';
 
 class Planning extends Component {
   componentDidUpdate(prevProps) {
-    if (prevProps.familyId === this.props.familyId && this.props.familyId) {
+    if (prevProps.familyId === this.props.familyId) {
       return;
     }
     this.props.history.push('/expenses');
