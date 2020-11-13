@@ -23,6 +23,11 @@ const YEARS_TITLE = ['год', 'года', 'лет'];
 const MONTHS_TITLE = ['месяц', 'месяца', 'месяцев'];
 
 class PrognosisBuy extends Component {
+  componentDidMount() {
+    const { countMonthsLeft, countYearsLeft } = this.props;
+    countMonthsLeft(this.leftYearMonth());
+    countYearsLeft(this.leftYearMonth());
+  }
   componentDidUpdate(prevProps) {
     if (prevProps.family === this.props.family) {
       return;
