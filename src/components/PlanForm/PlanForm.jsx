@@ -77,7 +77,7 @@ class PlanForm extends Component {
         <div className={styles.planTable}>
           <div className={styles.leftWrapper}>
             <div className={styles.planTable__item}>
-              <label>1. ЗП обоих супругов</label>
+              <label>1. Основной доход, мес.</label>
               <input
                 required
                 data-limit="6"
