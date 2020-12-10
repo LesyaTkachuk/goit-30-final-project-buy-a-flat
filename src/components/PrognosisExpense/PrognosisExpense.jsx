@@ -15,9 +15,10 @@ const PrognosisExpense = ({
 }) => {
   const daysToMonthEnd = moment().daysInMonth() - new Date().getDate() + 1;
 
-  // const income = info.totalSalary + info.passiveIncome;
-  const available =
-    (monthBalance * (100 - info.incomePercentageToSavings)) / 100;
+  const desiredSavings =
+    ((info.totalSalary + info.passiveIncome) * info.incomePercentageToSavings) /
+    100;
+  const available = monthBalance - desiredSavings;
   const dailySum = available / daysToMonthEnd;
 
   const dailyLimit = (dailySum - Number(transaction.amount)).toFixed(2);
