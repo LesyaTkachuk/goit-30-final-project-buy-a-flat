@@ -1,42 +1,31 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import moment from 'moment';
 import { familyOperations, familySelectors } from '../../redux/family';
 import styles from './PrognosisExpense.module.css';
 import { globalActions, globalSelectors } from '../../redux/global';
 
 const PrognosisExpense = ({
   transaction,
-  info,
   createTransaction,
   setExpenseBtnActive,
   isExpenseBtnActive,
-  monthBalance,
+  dayLimit,
+  monthLimit,
 }) => {
-  const daysToMonthEnd = moment().daysInMonth() - new Date().getDate() + 1;
-
-  const desiredSavings =
-    ((info.totalSalary + info.passiveIncome) * info.incomePercentageToSavings) /
-    100;
-  const available = monthBalance - desiredSavings;
-  const dailySum = available / daysToMonthEnd;
-
-  const dailyLimit = (dailySum - Number(transaction.amount)).toFixed(2);
-  const monthLimit = (available - Number(transaction.amount)).toFixed(2);
-
   const handleClick = () => {
     createTransaction(transaction);
     setExpenseBtnActive();
   };
+
   return (
     <div className={styles.wrp}>
       <div className={styles.inner}>
-        <p className={styles.value}>{dailyLimit} &#x20B4;</p>
+        <p className={styles.value}>{Number(dayLimit).toFixed(2)} &#x20B4;</p>
         <p className={styles.small}>Лимит на день</p>
       </div>
 
       <div className={styles.inner}>
-        <p className={styles.value}>{monthLimit} &#x20B4;</p>
+        <p className={styles.value}>{Number(monthLimit).toFixed(2)} &#x20B4;</p>
         <p className={styles.small}>Отклонение от плановой суммы накопления</p>
       </div>
 
@@ -53,9 +42,9 @@ const PrognosisExpense = ({
 };
 
 const mapStateToProps = state => ({
-  monthBalance: familySelectors.getMonthBalance(state),
+  dayLimit: familySelectors.getDailyLimit(state),
+  monthLimit: familySelectors.getMonthLimit(state),
   transaction: familySelectors.getTransaction(state),
-  info: familySelectors.getFamilyInfo(state),
   isExpenseBtnActive: globalSelectors.getIsExpenseBtnActive(state),
 });
 
