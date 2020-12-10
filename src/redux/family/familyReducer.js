@@ -16,7 +16,12 @@ const initialState = {
     monthsLeft: 0,
     yearsLeft: 0,
 
-    monthBalance: 0,
+    monthData: {
+      monthBalance: 0,
+      dayLimit: 0,
+      monthLimit: 0,
+    },
+
     transactionCategories: [],
 
     transaction: {
@@ -93,10 +98,13 @@ const yearsLeft = createReducer(initialState.family.yearsLeft, {
   [authActions.logoutSuccess]: () => initialState.family.yearsLeft,
 });
 
-const monthBalance = createReducer(initialState.family.monthBalance, {
+const monthData = createReducer(initialState.family.monthData, {
   [familyActions.getMonthsBalanceSuccess]: (_, { payload }) => payload,
-  [familyActions.createTransactionSuccess]: (_, { payload }) =>
-    payload.monthBalance,
+  [familyActions.createTransactionSuccess]: (_, { payload }) => {
+    const { monthBalance, dayLimit, monthLimit } = payload;
+    return { monthBalance, dayLimit, monthLimit };
+  },
+
   [authActions.logoutSuccess]: () => initialState.family.monthBalance,
 });
 
@@ -202,7 +210,7 @@ const error = createReducer(initialState.family.error, {
 
 export default combineReducers({
   info,
-  monthBalance,
+  monthData,
   transactionCategories,
   transaction,
   chart,

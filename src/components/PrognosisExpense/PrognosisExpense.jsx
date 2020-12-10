@@ -12,31 +12,23 @@ const PrognosisExpense = ({
   setExpenseBtnActive,
   isExpenseBtnActive,
   monthBalance,
+  dayLimit,
+  monthLimit,
 }) => {
-  const daysToMonthEnd = moment().daysInMonth() - new Date().getDate() + 1;
-
-  const desiredSavings =
-    ((info.totalSalary + info.passiveIncome) * info.incomePercentageToSavings) /
-    100;
-  const available = monthBalance - desiredSavings;
-  const dailySum = available / daysToMonthEnd;
-
-  const dailyLimit = (dailySum - Number(transaction.amount)).toFixed(2);
-  const monthLimit = (available - Number(transaction.amount)).toFixed(2);
-
   const handleClick = () => {
     createTransaction(transaction);
     setExpenseBtnActive();
   };
+
   return (
     <div className={styles.wrp}>
       <div className={styles.inner}>
-        <p className={styles.value}>{dailyLimit} &#x20B4;</p>
+        <p className={styles.value}>{Number(dayLimit).toFixed(2)} &#x20B4;</p>
         <p className={styles.small}>Лимит на день</p>
       </div>
 
       <div className={styles.inner}>
-        <p className={styles.value}>{monthLimit} &#x20B4;</p>
+        <p className={styles.value}>{Number(monthLimit).toFixed(2)} &#x20B4;</p>
         <p className={styles.small}>Отклонение от плановой суммы накопления</p>
       </div>
 
@@ -53,6 +45,8 @@ const PrognosisExpense = ({
 };
 
 const mapStateToProps = state => ({
+  dayLimit: familySelectors.getDailyLimit(state),
+  monthLimit: familySelectors.getMonthLimit(state),
   monthBalance: familySelectors.getMonthBalance(state),
   transaction: familySelectors.getTransaction(state),
   info: familySelectors.getFamilyInfo(state),

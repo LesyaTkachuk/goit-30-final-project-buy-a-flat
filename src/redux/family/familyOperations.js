@@ -61,7 +61,7 @@ const getMonthBalance = () => dispatch => {
   axios
     .get('/api/transactions/month/current')
     .then(({ data }) =>
-      dispatch(familyActions.getMonthsBalanceSuccess(data.monthBalance)),
+      dispatch(familyActions.getMonthsBalanceSuccess(data)),
     )
     .catch(error => {
       const code = error.message;

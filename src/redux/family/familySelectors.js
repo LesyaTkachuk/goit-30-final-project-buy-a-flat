@@ -15,7 +15,9 @@ const getGiftsUnpacked = state => state.family.gifts.giftsUnpacked;
 const getMonthsLeft = state => state.family.monthsLeft;
 const getYearsLeft = state => state.family.yearsLeft;
 const getFinance = state => state.family.finance;
-const getMonthBalance = state => state.family.monthBalance;
+const getMonthBalance = state => state.family.monthData.monthBalance;
+const getDailyLimit = state => state.family.monthData.dayLimit;
+const getMonthLimit = state => state.family.monthData.monthLimit;
 
 export default {
   getFamilyInfo,
@@ -36,4 +38,6 @@ export default {
   getMonthsLeft,
   getYearsLeft,
   getFinance,
+  getDailyLimit,
+  getMonthLimit,
 };
