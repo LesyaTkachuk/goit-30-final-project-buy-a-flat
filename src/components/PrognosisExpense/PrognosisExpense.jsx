@@ -1,17 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import moment from 'moment';
 import { familyOperations, familySelectors } from '../../redux/family';
 import styles from './PrognosisExpense.module.css';
 import { globalActions, globalSelectors } from '../../redux/global';
 
 const PrognosisExpense = ({
   transaction,
-  info,
   createTransaction,
   setExpenseBtnActive,
   isExpenseBtnActive,
-  monthBalance,
   dayLimit,
   monthLimit,
 }) => {
@@ -47,9 +44,7 @@ const PrognosisExpense = ({
 const mapStateToProps = state => ({
   dayLimit: familySelectors.getDailyLimit(state),
   monthLimit: familySelectors.getMonthLimit(state),
-  monthBalance: familySelectors.getMonthBalance(state),
   transaction: familySelectors.getTransaction(state),
-  info: familySelectors.getFamilyInfo(state),
   isExpenseBtnActive: globalSelectors.getIsExpenseBtnActive(state),
 });
 
