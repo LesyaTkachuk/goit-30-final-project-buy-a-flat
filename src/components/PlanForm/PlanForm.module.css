@@ -99,11 +99,21 @@ input:focus-within {
   font-size: 14px;
   line-height: 20px;
   color: #ffffff;
+  transition: all 300ms ease-in-out;
+}
+
+.planTable__button:hover,
+.planTable__button:focus {
+  background: var(--orange-hover-color);
 }
 
 .planTable__button:disabled {
-  background: rgba(0, 0, 0, 0.1);
-  color: rgba(255, 255, 255, 0.7);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.planTable__button:disabled:hover,
+.planTable__button:disabled:focus {
+  background: rgba(0, 0, 0, 0.4);
 }
 
 @media screen and (min-width: 768px) and (max-width: 1239px) {

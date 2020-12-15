@@ -29,8 +29,8 @@ class RegistrationForm extends Component {
 
     if (!values.password) {
       errors.password = 'Не указан пароль';
-    } else if (values.password.length < 3 || values.password.length > 8) {
-      errors.password = 'Пароль меньше 3 или больше 8 символов';
+    } else if (values.password.length < 3 || values.password.length > 16) {
+      errors.password = 'Пароль меньше 3 или больше 16 символов';
     }
     return errors;
   };

@@ -7,14 +7,14 @@ import click from '../../assets/images/click.svg';
 
 class Gift extends Component {
   componentDidMount() {
-    const { giftsForUnpacking, toggleHasGifts } = this.props;
-    giftsForUnpacking && toggleHasGifts();
+    const { giftsForUnpacking, setHasGiftsTrue } = this.props;
+    giftsForUnpacking && setHasGiftsTrue();
   }
 
   componentDidUpdate(prevProps) {
-    const { giftsForUnpacking, toggleHasGifts, giftsUnpacked } = this.props;
+    const { giftsForUnpacking, setHasGiftsTrue, giftsUnpacked } = this.props;
     if (prevProps.giftsForUnpacking === giftsForUnpacking) return;
-    giftsForUnpacking && !giftsUnpacked && toggleHasGifts();
+    giftsForUnpacking && !giftsUnpacked && setHasGiftsTrue();
   }
 
   render() {

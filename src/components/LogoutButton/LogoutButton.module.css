@@ -8,6 +8,12 @@
   background: var(--blue-button-color);
 }
 
+.buttonLogout:hover,
+.buttonLogout:focus {
+  background-color: var(--blue-hover-color);
+  /* color: #fff; */
+}
+
 .buttonLogoutTitle {
   font-family: var(--main-font-stack);
   font-style: normal;
@@ -21,7 +27,7 @@
 
 .buttonLogoutIcon {
   display: inline-block;
-  width: 10px;
-  height: 12px;
+  width: 16px;
+  height: 20px;
   margin-left: 13px;
 }

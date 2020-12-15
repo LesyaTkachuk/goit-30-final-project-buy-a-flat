@@ -24,8 +24,8 @@ class LoginForm extends Component {
 
     if (!values.password) {
       errors.password = 'Не указан пароль';
-    } else if (values.password.length < 3 || values.password.length > 8) {
-      errors.password = 'Пароль меньше 3 или больше 8 символов';
+    } else if (values.password.length < 3 || values.password.length > 16) {
+      errors.password = 'Пароль меньше 3 или больше 16 символов';
     }
     return errors;
   };
@@ -42,7 +42,6 @@ class LoginForm extends Component {
   };
 
   render() {
-
     return (
       <div className={styles.modal__login}>
         <Formik
@@ -69,12 +68,11 @@ class LoginForm extends Component {
                   name="email"
                   placeholder="Your@e-mail.com"
                   className={
-                    (errors.email &&
-                      touched.email) ?
-                      (styles.loginRegist__input_error +
+                    errors.email && touched.email
+                      ? styles.loginRegist__input_error +
                         ' ' +
-                        styles.loginRegist__input) :
-                    styles.loginRegist__input
+                        styles.loginRegist__input
+                      : styles.loginRegist__input
                   }
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -86,19 +84,24 @@ class LoginForm extends Component {
                 </div>
               </label>
 
-              <label className={(styles.loginRegist__inputform + ' ' + styles.loginRegist__input_bottom_null)}>
+              <label
+                className={
+                  styles.loginRegist__inputform +
+                  ' ' +
+                  styles.loginRegist__input_bottom_null
+                }
+              >
                 <label className={styles.loginRegist__input_text}>Пароль</label>
                 <input
                   type="password"
                   name="password"
                   placeholder="Введите пароль"
                   className={
-                    (errors.password &&
-                      touched.password) ?
-                      (styles.loginRegist__input_error +
+                    errors.password && touched.password
+                      ? styles.loginRegist__input_error +
                         ' ' +
-                        styles.loginRegist__input) :
-                    styles.loginRegist__input
+                        styles.loginRegist__input
+                      : styles.loginRegist__input
                   }
                   // onChange={this.handleChange}
                   onChange={handleChange}

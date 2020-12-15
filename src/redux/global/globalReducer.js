@@ -32,6 +32,8 @@ const isModalOpen = createReducer(initialState.global.isModalOpen, {
 
 const hasGifts = createReducer(initialState.global.hasGifts, {
   [globalActions.toggleHasGifts]: state => !state,
+  [globalActions.setHasGiftsTrue]: state => true,
+  [authActions.logoutSuccess]: () => initialState.global.hasGifts,
 });
 
 const isLogoutOpen = createReducer(initialState.global.isLogoutOpen, {

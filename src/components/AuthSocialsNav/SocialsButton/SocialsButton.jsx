@@ -2,13 +2,8 @@ import React, { Component } from 'react';
 import styles from './SocialsButton.module.css';
 
 class SocialsButton extends Component {
-  handleClick = () => {
-    const { googleAuth, label } = this.props;
-    label === 'Sign up with Google' && googleAuth();
-  };
-
   render() {
-    const { label, className: classForBtn } = this.props;
+    const { label } = this.props;
     return (
       <a
         href={
@@ -16,7 +11,7 @@ class SocialsButton extends Component {
             ? 'https://flat-finance.herokuapp.com/auth/google'
             : '/'
         }
-        className={`${styles.buttonAuth} ${classForBtn}`}
+        className={`${styles.buttonAuth} ${styles.google_btn}`}
       >
         {label}
       </a>

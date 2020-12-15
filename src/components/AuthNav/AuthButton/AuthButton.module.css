@@ -14,8 +14,11 @@
   text-align: center;
   color: var(--black-font-color);
   background-color: var(--blue-button-color);
+  transition: all 300ms ease-in-out;
 }
+
+.authButton:hover,
 .authButton:focus {
-  background-color: var(--orange-color);
-  color: #fff;
+  background-color: var(--blue-hover-color);
+  /* color: #fff; */
 }

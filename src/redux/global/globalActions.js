@@ -6,6 +6,7 @@ const toggleShowLogin = createAction('global/toggleShowLogin');
 
 const toggleAuthForm = createAction('global/toggleAuthForm');
 
+const setHasGiftsTrue = createAction('global/setHasGiftsTrue');
 const toggleHasGifts = createAction('global/toggleHasGifts');
 
 const toggleLogout = createAction('global/toggleLogout');
@@ -29,6 +30,7 @@ const chartMonth = createAction('global/chartMonth');
 export default {
   toggleModal,
   toggleShowLogin,
+  setHasGiftsTrue,
   toggleHasGifts,
   toggleLogout,
   toggleVerifyNotif,

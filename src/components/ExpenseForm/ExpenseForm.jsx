@@ -24,9 +24,8 @@ class ExpensesForm extends Component {
     //     balance: familyBalance,
     //   });
     // }
-    if (!monthBalance) {
-      getMonthBalance();
-    }
+
+    getMonthBalance();
 
     if (transactionCategories.length === 0) {
       getCategories();

@@ -30,6 +30,12 @@
   background: var(--orange-color);
   border-radius: inherit;
   color: inherit;
+  transition: all 300ms ease-in-out;
+}
+
+.btn:hover,
+.btn:focus {
+  background: var(--orange-hover-color);
 }
 
 .btn:disabled {
